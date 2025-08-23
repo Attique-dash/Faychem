@@ -7,9 +7,18 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/send', (req, res) => {
-  const { name, email, message } = req.body;
+// Health check endpoint
+app.get('/', (req, res) => {
+  res.json({ message: 'Email server is running!' });
+});
 
+app.post('/send', (req, res) => {
+  const { name, email, message, companyName, companyAddress, country } = req.body;
+
+  // Validate required fields
+  if (!name || !email || !message) {
+    return res.status(400).json({ error: 'Missing required fields: name, email, message' });
+  }
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -21,18 +30,38 @@ app.post('/send', (req, res) => {
     },
   });
 
+  // Create a more detailed email content
+  const emailContent = `
+Name: ${name}
+Email: ${email}
+Company: ${companyName || 'Not provided'}
+Company Address: ${companyAddress || 'Not provided'}
+Country: ${country || 'Not provided'}
+
+Message:
+${message}
+  `;
+
   const mailOptions = {
     from: email,
     to: 'umershafeeq053@gmail.com',
-    subject: `Hello ${name}!`,
-    text: `${message} from ${email}`,
+    subject: `Faychem Salt team ${name}`,
+    text: emailContent,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      return res.status(500).send(error.toString());
+      console.error('Email sending error:', error);
+      return res.status(500).json({ 
+        error: 'Failed to send email',
+        details: error.message 
+      });
     }
-    res.status(200).send('Email sent: ' + info.response);
+    console.log('Email sent successfully:', info.response);
+    res.status(200).json({ 
+      message: 'Email sent successfully',
+      response: info.response 
+    });
   });
 });
 
