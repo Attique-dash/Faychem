@@ -70,6 +70,14 @@ EMAIL_TO=umershafeeq053@gmail.com
    - Check build logs for CSS compilation errors
    - Ensure no conflicting CSS loaders are installed
 
+5. **404 NOT_FOUND Error**
+   - Check that all pages exist in the app directory
+   - Verify API routes are properly configured
+   - Ensure environment variables are set correctly
+   - Check build logs for any missing dependencies
+   - Visit `/api/health` to test API functionality
+   - Clear Vercel cache and redeploy
+
 ### Debugging Steps:
 
 1. **Check Build Logs**
