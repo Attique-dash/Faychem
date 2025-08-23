@@ -16,6 +16,10 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  // Ensure CSS is properly processed
+  experimental: {
+    optimizeCss: true,
+  },
 };
 
 module.exports = nextConfig;

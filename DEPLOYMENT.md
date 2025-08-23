@@ -66,6 +66,9 @@ EMAIL_TO=umershafeeq053@gmail.com
    - Check that globals.css is imported in layout.js
    - Ensure Tailwind config includes all component paths
    - Clear browser cache and redeploy
+   - Visit `/debug-css` to test CSS loading
+   - Check build logs for CSS compilation errors
+   - Ensure no conflicting CSS loaders are installed
 
 ### Debugging Steps:
 
