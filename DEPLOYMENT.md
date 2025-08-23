@@ -18,6 +18,8 @@ EMAIL_PASS=uarf vlrl zmdj frqt
 EMAIL_TO=umershafeeq053@gmail.com
 ```
 
+**Important**: Do NOT use the `@` symbol or reference secrets in vercel.json. Set these directly as environment variables in the Vercel dashboard.
+
 ### 2. Environment Variable Configuration:
 - **Production**: Set for production environment
 - **Preview**: Set for preview deployments

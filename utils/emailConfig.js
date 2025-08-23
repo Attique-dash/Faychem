@@ -7,8 +7,8 @@ export const emailConfig = {
   
   // Email settings
   emailSettings: {
-    user: process.env.EMAIL_USER || 'umershafeeq053@gmail.com',
-    pass: process.env.EMAIL_PASS || 'uarf vlrl zmdj frqt',
-    to: process.env.EMAIL_TO || 'umershafeeq053@gmail.com',
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+    to: process.env.EMAIL_TO,
   }
 };
