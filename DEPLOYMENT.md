@@ -61,6 +61,12 @@ EMAIL_TO=umershafeeq053@gmail.com
    - Check API route logs in Vercel function logs
    - Ensure proper error handling in API routes
 
+4. **CSS Not Loading**
+   - Verify Tailwind CSS is properly configured
+   - Check that globals.css is imported in layout.js
+   - Ensure Tailwind config includes all component paths
+   - Clear browser cache and redeploy
+
 ### Debugging Steps:
 
 1. **Check Build Logs**
