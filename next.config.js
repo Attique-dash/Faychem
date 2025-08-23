@@ -16,15 +16,6 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // Better error handling and performance
-  onDemandEntries: {
-    maxInactiveAge: 25 * 1000,
-    pagesBufferLength: 2,
-  },
-  // Ensure proper static generation
-  trailingSlash: false,
-  // Better compression
-  compress: true,
 };
 
 module.exports = nextConfig;
