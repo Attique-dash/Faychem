@@ -12,14 +12,23 @@ export async function POST(request) {
       );
     }
 
+    // Validate environment variables
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS || !process.env.EMAIL_TO) {
+      console.error('Missing email environment variables');
+      return Response.json(
+        { error: 'Email service configuration error' },
+        { status: 500 }
+      );
+    }
+
     // Create transporter
     const transporter = nodemailer.createTransporter({
       service: 'gmail',
       port: 465,
       secure: true,
       auth: {
-        user: process.env.EMAIL_USER || 'umershafeeq053@gmail.com',
-        pass: process.env.EMAIL_PASS || 'uarf vlrl zmdj frqt',
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
       },
     });
 
@@ -37,7 +46,7 @@ ${message}
 
     const mailOptions = {
       from: email,
-      to: process.env.EMAIL_TO || 'umershafeeq053@gmail.com',
+      to: process.env.EMAIL_TO,
       subject: `Faychem Salt team ${name}`,
       text: emailContent,
     };
