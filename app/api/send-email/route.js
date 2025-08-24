@@ -22,7 +22,7 @@ export async function POST(request) {
     }
 
     // Create transporter
-    const transporter = nodemailer.createTransporter({
+    const transporter = nodemailer.createTransport({
       service: 'gmail',
       port: 465,
       secure: true,

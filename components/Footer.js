@@ -30,7 +30,6 @@ const Footer = () => {
   const { user } = useContext(Context);
   const contactRef = useRef(null);
 
-  // Intersection observer for animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -40,20 +39,20 @@ const Footer = () => {
       },
       { threshold: 0.1 }
     );
-  
-    const currentElement = contactRef.current; // ✅ snapshot the ref value
-  
+
+    const currentElement = contactRef.current;
+
     if (currentElement) {
       observer.observe(currentElement);
     }
-  
+
     return () => {
       if (currentElement) {
-        observer.unobserve(currentElement); // ✅ always unobserve the same element
+        observer.unobserve(currentElement); 
       }
     };
   }, []);
-  
+
   function Sendmail(e) {
     e.preventDefault();
     setIsSubmitting(true);
@@ -110,7 +109,6 @@ const Footer = () => {
           draggable: true,
         });
 
-        // Reset form
         setName("");
         setLastName("");
         setEmail("");
@@ -144,7 +142,6 @@ const Footer = () => {
       setMessage(text);
       setWordCount(wordCount);
 
-      // Auto-resize textarea
       e.target.style.height = "auto";
       e.target.style.height = Math.min(e.target.scrollHeight, 150) + "px";
     }
@@ -153,11 +150,11 @@ const Footer = () => {
   const inputClasses = "block w-full px-5 py-3 mt-2 text-blue-700 placeholder-blue-400 bg-white border-2 border-gray-200 rounded-xl transition-all duration-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 focus:outline-none hover:border-blue-300 transform hover:scale-[1.02]";
 
   const socialLinks = [
-    { icon: FaFacebook, href: "#", label: "Facebook", color: "hover:text-blue-600" },
-    { icon: FaTwitter, href: "#", label: "Twitter", color: "hover:text-blue-400" },
-    { icon: FaInstagram, href: "#", label: "Instagram", color: "hover:text-pink-500" },
-    { icon: FaYoutube, href: "#", label: "YouTube", color: "hover:text-red-500" },
-    { icon: FaLinkedin, href: "#", label: "LinkedIn", color: "hover:text-blue-700" },
+    { icon: FaFacebook, label: "Facebook", color: "hover:text-blue-600" },
+    { icon: FaTwitter, label: "Twitter", color: "hover:text-blue-400" },
+    { icon: FaInstagram, label: "Instagram", color: "hover:text-pink-500" },
+    { icon: FaYoutube, label: "YouTube", color: "hover:text-red-500" },
+    { icon: FaLinkedin, label: "LinkedIn", color: "hover:text-blue-700" },
   ];
 
   return (
@@ -168,11 +165,10 @@ const Footer = () => {
           <div className="absolute top-20 right-10 w-32 h-32 bg-blue-100 rounded-full opacity-20 animate-pulse"></div>
           <div className="absolute bottom-40 left-20 w-20 h-20 bg-teal-100 rounded-full opacity-30 animate-bounce delay-300"></div>
 
-          <div 
+          <div
             ref={contactRef}
-            className={`px-8 pb-12 mx-auto pt-[80px] lg:pt-[0px] transition-all duration-1000 transform ${
-              isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-            }`}
+            className={`px-8 pb-12 mx-auto pt-[80px] lg:pt-[0px] transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+              }`}
           >
             {/* Header */}
             <div className="text-center mb-12">
@@ -191,15 +187,14 @@ const Footer = () => {
 
             <div className="grid grid-cols-1 gap-16 mt-5 lg:grid-cols-2">
               {/* Contact Image */}
-              <div className={`hidden lg:grid justify-items-center items-center transition-all duration-1000 delay-300 transform ${
-                isVisible ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'
-              }`}>
+              <div className={`hidden lg:grid justify-items-center items-center transition-all duration-1000 delay-300 transform ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'
+                }`}>
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 to-teal-500 rounded-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-300 blur-lg"></div>
-                  <Image 
-                    width={550} 
-                    height={550} 
-                    src={Contact} 
+                  <Image
+                    width={550}
+                    height={550}
+                    src={Contact}
                     alt="Faychem Contact-US"
                     className="relative rounded-2xl shadow-2xl transform group-hover:scale-105 transition-transform duration-500"
                   />
@@ -207,9 +202,8 @@ const Footer = () => {
               </div>
 
               {/* Contact Form */}
-              <div className={`transition-all duration-1000 delay-500 transform ${
-                isVisible ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
-              }`}>
+              <div className={`transition-all duration-1000 delay-500 transform ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
+                }`}>
                 <div className="relative p-8 py-10 rounded-2xl bg-white shadow-2xl border border-blue-100 backdrop-blur-sm">
                   {/* Decorative elements */}
                   <div className="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-blue-500 to-teal-500 rounded-br-3xl opacity-10"></div>
@@ -229,9 +223,8 @@ const Footer = () => {
                           onBlur={() => setFocusedField('')}
                           required
                         />
-                        <div className={`absolute left-3 top-1 h-2 w-2 bg-blue-500 rounded-full transition-all duration-300 ${
-                          focusedField === 'firstName' ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
-                        }`}></div>
+                        <div className={`absolute left-3 top-1 h-2 w-2 bg-blue-500 rounded-full transition-all duration-300 ${focusedField === 'firstName' ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                          }`}></div>
                       </div>
                       <div className="relative">
                         <input
@@ -243,9 +236,8 @@ const Footer = () => {
                           onFocus={() => setFocusedField('lastName')}
                           onBlur={() => setFocusedField('')}
                         />
-                        <div className={`absolute left-3 top-1 h-2 w-2 bg-blue-500 rounded-full transition-all duration-300 ${
-                          focusedField === 'lastName' ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
-                        }`}></div>
+                        <div className={`absolute left-3 top-1 h-2 w-2 bg-blue-500 rounded-full transition-all duration-300 ${focusedField === 'lastName' ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                          }`}></div>
                       </div>
                     </div>
 
@@ -262,9 +254,8 @@ const Footer = () => {
                           onBlur={() => setFocusedField('')}
                           required
                         />
-                        <div className={`absolute left-3 top-1 h-2 w-2 bg-blue-500 rounded-full transition-all duration-300 ${
-                          focusedField === 'company' ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
-                        }`}></div>
+                        <div className={`absolute left-3 top-1 h-2 w-2 bg-blue-500 rounded-full transition-all duration-300 ${focusedField === 'company' ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                          }`}></div>
                       </div>
                       <div className="relative">
                         <input
@@ -277,9 +268,8 @@ const Footer = () => {
                           onBlur={() => setFocusedField('')}
                           required
                         />
-                        <div className={`absolute left-3 top-1 h-2 w-2 bg-blue-500 rounded-full transition-all duration-300 ${
-                          focusedField === 'email' ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
-                        }`}></div>
+                        <div className={`absolute left-3 top-1 h-2 w-2 bg-blue-500 rounded-full transition-all duration-300 ${focusedField === 'email' ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                          }`}></div>
                       </div>
                     </div>
 
@@ -296,9 +286,8 @@ const Footer = () => {
                           onBlur={() => setFocusedField('')}
                           required
                         />
-                        <div className={`absolute left-3 top-1 h-2 w-2 bg-blue-500 rounded-full transition-all duration-300 ${
-                          focusedField === 'address' ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
-                        }`}></div>
+                        <div className={`absolute left-3 top-1 h-2 w-2 bg-blue-500 rounded-full transition-all duration-300 ${focusedField === 'address' ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                          }`}></div>
                       </div>
                     </div>
 
@@ -333,15 +322,13 @@ const Footer = () => {
                           style={{ overflow: "hidden" }}
                           required
                         />
-                        <div className={`absolute left-3 top-3 h-2 w-2 bg-blue-500 rounded-full transition-all duration-300 ${
-                          focusedField === 'message' ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
-                        }`}></div>
+                        <div className={`absolute left-3 top-3 h-2 w-2 bg-blue-500 rounded-full transition-all duration-300 ${focusedField === 'message' ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                          }`}></div>
                       </div>
-                      
+
                       <div className="flex justify-between items-center mt-3">
-                        <p className={`text-sm transition-colors duration-300 ${
-                          wordCount > wordLimit * 0.8 ? 'text-orange-500' : 'text-gray-500'
-                        } ${wordCount === wordLimit ? 'text-red-500' : ''}`}>
+                        <p className={`text-sm transition-colors duration-300 ${wordCount > wordLimit * 0.8 ? 'text-orange-500' : 'text-gray-500'
+                          } ${wordCount === wordLimit ? 'text-red-500' : ''}`}>
                           {wordCount} / {wordLimit} words
                         </p>
                         {wordCount === wordLimit && (
@@ -356,9 +343,8 @@ const Footer = () => {
                       disabled={isSubmitting}
                       className="group relative w-full px-6 py-4 mt-8 text-sm font-semibold tracking-wide text-white capitalize transition-all duration-300 transform bg-gradient-to-r from-blue-600 to-teal-500 rounded-xl hover:from-blue-700 hover:to-teal-600 focus:outline-none focus:ring-4 focus:ring-blue-200 disabled:opacity-70 disabled:cursor-not-allowed hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"
                     >
-                      <span className={`flex items-center justify-center gap-3 transition-all duration-300 ${
-                        isSubmitting ? 'scale-90 opacity-50' : ''
-                      }`}>
+                      <span className={`flex items-center justify-center gap-3 transition-all duration-300 ${isSubmitting ? 'scale-90 opacity-50' : ''
+                        }`}>
                         {isSubmitting ? (
                           <>
                             <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -382,17 +368,18 @@ const Footer = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-br from-gray-100 to-gray-200 lg:grid lg:grid-cols-3 md:pl-[260px] relative overflow-hidden">
+      {/* Footer */}
+      <footer className="bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,_#3b82f6_1px,_transparent_1px)] bg-[length:50px_50px]"></div>
         </div>
 
-        <div className="relative z-10 px-4 pt-16 pb-8 xs:px-6 lg:col-span-3 lg:px-8">
-          <div className="grid grid-cols-1 gap-12 xs:grid-cols-2 lg:grid-cols-3 xs:gap-8">
+        <div className="relative md:ml-[230px] ml-[0px] z-10 px-4 pt-12 pb-8 sm:px-6 lg:px-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
 
             {/* Company Info */}
-            <div className="pl-5 sm:pl-0 group">
+            <div className="group">
               <div className="block text-teal-600 mb-6">
                 <div className="transform transition-all duration-300 justify-self-center group-hover:scale-105">
                   <Image
@@ -400,38 +387,40 @@ const Footer = () => {
                     height={140}
                     src={Logo2}
                     alt="Faychem company logo"
-                    className="filter drop-shadow-lg"
+                    className="filter drop-shadow-lg mx-auto sm:mx-0"
                   />
                 </div>
               </div>
-              
+
               <div className="space-y-4">
-                <div className="flex flex-col sm:flex-row sm:items-center gap-3 p-3 rounded-lg bg-white bg-opacity-50 hover:bg-opacity-80 transition-all duration-300 transform hover:scale-105">
-                  <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-teal-500 rounded-full flex items-center justify-center flex-shrink-0">
+                {/* Phone */}
+                <div className="flex items-center gap-3 p-3 rounded-lg bg-white bg-opacity-50 hover:bg-opacity-80 transition-all duration-300 transform hover:scale-105">
+                  <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-teal-500 rounded-full flex items-center justify-center">
                     <FaPhone className="text-white text-sm" />
                   </div>
-                  <div className="text-center sm:text-left">
+                  <div>
                     <span className="text-xs uppercase tracking-wide font-medium text-blue-600 block">
                       Call us
                     </span>
                     <a
-                      href="tel:+971566494784"
+                    
                       className="font-semibold text-gray-700 hover:text-blue-600 transition-colors duration-300 text-lg"
                     >
                       +971 56 649 4784
                     </a>
                   </div>
                 </div>
-                <div className="flex flex-col sm:flex-row sm:items-center gap-3 p-3 rounded-lg bg-white bg-opacity-50 hover:bg-opacity-80 transition-all duration-300 transform hover:scale-105">
-                  <div className="w-10 h-10 bg-gradient-to-r from-teal-500 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+
+                {/* Email */}
+                <div className="flex items-center gap-3 p-3 rounded-lg bg-white bg-opacity-50 hover:bg-opacity-80 transition-all duration-300 transform hover:scale-105">
+                  <div className="w-10 h-10 bg-gradient-to-r from-teal-500 to-blue-500 rounded-full flex items-center justify-center">
                     <FaEnvelope className="text-white text-sm" />
                   </div>
-                  <div className="text-center sm:text-left">
+                  <div>
                     <span className="text-xs uppercase tracking-wide font-medium text-blue-600 block">
                       Email us
                     </span>
                     <a
-                      href="mailto:info@faychem.com"
                       className="font-semibold text-gray-700 hover:text-blue-600 transition-colors duration-300"
                     >
                       info@faychem.com
@@ -442,58 +431,15 @@ const Footer = () => {
             </div>
 
             {/* Company Description */}
-            <div className="hidden lg:block px-5">
-              <div className="h-full flex flex-col justify-center">
-                <h3 className="font-bold text-blue-600 text-xl mb-4 flex items-center gap-2">
-                  <div className="w-2 h-8 bg-gradient-to-b from-blue-500 to-teal-500 rounded-full"></div>
-                  Our Company
-                </h3>
-                <p className="text-gray-700 leading-relaxed text-base">
+            <div className="hidden lg:flex flex-col justify-center px-5">
+              <h3 className="font-bold text-blue-600 text-xl mb-4 flex items-center gap-2">
+                <div className="w-2 h-8 bg-gradient-to-b from-blue-500 to-teal-500 rounded-full"></div>
+                Our Company
+              </h3>
+              <p className="text-gray-700 leading-relaxed text-base">
                 Empowering businesses globally with premium, reliable salt solutions.
-                </p>
-                <div className="mt-6 flex gap-4">
-                  {socialLinks.map(({ icon: Icon, href, label, color }) => (
-                    <a
-                      key={label}
-                      href={href}
-                      aria-label={label}
-                      className={`w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-500 ${color} transform transition-all duration-300 hover:scale-125 hover:shadow-lg group`}
-                    >
-                      <Icon className="text-lg group-hover:scale-110 transition-transform duration-300" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Location */}
-            <div className="px-5">
-              <div className="h-full flex flex-col justify-center">
-                <h3 className="font-bold text-blue-600 text-xl mb-4 flex items-center gap-2">
-                  <div className="w-2 h-8 bg-gradient-to-b from-blue-500 to-teal-500 rounded-full"></div>
-                  Location
-                </h3>
-                <div className="flex flex-col sm:flex-row sm:items-start gap-3 p-4 rounded-lg bg-white bg-opacity-50 hover:bg-opacity-80 transition-all duration-300 transform hover:scale-105">
-                  <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-teal-500 rounded-full flex items-center justify-center flex-shrink-0 sm:mt-1">
-                    <FaMapMarkerAlt className="text-white text-sm" />
-                  </div>
-                  <div className="text-center sm:text-left">
-                    <span className="text-xs uppercase tracking-wide font-medium text-blue-600 block mb-1">
-                      Address
-                    </span>
-                    <p className="text-gray-700 leading-relaxed">
-                      308 Al-Zarooni Building,<br />
-                      Al-Rafa, Al-Suq-Al-Akbeer,<br />
-                      Bur Dubai, U.A.E.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Mobile Social Links */}
-            <div className="lg:hidden col-span-full">
-              <div className="flex justify-center gap-4 pt-8 border-t border-gray-300">
+              </p>
+              <div className="mt-6 flex gap-4">
                 {socialLinks.map(({ icon: Icon, href, label, color }) => (
                   <a
                     key={label}
@@ -506,13 +452,51 @@ const Footer = () => {
                 ))}
               </div>
             </div>
+
+            {/* Location */}
+            <div className="px-5">
+              <h3 className="font-bold text-blue-600 text-xl mb-4 flex items-center gap-2">
+                <div className="w-2 h-8 bg-gradient-to-b from-blue-500 to-teal-500 rounded-full"></div>
+                Location
+              </h3>
+              <div className="flex items-start gap-3 p-4 rounded-lg bg-white bg-opacity-50 hover:bg-opacity-80 transition-all duration-300 transform hover:scale-105">
+                <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-teal-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <FaMapMarkerAlt className="text-white text-sm" />
+                </div>
+                <div>
+                  <span className="text-xs uppercase tracking-wide font-medium text-blue-600 block mb-1">
+                    Address
+                  </span>
+                  <p className="text-gray-700 leading-relaxed">
+                    308 Al-Zarooni Building,<br />
+                    Al-Rafa, Al-Suq-Al-Akbeer,<br />
+                    Bur Dubai, U.A.E.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Social Links */}
+          <div className="lg:hidden flex justify-center gap-4 mt-10">
+            {socialLinks.map(({ icon: Icon, href, label, color }) => (
+              <a
+                key={label}
+                aria-label={label}
+                className={`w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-500 ${color} transform transition-all duration-300 hover:scale-125 hover:shadow-lg group`}
+              >
+                <Icon className="text-lg group-hover:scale-110 transition-transform duration-300" />
+              </a>
+            ))}
           </div>
 
           {/* Copyright */}
-          <div className="mt-12 pt-8 border-t border-gray-300 text-center">
+          <div className="mt-10 pt-8 border-t border-gray-300 text-center">
             <p className="text-gray-600">
-              &copy; 2024 Faychem. All rights reserved. | 
-              <span className="ml-1 text-blue-600 font-medium">Premium Salt Solutions Worldwide</span>
+              &copy; 2024 Faychem. All rights reserved. |
+              <span className="ml-1 text-blue-600 font-medium">
+                Premium Salt Solutions Worldwide
+              </span>
             </p>
           </div>
         </div>

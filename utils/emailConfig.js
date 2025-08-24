@@ -1,9 +1,7 @@
 // Email configuration for development and production
 export const emailConfig = {
-  // API endpoint - will work for both local and deployed environments
-  apiEndpoint: process.env.NODE_ENV === 'production' 
-    ? '/api/send-email'  // Production: relative path
-    : 'http://localhost:5000/send', // Development: local server
+  // API endpoint - using Next.js API route for both environments
+  apiEndpoint: '/api/send-email',  // Works for both development and production
   
   // Email settings
   emailSettings: {

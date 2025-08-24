@@ -146,39 +146,35 @@ const HeroBanner = () => {
               isVisible ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
             }`}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 justify-items-center">
-                {productImages.map((image, index) => {
-                  const href = index === 0 ? "/products" : index === 1 ? "/products" : index === 2 ? "/category" : "/contact";
-                  return (
-                    <Link key={index} href={href}>
-                      <div
-                        className="group relative overflow-hidden rounded-lg shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:rotate-1 cursor-pointer"
-                        style={{ 
-                          animationDelay: `${index * 200}ms`,
-                          animation: isVisible ? `fadeInUp 0.8s ease-out forwards` : 'none'
-                        }}
-                      >
-                        <Image
-                          width={200}
-                          height={300}
-                          src={image.src}
-                          alt={image.alt}
-                          className="rounded-lg w-[500px] lg:w-auto object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                        
-                        {/* Hover Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
-                          <div className="absolute bottom-4 left-4 text-white">
-                            <h3 className="font-semibold text-sm">{image.title}</h3>
-                            <p className="text-xs text-gray-200">Premium Quality</p>
-                          </div>
-                        </div>
-
-                        {/* Floating Animation Effect */}
-                        <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-500 bg-opacity-20 rounded-full blur-sm group-hover:scale-150 transition-transform duration-500"></div>
+                {productImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className="group relative overflow-hidden rounded-lg shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:rotate-1"
+                    style={{ 
+                      animationDelay: `${index * 200}ms`,
+                      animation: isVisible ? `fadeInUp 0.8s ease-out forwards` : 'none'
+                    }}
+                  >
+                    <Image
+                      width={200}
+                      height={300}
+                      src={image.src}
+                      alt={image.alt}
+                      className="rounded-lg w-[500px] lg:w-auto object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                      <div className="absolute bottom-4 left-4 text-white">
+                        <h3 className="font-semibold text-sm">{image.title}</h3>
+                        <p className="text-xs text-gray-200">Premium Quality</p>
                       </div>
-                    </Link>
-                  );
-                })}
+                    </div>
+
+                    {/* Floating Animation Effect */}
+                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-500 bg-opacity-20 rounded-full blur-sm group-hover:scale-150 transition-transform duration-500"></div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

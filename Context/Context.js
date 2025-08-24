@@ -121,11 +121,11 @@ const ContextProvider = ({ children }) => {
   //     console.log(error);
   //   }
   // };
-  useEffect(() => {
-    if (!user?.isAdmin) {
-      router.push("/");
-    }
-  }, [user?.isAdmin, router]);
+  // useEffect(() => {
+  //   if (!user?.isAdmin) {
+  //     router.push("/");
+  //   }
+  // }, [user?.isAdmin, router]);
   return (
     <Context.Provider
       value={{

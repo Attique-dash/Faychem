@@ -44,7 +44,6 @@ const Header = () => {
 
   const activeLink = useActiveLink(sections.map(section => section.name));
 
-  // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)) {
@@ -54,7 +53,6 @@ const Header = () => {
 
     if (isOpen) {
       document.addEventListener('mousedown', handleClickOutside);
-      // Prevent body scroll when mobile menu is open
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -86,11 +84,11 @@ const Header = () => {
   };
 
   const socialLinks = [
-    { icon: FaFacebook, href: "#", label: "Facebook" },
-    { icon: FaTwitter, href: "#", label: "Twitter" },
-    { icon: FaInstagram, href: "#", label: "Instagram" },
-    { icon: FaYoutube, href: "#", label: "YouTube" },
-    { icon: FaLinkedin, href: "#", label: "LinkedIn" },
+    { icon: FaFacebook, label: "Facebook" },
+    { icon: FaTwitter, label: "Twitter" },
+    { icon: FaInstagram, label: "Instagram" },
+    { icon: FaYoutube, label: "YouTube" },
+    { icon: FaLinkedin, label: "LinkedIn" },
   ];
 
   return (
@@ -102,7 +100,6 @@ const Header = () => {
           className="bg-gradient-to-b from-gray-50 to-gray-100 border-r border-blue-200 fixed top-0 left-0 h-full md:w-60 lg:w-64 z-50 shadow-lg overflow-y-auto scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-gray-200"
         >
           <div className="flex flex-col h-full px-4 py-6">
-            {/* Logo */}
             <Link href="/" className="text-teal-600 mb-8 group">
               <div className="transform transition-transform duration-200 group-hover:scale-105">
                 <Image
@@ -115,7 +112,6 @@ const Header = () => {
               </div>
             </Link>
 
-            {/* Navigation */}
             <nav aria-label="Global" className="flex-1">
               <ul className="flex flex-col gap-2 text-lg w-full">
                 {sections.map(({ name, href, hasSubMenu, icon }) => (
@@ -157,7 +153,6 @@ const Header = () => {
                       </div>
                     </div>
                     
-                    {/* Desktop Submenu */}
                     {hasSubMenu && (
                       <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
                         isProductsOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
@@ -182,7 +177,6 @@ const Header = () => {
               </ul>
             </nav>
 
-            {/* Social Media Icons */}
             <div className="mt-auto pt-6 border-t border-gray-200">
               <div className="flex justify-between items-center">
                 {socialLinks.map(({ icon: Icon, href, label }) => (
@@ -201,7 +195,6 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Header */}
       <div className="flex md:hidden items-center justify-between px-4 py-3 bg-white border-b border-blue-200 shadow-sm fixed top-0 left-0 w-full y-50">
         <Link href="/" className="group">
           <div className="transform transition-transform duration-200 group-hover:scale-105">
@@ -236,7 +229,6 @@ const Header = () => {
         </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
       {isOpen && (
         <>
           <div className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden transition-opacity duration-300" />
@@ -275,7 +267,6 @@ const Header = () => {
                 </button>
               </div>
 
-              {/* Mobile Navigation */}
               <nav aria-label="Global" className="flex-1 p-4 overflow-y-auto">
                 <ul className="space-y-3">
                   {sections.map(({ name, href, hasSubMenu }) => (
@@ -333,7 +324,6 @@ const Header = () => {
                 </ul>
               </nav>
 
-              {/* Mobile Social Links */}
               <div className="p-4 border-t border-gray-200">
                 <div className="flex justify-center space-x-6">
                   {socialLinks.map(({ icon: Icon, href, label }) => (
