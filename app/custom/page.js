@@ -96,10 +96,10 @@ const Page = () => {
     setImageLoading(initialLoading);
   }, []);
 
-  useEffect(() => {
+  /*useEffect(() => {
     // Store the current value of tiltElements.current
     const elements = tiltElements.current.filter(Boolean);
-  
+
     // Initialize VanillaTilt with enhanced settings
     elements.forEach((el) => {
       if (el && !el.vanillaTilt) {
@@ -118,7 +118,7 @@ const Page = () => {
         });
       }
     });
-  
+
     // Cleanup on unmount
     return () => {
       elements.forEach((el) => {
@@ -128,127 +128,130 @@ const Page = () => {
       });
     };
   }, []);
-
+*/
   const handleNext = (id) => {
-    setImageLoading(prev => ({ ...prev, [id]: true }));
+    setImageLoading((prev) => ({ ...prev, [id]: true }));
     setTimeout(() => {
       setCurrentIndex((prev) => {
         const imagesArray = cardImages[id];
         const newIndex = (prev[id] + 1) % imagesArray.length;
         return { ...prev, [id]: newIndex };
       });
-      setImageLoading(prev => ({ ...prev, [id]: false }));
+      setImageLoading((prev) => ({ ...prev, [id]: false }));
     }, 150);
   };
 
   const handlePrev = (id) => {
-    setImageLoading(prev => ({ ...prev, [id]: true }));
+    setImageLoading((prev) => ({ ...prev, [id]: true }));
     setTimeout(() => {
       setCurrentIndex((prev) => {
         const imagesArray = cardImages[id];
-        const newIndex = (prev[id] - 1 + imagesArray.length) % imagesArray.length;
+        const newIndex =
+          (prev[id] - 1 + imagesArray.length) % imagesArray.length;
         return { ...prev, [id]: newIndex };
       });
-      setImageLoading(prev => ({ ...prev, [id]: false }));
+      setImageLoading((prev) => ({ ...prev, [id]: false }));
     }, 150);
   };
 
   const handleDotClick = (id, index) => {
-    setImageLoading(prev => ({ ...prev, [id]: true }));
+    setImageLoading((prev) => ({ ...prev, [id]: true }));
     setTimeout(() => {
-      setCurrentIndex(prev => ({ ...prev, [id]: index }));
-      setImageLoading(prev => ({ ...prev, [id]: false }));
+      setCurrentIndex((prev) => ({ ...prev, [id]: index }));
+      setImageLoading((prev) => ({ ...prev, [id]: false }));
     }, 150);
   };
 
   const products = [
-    { 
-      id: 1, 
-      heading: "Salt Lamps", 
+    {
+      id: 1,
+      heading: "Salt Lamps",
       text: "Himalayan salt lamps emitting a warm amber glow, creating calm spaces while purifying the air naturally.",
     },
-    { 
-      id: 2, 
-      heading: "Salt Candle Holders", 
+    {
+      id: 2,
+      heading: "Salt Candle Holders",
       text: "Hand-carved salt crystal holders that enrich candlelight with elegance, warmth, and natural therapeutic properties.",
     },
-    { 
-      id: 3, 
-      heading: "Salt Culinary", 
+    {
+      id: 3,
+      heading: "Salt Culinary",
       text: "Premium edible salts for gourmet dishes, enhancing flavor with natural minerals and distinctive culinary richness.",
     },
-    { 
-      id: 4, 
-      heading: "Aromatherapy", 
+    {
+      id: 4,
+      heading: "Aromatherapy",
       text: "Therapeutic salt products with essential oils, crafted for spa rituals, relaxation, and holistic wellness experiences.",
     },
-    { 
-      id: 5, 
-      heading: "Home Décor", 
+    {
+      id: 5,
+      heading: "Home Décor",
       text: "Artistic salt sculptures and decorative items that bring beauty, balance, and positive energy into modern living spaces.",
     },
-    { 
-      id: 6, 
-      heading: "Animal Lick Salt", 
+    {
+      id: 6,
+      heading: "Animal Lick Salt",
       text: "Natural mineral salt blocks for animals, supplying vital nutrients that support growth, strength, and well-being.",
     },
-    { 
-      id: 7, 
-      heading: "Pyramid Salt", 
+    {
+      id: 7,
+      heading: "Pyramid Salt",
       text: "Unique pyramid-shaped salt crystals, admired as finishing salts in gourmet dining and modern culinary presentations.",
     },
-    { 
-      id: 8, 
-      heading: "Salt Tree", 
+    {
+      id: 8,
+      heading: "Salt Tree",
       text: "Decorative salt formations shaped like trees, symbolizing growth, strength, and harmony with natural earth elements.",
     },
-    { 
-      id: 9, 
-      heading: "Globe Salt", 
+    {
+      id: 9,
+      heading: "Globe Salt",
       text: "Spherical salt pieces from ancient deposits, symbolizing global unity and the timeless natural purity of the Earth.",
     },
-    { 
-      id: 10, 
-      heading: "Crafted Items", 
+    {
+      id: 10,
+      heading: "Crafted Items",
       text: "Handmade salt bowls, vases, and ornaments designed for luxury décor, wellness spaces, and elegant spa settings.",
-    },    
+    },
   ];
 
   return (
-    <div className="w-full flex flex-col lg:pl-[265px] md:pl-[245px] lg:pt-[25px] bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
+    <div className="w-full flex flex-col bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
       {/* Enhanced Header */}
-      <div className="w-11/12 mx-auto text-center mt-[6.5rem] md:mt-[1.5rem] mb-[40px]">
+      <div className="w-11/12 mx-auto text-center mt-[6.5rem] md:mt-[2rem] mb-[20px]">
         <h1 className="text-4xl sm:mt-[30px] lg:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent mb-4">
           Customized Shapes
         </h1>
         <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6"></div>
         <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-          Discover our premium collection of handcrafted salt products, each designed to enhance your lifestyle with natural beauty and therapeutic benefits.
+          Discover our premium collection of handcrafted salt products, each
+          designed to enhance your lifestyle with natural beauty and therapeutic
+          benefits.
         </p>
       </div>
 
-      <div className="p-8">
-        <section className="flex flex-wrap justify-center items-stretch gap-6">
+      <div className="px-4 sm:px-6 lg:px-8">
+        <section className="flex flex-wrap justify-center items-stretch gap-6 max-w-7xl mx-auto">
           {products.map((product) => {
             const imageList = cardImages[product.id];
             const index = currentIndex[product.id] || 0;
             const currentImage = imageList[index];
             const isLoading = imageLoading[product.id];
             const isHovered = hoveredCard === product.id;
-            
+
             return (
               <div
                 key={product.id}
-                ref={(el) => (tiltElements.current[product.id] = el)}
+                //ref={(el) => (tiltElements.current[product.id] = el)}
                 className={`
                   bg-white p-6 rounded-2xl shadow-lg w-full sm:w-[calc(100%-24px)] 
-                  md:w-[calc(50%-24px)] lg:w-[calc(33.333%-24px)] 
-                  h-[420px] flex flex-col justify-between
+                  md:w-[calc(50%-24px)] lg:w-[calc(30%-16px)] 
+                  h-[400px] flex flex-col justify-between
                   transition-all duration-500 ease-out transform hover:scale-[1.03]
                   border-2 border-transparent hover:border-blue-300
                   hover:shadow-2xl hover:shadow-blue-500/20
                   cursor-pointer group overflow-hidden
-                  ${isHovered ? 'ring-4 ring-blue-200' : ''}
+                  ${isHovered ? "ring-4 ring-blue-200" : ""}
                 `}
                 onMouseEnter={() => setHoveredCard(product.id)}
                 onMouseLeave={() => setHoveredCard(null)}
@@ -261,17 +264,19 @@ const Page = () => {
                       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
                     </div>
                   )}
-                  
-                                     {/* Main Image */}
-                   <div className={`transition-opacity duration-300 w-full h-full ${isLoading ? 'opacity-50' : 'opacity-100'}`}>
-                     <Image 
-                       src={currentImage} 
-                       alt={product.heading} 
-                       fill
-                       className="rounded-xl object-cover transition-transform duration-700 group-hover:scale-110 object-center" 
-                     />
-                   </div>
-                  
+
+                  {/* Main Image */}
+                  <div
+                    className={`transition-opacity duration-300 w-full h-full ${isLoading ? "opacity-50" : "opacity-100"}`}
+                  >
+                    <Image
+                      src={currentImage}
+                      alt={product.heading}
+                      fill
+                      className="rounded-xl object-cover transition-transform duration-700 group-hover:scale-110 object-center"
+                    />
+                  </div>
+
                   {/* Enhanced Navigation Buttons */}
                   <button
                     onClick={() => handlePrev(product.id)}
@@ -281,11 +286,21 @@ const Page = () => {
                              shadow-lg hover:shadow-xl hover:scale-110
                              opacity-0 group-hover:opacity-100"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 19l-7-7 7-7"
+                      />
                     </svg>
                   </button>
-                  
+
                   <button
                     onClick={() => handleNext(product.id)}
                     className="absolute top-1/2 right-3 transform -translate-y-1/2 
@@ -294,11 +309,21 @@ const Page = () => {
                              shadow-lg hover:shadow-xl hover:scale-110
                              opacity-0 group-hover:opacity-100"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
                     </svg>
                   </button>
-                  
+
                   {/* Image Indicator Dots */}
                   <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2">
                     {imageList.map((_, idx) => (
@@ -306,17 +331,15 @@ const Page = () => {
                         key={idx}
                         onClick={() => handleDotClick(product.id, idx)}
                         className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                          idx === index 
-                            ? 'bg-blue-500 scale-125' 
-                            : 'bg-white/60 hover:bg-white/80 hover:scale-110'
+                          idx === index
+                            ? "bg-blue-500 scale-125"
+                            : "bg-white/60 hover:bg-white/80 hover:scale-110"
                         }`}
                       />
                     ))}
                   </div>
-                  
-              
                 </div>
-                
+
                 {/* Enhanced Content */}
                 <div className="mt-6 text-center flex-grow">
                   <div className="flex mb-3">
@@ -329,13 +352,12 @@ const Page = () => {
                     {product.text}
                   </p>
                 </div>
-                
               </div>
             );
           })}
         </section>
       </div>
-      
+
       {/* Enhanced Footer Message */}
       <div className="text-center mt-12 mb-8 px-8">
         <div className="max-w-4xl mx-auto">
@@ -344,8 +366,9 @@ const Page = () => {
               Custom Solutions Available
             </h2>
             <p className="text-gray-700 text-lg leading-relaxed">
-              Any shape, size, or design can be customized according to your specific requirements. 
-              Our master craftsmen work with you to create unique salt products that perfectly match your vision.
+              Any shape, size, or design can be customized according to your
+              specific requirements. Our master craftsmen work with you to
+              create unique salt products that perfectly match your vision.
             </p>
             <div className="flex justify-center mt-6 space-x-8 text-sm text-gray-600">
               <div className="flex items-center">

@@ -3,7 +3,8 @@ import { Context } from "@/Context/Context";
 import useActiveLink from "@/utils/observe";
 import Link from "next/link";
 import { useContext } from "react";
-import Logo2 from "../images/logo.png";
+import Logo2 from "../images/stc_Logo.png";
+import logo from "../images/stc_logo.png";
 import Image from "next/image";
 
 const Mobile = ({ setIsOpen, categories }) => {
@@ -27,7 +28,7 @@ const Mobile = ({ setIsOpen, categories }) => {
         <Link onClick={() => setIsOpen(false)} href="/">
           <div className="block text-teal-600 mx-4">
             <Image
-              src={Logo2}
+              src={logo}
               className="mt-[15px] w-[150px] h-[34px]"
               alt="Faychem company logo"
             />
@@ -63,7 +64,8 @@ const Mobile = ({ setIsOpen, categories }) => {
             ) : (
               <p className="text-xs ">
                 <strong className="block font-medium ml-[15px] ">
-                  Welcome to <span className="text-blue-500 font-semibold">FayChem</span>
+                  Welcome to{" "}
+                  <span className="text-blue-500 font-semibold">FayChem</span>
                 </strong>
               </p>
             )}

@@ -1,20 +1,21 @@
 "use client";
-import Mobile from "./Mobile";
 import useActiveLink from "@/utils/observe";
 import { useContext, useState, useEffect, useRef } from "react";
 import { Context } from "@/Context/Context";
-import Logo2 from "@/images/logo.png";
+import Logo2 from "@/images/logo1.png";
 import Image from "next/image";
-import { FaFacebook, FaTwitter, FaInstagram, FaChevronDown, FaYoutube, FaLinkedin } from "react-icons/fa";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import {
+  FaFacebook,
+  FaTwitter,
+  FaInstagram,
+  FaYoutube,
+  FaLinkedin,
+  FaChevronDown,
+} from "react-icons/fa";
 
 // Icons
-import home from "@/images/home_icon.png";
-import about from "@/images/about_icon.png";
-import mission from "@/images/mission_icon.png";
-import aboutSalt from "@/images/salt_icon.png";
-import product from "@/images/products_icon.png";
-import contact from "@/images/contact_icon.png";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,86 +26,139 @@ const Header = () => {
   const name = user?.data?.name.replace(/ .*/, "");
   const sidebarRef = useRef(null);
   const mobileMenuRef = useRef(null);
+  const dropdownRef = useRef(null);
+  const router = useRouter();
+
+  const socialLinks = [
+    {
+      icon: FaFacebook,
+      label: "Facebook",
+      color: "hover:text-blue-600",
+      href: "https://facebook.com",
+    },
+    {
+      icon: FaTwitter,
+      label: "Twitter",
+      color: "hover:text-blue-400",
+      href: "https://twitter.com",
+    },
+    {
+      icon: FaInstagram,
+      label: "Instagram",
+      color: "hover:text-pink-500",
+      href: "https://instagram.com",
+    },
+    {
+      icon: FaYoutube,
+      label: "YouTube",
+      color: "hover:text-red-600",
+      href: "https://youtube.com",
+    },
+    {
+      icon: FaLinkedin,
+      label: "LinkedIn",
+      color: "hover:text-blue-700",
+      href: "https://linkedin.com",
+    },
+  ];
 
   const sections = [
-    { name: "Home", href: "/", icon: home },
-    { name: "About", href: "/#about", icon: about },
-    { name: "Mission", href: "/#mission", icon: mission },
-    { name: "About Salt", href: "/#about_salt", icon: aboutSalt },
-    { name: "Products", href: "/#categories", icon: product, hasSubMenu: true },
-    { name: "Contact", href: "/#contact", icon: contact },
+    { name: "Home", href: "/" },
+    { name: "About Us", href: "/#about" },
+
+    // { name: "About Salt", href: "/#about_salt" },
+    { name: "Products", href: "/#categories", hasSubMenu: true },
+    { name: "Contact Us", href: "/contact" },
   ];
 
   const subSections = [
-    { name: "Black Salt", href: "/#salt-b" },
-    { name: "White Salt", href: "/#salt-w" },
-    { name: "Pink Salt", href: "/#salt-p" },
-    { name: "Customized Products", href: "/#salt-c" },
+    { name: "Pink Salt", href: "/pink-salt" },
+    { name: "White Salt", href: "/white-salt" },
+    { name: "Black Salt", href: "/black-salt" },
+    { name: "Crafted Products", href: "/custom" },
   ];
 
-  const activeLink = useActiveLink(sections.map(section => section.name));
+  const activeLink = useActiveLink(sections.map((section) => section.name));
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)) {
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target)
+      ) {
         setIsOpen(false);
+      }
+
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsProductsOpen(false);
       }
     };
 
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      document.body.style.overflow = 'hidden';
+    if (isOpen || isProductsOpen) {
+      document.addEventListener("click", handleClickOutside);
+      if (isOpen) document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.body.style.overflow = 'unset';
+      document.removeEventListener("click", handleClickOutside);
+      document.body.style.overflow = "unset";
     };
-  }, [isOpen]);
+  }, [isOpen, isProductsOpen]);
 
   const handleToggle = () => {
-    setIsOpen(prev => !prev);
+    setIsOpen((prev) => !prev);
   };
 
   const handleLinkClick = (href) => {
     setIsOpen(false);
     setMobileProductsOpen(false);
-    
-    if (href.startsWith('/#')) {
+
+    if (href.startsWith("/#")) {
       const id = href.substring(2);
       const section = document.getElementById(id);
       if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
+        section.scrollIntoView({ behavior: "smooth" });
       }
-    } else if (href.startsWith('/')) {
-      window.location.href = href;
+    } else if (href.startsWith("/")) {
+      // Use Next.js router instead of window.location
+      router.push(href);
     }
   };
 
-  const socialLinks = [
-    { icon: FaFacebook, label: "Facebook" },
-    { icon: FaTwitter, label: "Twitter" },
-    { icon: FaInstagram, label: "Instagram" },
-    { icon: FaYoutube, label: "YouTube" },
-    { icon: FaLinkedin, label: "LinkedIn" },
-  ];
+  const handleDropdownClick = (href) => {
+    setIsProductsOpen(false);
+
+    // Add small delay to ensure dropdown closes before navigation
+    setTimeout(() => {
+      if (href.startsWith("/#")) {
+        const id = href.substring(2);
+        const section = document.getElementById(id);
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth" });
+        }
+      } else if (href.startsWith("/")) {
+        router.push(href);
+      }
+    }, 100);
+  };
 
   return (
-    <header className="relative bg-white fixed top-0 left-0 w-full z-50 shadow-sm">
-      {/* Desktop Sidebar */}
-      <div className="hidden md:flex">
-        <div 
+    <header className="bg-[white] w-full z-50 fixed top-0 left-0">
+      {/* Desktop Top Navigation bg-gradient-to-r from-gray-50 to-white border-b border-blue-100 */}
+      <div className="hidden md:block">
+        <div
           ref={sidebarRef}
-          className="bg-gradient-to-b from-gray-50 to-gray-100 border-r border-blue-200 fixed top-0 left-0 h-full md:w-60 lg:w-64 z-50 shadow-lg overflow-y-auto scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-gray-200"
+          className="bg-[##1b2e3c]  fixed top-0 left-0 w-full h-16 z-50 shadow-md"
         >
-          <div className="flex flex-col h-full px-4 py-6">
-            <Link href="/" className="text-teal-600 mb-8 group">
-              <div className="transform transition-transform duration-200 group-hover:scale-105">
+          <div className="flex items-center justify-between h-full px-6 mx-auto max-w-7xl">
+            {/* Logo */}
+            <Link href="/" className="text-teal-600 group">
+              <div className="transform transition-transform duration-500 group-hover:scale-105">
                 <Image
-                  width={205}
-                  height={80}
+                  width={"auto"}
+                  height={40}
                   src={Logo2}
                   alt="Faychem company logo"
                   className="filter drop-shadow-sm"
@@ -112,58 +166,56 @@ const Header = () => {
               </div>
             </Link>
 
-            <nav aria-label="Global" className="flex-1">
-              <ul className="flex flex-col gap-2 text-lg w-full">
-                {sections.map(({ name, href, hasSubMenu, icon }) => (
+            {/* Navigation */}
+            <nav aria-label="Global" className="flex-1 px-8">
+              <ul className="flex flex-row gap-1 items-center justify-center">
+                {sections.map(({ name, href, hasSubMenu }) => (
                   <li key={name} className="relative">
-                    <div className={`flex items-center w-full rounded-lg transition-all duration-300 ease-in-out ${
-                      activeLink === name
-                        ? "bg-blue-500 text-white shadow-md transform scale-105"
-                        : "text-blue-600 hover:bg-blue-50 hover:shadow-sm hover:transform hover:scale-102"
-                    } p-3 group cursor-pointer`}>
+                    <div
+                      ref={hasSubMenu ? dropdownRef : null}
+                      className={`flex items-center rounded-lg transition-all duration-300 ${
+                        activeLink === name
+                          ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md"
+                          : "text-gray-700 hover:bg-blue-50 hover:to-blue-100 hover:text-blue-600"
+                      } px-3 py-2 mx-1 group cursor-pointer`}
+                    >
                       <div className="flex items-center flex-1 min-w-0">
-                        <div className="flex-shrink-0 mr-3">
-                          <Image
-                            src={icon}
-                            alt={name}
-                            width={name === "Home" || name === "About" ? 20 : 24}
-                            height={name === "Home" || name === "About" ? 20 : 24}
-                            className={`transition-all duration-300 ${
-                              activeLink === name ? "brightness-0 invert" : "group-hover:scale-110"
-                            }`}
-                          />
-                        </div>
+                        <div className="flex-shrink-0 mr-2"></div>
                         {hasSubMenu ? (
                           <button
                             onClick={() => setIsProductsOpen(!isProductsOpen)}
                             className="flex items-center justify-between w-full text-left font-medium"
                           >
-                            <span className="truncate">{name}</span>
-                            <FaChevronDown 
-                              className={`ml-2 transition-all duration-300 flex-shrink-0 ${
-                                isProductsOpen ? 'rotate-180' : 'rotate-0'
-                              } ${activeLink === name ? 'text-white' : 'text-blue-400'}`} 
+                            <span>{name}</span>
+                            <FaChevronDown
+                              className={`ml-1.5 text-xs transition-all duration-300 ${
+                                isProductsOpen ? "rotate-180" : "rotate-0"
+                              } ${activeLink === name ? "text-white" : "text-blue-400"}`}
                             />
                           </button>
                         ) : (
-                          <Link href={href} className="w-full font-medium truncate">
+                          <Link href={href} className={`w-full font-medium`}>
                             {name}
                           </Link>
                         )}
                       </div>
                     </div>
-                    
+
                     {hasSubMenu && (
-                      <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                        isProductsOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                      }`}>
-                        <ul className="mt-2 ml-4 space-y-1 border-l-2 border-blue-200 pl-4">
+                      <div
+                        className={`absolute top-full left-0 bg-white shadow-xl rounded-lg border border-blue-50 min-w-[180px] transition-all duration-300 ${
+                          isProductsOpen
+                            ? "opacity-100 visible translate-y-1"
+                            : "opacity-0 invisible translate-y-4 pointer-events-none"
+                        }`}
+                      >
+                        <ul className="py-1">
                           {subSections.map(({ name, href }) => (
                             <li key={name}>
                               <Link
                                 href={href}
-                                scroll={true}
-                                className="block py-2 px-3 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-all duration-200 hover:transform hover:translate-x-1"
+                                onClick={() => setIsProductsOpen(false)}
+                                className="block w-full text-left py-2 px-4 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 hover:pl-6"
                               >
                                 {name.trim()}
                               </Link>
@@ -177,39 +229,31 @@ const Header = () => {
               </ul>
             </nav>
 
-            <div className="mt-auto pt-6 border-t border-gray-200">
-              <div className="flex justify-between items-center">
-                {socialLinks.map(({ icon: Icon, href, label }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    aria-label={label}
-                    className="text-blue-500 hover:text-blue-700 cursor-pointer text-xl transform transition-all duration-200 hover:scale-125 hover:rotate-12 p-1"
-                  >
-                    <Icon />
-                  </a>
-                ))}
-              </div>
-            </div>
+            {/* CTA Button */}
+            <Link href="/contact">
+              {/*"bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-2.5 rounded-full font-medium shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-1.5"*/}
+              <button className="button">Let's Talk Business</button>
+            </Link>
           </div>
         </div>
       </div>
 
-      <div className="flex md:hidden items-center justify-between px-4 py-3 bg-white border-b border-blue-200 shadow-sm fixed top-0 left-0 w-full y-50">
+      {/* Mobile menu button */}
+      <div className="flex md:hidden items-center justify-between px-4 py-3 bg-white border-b border-blue-100 shadow-sm fixed top-0 left-0 w-full z-50">
         <Link href="/" className="group">
           <div className="transform transition-transform duration-200 group-hover:scale-105">
             <Image
-              width={100}
-              height={100}
+              width={120}
+              height={35}
               src={Logo2}
-              alt="Faychem company logo"
+              alt="STC company logo"
               className="filter drop-shadow-sm"
             />
           </div>
         </Link>
         <button
           onClick={handleToggle}
-          className="rounded-lg bg-gray-50 p-3 text-gray-600 transition-all duration-200 hover:bg-blue-50 hover:text-blue-600 hover:shadow-md active:scale-95"
+          className="rounded-lg bg-gray-50 p-2.5 text-gray-600 transition-all duration-200 hover:bg-blue-50 hover:text-blue-600 hover:shadow-md active:scale-95"
         >
           <span className="sr-only">Toggle menu</span>
           <svg
@@ -229,10 +273,11 @@ const Header = () => {
         </button>
       </div>
 
+      {/* Mobile Menu Sidebar */}
       {isOpen && (
         <>
-          <div className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden transition-opacity duration-300" />
-          <div 
+          <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300" />
+          <div
             ref={mobileMenuRef}
             className="fixed top-0 left-0 w-80 max-w-[90vw] h-full bg-white shadow-2xl z-50 md:hidden transform transition-transform duration-300 ease-out"
           >
@@ -240,8 +285,8 @@ const Header = () => {
               {/* Mobile Header */}
               <div className="flex items-center justify-between p-4 border-b border-gray-200">
                 <Image
-                  width={80}
-                  height={80}
+                  width={110}
+                  height={30}
                   src={Logo2}
                   alt="Faychem company logo"
                 />
@@ -252,7 +297,7 @@ const Header = () => {
                   <span className="sr-only">Close menu</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
+                    className="h-5 w-5"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -268,13 +313,15 @@ const Header = () => {
               </div>
 
               <nav aria-label="Global" className="flex-1 p-4 overflow-y-auto">
-                <ul className="space-y-3">
+                <ul className="space-y-2">
                   {sections.map(({ name, href, hasSubMenu }) => (
                     <li key={name}>
                       {hasSubMenu ? (
                         <div className="space-y-2">
                           <button
-                            onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
+                            onClick={() =>
+                              setMobileProductsOpen(!mobileProductsOpen)
+                            }
                             className={`flex items-center justify-between w-full p-3 rounded-lg text-left transition-all duration-300 ${
                               activeLink === name
                                 ? "bg-blue-500 text-white shadow-md"
@@ -286,13 +333,17 @@ const Header = () => {
                             </span>
                             <FaChevronDown
                               className={`transition-transform duration-300 ${
-                                mobileProductsOpen ? 'rotate-180' : 'rotate-0'
+                                mobileProductsOpen ? "rotate-180" : "rotate-0"
                               }`}
                             />
                           </button>
-                          <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                            mobileProductsOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                          }`}>
+                          <div
+                            className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                              mobileProductsOpen
+                                ? "max-h-96 opacity-100"
+                                : "max-h-0 opacity-0"
+                            }`}
+                          >
                             <ul className="ml-4 space-y-1 border-l-2 border-blue-200 pl-4">
                               {subSections.map(({ name, href }) => (
                                 <li key={name}>
@@ -324,19 +375,27 @@ const Header = () => {
                 </ul>
               </nav>
 
-              <div className="p-4 border-t border-gray-200">
-                <div className="flex justify-center space-x-6">
-                  {socialLinks.map(({ icon: Icon, href, label }) => (
+              <div className="flex flex-col gap-4">
+                <div className="flex justify-center gap-4 mb-4">
+                  {socialLinks.map(({ icon: Icon, label, color, href }) => (
                     <a
                       key={label}
-                      href={href}
                       aria-label={label}
-                      className="text-blue-500 hover:text-blue-700 text-xl transform transition-all duration-200 hover:scale-125 sm:p-2"
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`text-gray-500 ${color} cursor-pointer text-xl transition-all duration-200 hover:scale-125`}
                     >
                       <Icon />
                     </a>
                   ))}
                 </div>
+                <button
+                  onClick={() => handleLinkClick("/contact")}
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white p-3 rounded-lg text-center transition-all duration-300 font-medium shadow-md"
+                >
+                  Let's Talk Business
+                </button>
               </div>
             </div>
           </div>

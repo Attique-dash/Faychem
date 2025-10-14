@@ -11,19 +11,23 @@ const HeroBanner = () => {
   const [isVisible, setIsVisible] = useState(false);
   const intervalRef = useRef(null);
   const heroRef = useRef(null);
-  
+
   const images = [
     { src: banner, alt: "Premium salt crystals" },
     { src: banner2, alt: "Salt mining operations" },
     { src: banner3, alt: "Pure white salt" },
-    { src: banner4, alt: "Industrial salt processing" }
+    { src: banner4, alt: "Industrial salt processing" },
   ];
 
   const productImages = [
     { src: banner, alt: "Premium salt crystals", title: "Premium Salt" },
     { src: banner3, alt: "Pure white salt", title: "White Salt" },
     { src: banner2, alt: "Salt mining operations", title: "Rock Salt" },
-    { src: banner4, alt: "Industrial salt processing", title: "Industrial Salt" }
+    {
+      src: banner4,
+      alt: "Industrial salt processing",
+      title: "Industrial Salt",
+    },
   ];
 
   // Auto-slide functionality
@@ -49,27 +53,25 @@ const HeroBanner = () => {
       },
       { threshold: 0.1 }
     );
-  
+
     const currentElement = heroRef.current; // ✅ take a snapshot
-  
+
     if (currentElement) {
       observer.observe(currentElement);
     }
-  
+
     return () => {
       if (currentElement) {
         observer.unobserve(currentElement); // ✅ cleanup always uses the same node
       }
     };
-  }, []);  
-
-
+  }, []);
 
   return (
     <div
       ref={heroRef}
       id="home"
-      className="relative flex justify-center items-center min-h-screen p-4 sm:p-6 lg:p-8 md:pl-[240px] overflow-hidden"
+      className="relative flex justify-center items-center min-h-screen mb-[-2rem] p-4 sm:p-6 lg:p-8 overflow-hidden pt-20"
     >
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
@@ -77,7 +79,7 @@ const HeroBanner = () => {
           <div
             key={index}
             className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === bgImageIndex ? 'opacity-100' : 'opacity-0'
+              index === bgImageIndex ? "opacity-100" : "opacity-0"
             }`}
             style={{
               backgroundImage: `url(${image.src.src})`,
@@ -90,37 +92,23 @@ const HeroBanner = () => {
           </div>
         ))}
       </div>
-
-      {/* Slide Indicators */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30">
-        <div className="flex space-x-3">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => handleDotClick(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 transform hover:scale-125 ${
-                index === bgImageIndex
-                  ? 'bg-white shadow-lg'
-                  : 'bg-white bg-opacity-50 hover:bg-opacity-75'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
-      </div>
-
       {/* Main Content */}
-      <div className={`relative z-20 max-w-screen transition-all duration-1000 transform ${
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-      }`}>
-        <div className="bg-white/30 backdrop-blur-sm lg:pl-[170px] py-8 sm:py-12 lg:py-16 px-6 sm:px-8 lg:px-12 rounded-xl lg:ml-[-5rem] xl:ml-[-7rem] shadow-2xl border border-white border-opacity-20">
-          <div className="lg:flex lg:items-center lg:justify-between lg:w-10/12 ml-auto">
-            
+      <div
+        className={`relative z-20 max-w-7xl mx-auto w-full transition-all duration-1000 transform ${
+          isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+        }`}
+      >
+        <div className="bg-white/30 backdrop-blur-sm py-8 sm:py-12 lg:py-16 px-6 sm:px-8 lg:px-12 rounded-xl shadow-2xl border border-white border-opacity-20">
+          <div className="lg:flex lg:items-center lg:justify-between max-w-6xl mx-auto">
             {/* Text Content */}
             <div className="lg:flex-1 lg:pr-8">
-              <div className={`relative mt-[3.5rem] md:mt-[1.5rem] sm:mt-8 px-4 sm:px-6 lg:px-0 text-left transition-all duration-1000 delay-300 transform ${
-                isVisible ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'
-              }`}>
+              <div
+                className={`relative mt-[3.5rem] md:mt-[1.5rem] sm:mt-8 px-4 sm:px-6 lg:px-0 text-left transition-all duration-1000 delay-300 transform ${
+                  isVisible
+                    ? "translate-x-0 opacity-100"
+                    : "-translate-x-8 opacity-0"
+                }`}
+              >
                 <div className="relative">
                   <h1 className="text-xl text-center lg:text-left sm:text-2xl lg:text-3xl font-bold tracking-tight text-white leading-tight">
                     Global Trader in Premium <br />
@@ -130,29 +118,35 @@ const HeroBanner = () => {
                   </h1>
                   <div className="absolute -top-2 -left-2 w-20 h-20 bg-blue-100 bg-opacity-50 rounded-full blur-xl"></div>
                 </div>
-                
-                <p className="mt-4 sm:mt-6 text-center text-justify text-sm sm:text-base font-medium text-white leading-relaxed">
-                  Faychem specializes in exporting the purest, high-quality salt
-                  sourced from Pakistan to global markets. Our diverse offerings,
-                  from culinary to industrial applications, are tailored to meet
-                  the unique needs of our customers worldwide.
-                </p>
 
+                <p className="mt-4 sm:mt-6 text-center text-justify text-sm sm:text-base font-medium text-white leading-relaxed">
+                  Silverline Trading Company specializes in exporting the
+                  purest, high-quality salt sourced from Pakistan to global
+                  markets. Our diverse offerings include culinary salt,
+                  industrial salt, and decorative salt, all tailored to meet the
+                  unique needs of our customers worldwide.
+                </p>
               </div>
             </div>
 
             {/* Product Images Grid */}
-            <div className={`lg:flex-shrink-0 lg:w-[400px] mt-8 lg:mt-0 transition-all duration-1000 delay-500 transform ${
-              isVisible ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
-            }`}>
+            <div
+              className={`lg:flex-shrink-0 lg:w-[400px] mt-8 lg:mt-0 transition-all duration-1000 delay-500 transform ${
+                isVisible
+                  ? "translate-x-0 opacity-100"
+                  : "translate-x-8 opacity-0"
+              }`}
+            >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 justify-items-center">
                 {productImages.map((image, index) => (
                   <div
                     key={index}
-                    className="group relative overflow-hidden rounded-lg shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:rotate-1"
-                    style={{ 
+                    className="group relative overflow-hidden rounded-lg shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:rotate-4"
+                    style={{
                       animationDelay: `${index * 200}ms`,
-                      animation: isVisible ? `fadeInUp 0.8s ease-out forwards` : 'none'
+                      animation: isVisible
+                        ? `fadeInUp 0.8s ease-out forwards`
+                        : "none",
                     }}
                   >
                     <Image
@@ -162,7 +156,7 @@ const HeroBanner = () => {
                       alt={image.alt}
                       className="rounded-lg w-[500px] lg:w-auto object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    
+
                     {/* Hover Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
                       <div className="absolute bottom-4 left-4 text-white">
@@ -180,24 +174,6 @@ const HeroBanner = () => {
           </div>
         </div>
       </div>
-
-      {/* Floating Elements */}
-      <div className="absolute top-20 left-10 w-4 h-4 bg-blue-300 bg-opacity-30 rounded-full animate-bounce delay-100"></div>
-      <div className="absolute top-40 right-20 w-6 h-6 bg-teal-300 bg-opacity-30 rounded-full animate-bounce delay-300"></div>
-      <div className="absolute bottom-40 left-20 w-3 h-3 bg-blue-400 bg-opacity-30 rounded-full animate-bounce delay-500"></div>
-
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </div>
   );
 };
