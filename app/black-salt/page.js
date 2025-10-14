@@ -98,8 +98,8 @@ const BlackSalt = () => {
             </h1>
           </div>
 
-          {/* Professional Product Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-16">
+                  {/* Professional Product Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-16 items-stretch">
             {saltVariants.map((salt, index) => (
               <div
                 key={salt.id}
@@ -107,9 +107,9 @@ const BlackSalt = () => {
                   isVisible
                     ? "translate-y-0 opacity-100"
                     : "translate-y-8 opacity-0"
-                }`}
+                } h-full`}
               >
-                <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 group">
+                <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 group h-full flex flex-col">
                   {/* Professional Image Section */}
                   <div className="relative h-60 w-auto bg-gray-50 overflow-hidden">
                     <Image
@@ -120,7 +120,7 @@ const BlackSalt = () => {
                     />
                   </div>{" "}
                   {/* Professional Content Section */}
-                  <div className="p-6">
+                  <div className="p-6 flex-1 flex flex-col">
                     <h3 className="text-xl font-bold text-gray-900 mb-3">
                       {salt.name}
                     </h3>
@@ -133,43 +133,73 @@ const BlackSalt = () => {
             ))}
           </div>
 
-          {/* Professional CTA Section */}
+                    {/* Professional CTA Section (enhanced) */}
           <div
             className={`text-center transition-all duration-1000 delay-700 transform ${
-              isVisible
-                ? "translate-y-0 opacity-100"
-                : "translate-y-8 opacity-0"
+              isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
             }`}
           >
-            <div className="bg-white rounded-2xl shadow-lg p-10 max-w-3xl mx-auto my-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 text-center tracking-tight">
-                Ready to Experience{" "}
-                <span className="text-blue-600">Premium Quality?</span>
-              </h2>
-              <p className="text-gray-600 text-lg md:text-xl mb-8 text-center max-w-2xl mx-auto">
-                Contact our team for bulk orders, custom specifications, and
-                professional consultation.
-              </p>
-              <div className="flex justify-center">
-                <a
-                  href="/contact"
-                  className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow transition-all duration-200"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    viewBox="0 0 24 24"
+            <div className="relative overflow-hidden max-w-5xl mx-auto my-16">
+              {/* soft gradient background + glow */}
+              <div className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-50 via-white to-blue-50" />
+              <div className="absolute -top-24 -right-24 h-80 w-80 bg-blue-200/40 rounded-full blur-3xl -z-10" />
+              <div className="absolute -bottom-24 -left-24 h-72 w-72 bg-indigo-200/40 rounded-full blur-3xl -z-10" />
+
+              <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-lg ring-1 ring-gray-100 p-10 md:p-12">
+                <p className="inline-flex items-center gap-2 text-xs font-semibold tracking-wide uppercase text-blue-700 bg-blue-50 px-3 py-1.5 rounded-full mb-5">
+                  Trusted by food brands & distributors
+                  <span className="h-1.5 w-1.5 rounded-full bg-blue-600 inline-block" />
+                </p>
+
+                <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+                  Unlock Bulk Pricing on{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+                    Himalayan Black Salt
+                  </span>
+                </h2>
+
+                <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto">
+                  Private labeling, custom mesh sizes, and export-ready packaging—delivered on time with rigorous QC.
+                </p>
+
+                {/* value bullets */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 text-left max-w-4xl mx-auto">
+                  <div className="flex items-start gap-3">
+                    <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-white">✓</span>
+                    <p className="text-gray-700"><strong>ISO-certified facility</strong> with 99.8% purity</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-white">✓</span>
+                    <p className="text-gray-700"><strong>MOQ from 500 kg</strong> with flexible packaging</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-white">✓</span>
+                    <p className="text-gray-700"><strong>Global shipping</strong> to 50+ countries</p>
+                  </div>
+                </div>
+
+                {/* buttons */}
+                <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <a
+                    href="/contact"
+                    className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-7 py-4 rounded-xl font-semibold text-lg shadow transition-all duration-200"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M5 12h14M12 5l7 7-7 7"
-                    />
-                  </svg>
-                  Contact Sales Team
-                </a>
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                    Contact Sales
+                  </a>
+                  <a
+                    href="/contact"
+                    className="inline-flex items-center gap-2 bg-white text-blue-700 hover:text-blue-800 px-7 py-4 rounded-xl font-semibold text-lg ring-1 ring-blue-200 hover:ring-blue-300 shadow-sm transition-all duration-200"
+                  >
+                    Get a Free Quote
+                  </a>
+                </div>
+
+                <p className="mt-6 text-sm text-gray-500">
+                  Lead time: 5–7 days · Samples available · Custom branding & barcodes supported
+                </p>
               </div>
             </div>
           </div>

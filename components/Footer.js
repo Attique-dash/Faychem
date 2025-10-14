@@ -95,7 +95,9 @@ const Footer = () => (
 
         {/* Contact/Resources */}
         <div>
-          <h3 className="font-bold text-lg mb-3">CONTACT US</h3>
+          <h3 className="font-bold text-lg mb-3 border-b border-gray-300 pb-1">
+            CONTACT US
+          </h3>
           <div className="flex items-center gap-3 mb-2">
             <Image src={EmailIcon} alt="Email" width={22} height={22} />
             <a

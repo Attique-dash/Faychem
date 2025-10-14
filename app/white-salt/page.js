@@ -98,8 +98,8 @@ const BlackSalt = () => {
             </h1>
           </div>
 
-          {/* Professional Product Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-16">
+                   {/* Professional Product Grid */}
+                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-16 items-stretch">
             {saltVariants.map((salt, index) => (
               <div
                 key={salt.id}
@@ -107,9 +107,9 @@ const BlackSalt = () => {
                   isVisible
                     ? "translate-y-0 opacity-100"
                     : "translate-y-8 opacity-0"
-                }`}
+                } h-full`}
               >
-                <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 group">
+                <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 group h-full flex flex-col">
                   {/* Professional Image Section */}
                   <div className="relative h-60 w-auto bg-gray-50 overflow-hidden">
                     <Image
@@ -120,7 +120,7 @@ const BlackSalt = () => {
                     />
                   </div>{" "}
                   {/* Professional Content Section */}
-                  <div className="p-6">
+                  <div className="p-6 flex-1 flex flex-col">
                     <h3 className="text-xl font-bold text-gray-900 mb-3">
                       {salt.name}
                     </h3>
