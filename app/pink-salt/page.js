@@ -98,8 +98,8 @@ const BlackSalt = () => {
             </h1>
           </div>
 
-                  {/* Professional Product Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-16 items-stretch">
+          {/* Professional Product Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-16 items-stretch">
             {saltVariants.map((salt, index) => (
               <div
                 key={salt.id}
@@ -111,7 +111,7 @@ const BlackSalt = () => {
               >
                 <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 group h-full flex flex-col">
                   {/* Professional Image Section */}
-                  <div className="relative h-60 w-auto bg-gray-50 overflow-hidden">
+                  <div className="relative h-56 w-auto bg-gray-50 overflow-hidden">
                     <Image
                       src={salt.image}
                       alt={salt.name}
@@ -120,8 +120,8 @@ const BlackSalt = () => {
                     />
                   </div>{" "}
                   {/* Professional Content Section */}
-                  <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  <div className="p-4 flex-1 flex flex-col">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">
                       {salt.name}
                     </h3>
                     <p className="text-gray-600 text-sm leading-relaxed mb-4">
@@ -132,7 +132,7 @@ const BlackSalt = () => {
               </div>
             ))}
           </div>
-          
+
           {/* Professional CTA Section */}
           <div
             className={`text-center transition-all duration-1000 delay-700 transform ${

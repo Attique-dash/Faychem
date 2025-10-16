@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { emailConfig } from "@/utils/emailConfig";
 import ReactFlagsSelect from "react-flags-select";
-import { FaPaperPlane } from "react-icons/fa";
+import { FaPaperPlane, FaEnvelopeOpen, FaPhone } from "react-icons/fa";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -172,28 +172,16 @@ const ContactForm = () => {
 
             {/* Email */}
             <div className="flex items-center gap-3 mb-4">
-              <Image
-                src="/images/email.png"
-                alt="Email"
-                width={32}
-                height={32}
-              />
               <div>
                 <div className="text-xs text-gray-500">E-mail</div>
                 <div className="text-base text-gray-800">
-                  info@silverlinetrading.com
+                  info@silverlinetradingcompany.com
                 </div>
               </div>
             </div>
 
             {/* Phone */}
             <div className="flex items-center gap-3">
-              <Image
-                src="/images/phone.png"
-                alt="Phone"
-                width={32}
-                height={32}
-              />
               <div>
                 <div className="text-xs text-gray-500">Phone number</div>
                 <div className="text-base text-gray-800">+971 56 649 4784</div>

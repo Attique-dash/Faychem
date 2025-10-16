@@ -72,9 +72,9 @@ const Header = () => {
   ];
 
   const subSections = [
-    { name: "Pink Salt", href: "/pink-salt" },
-    { name: "White Salt", href: "/white-salt" },
-    { name: "Black Salt", href: "/black-salt" },
+    { name: "Himalayan Pink Salt", href: "/pink-salt" },
+    { name: "Himalayan White Salt", href: "/white-salt" },
+    { name: "Himalayan Black Salt", href: "/black-salt" },
     { name: "Crafted Products", href: "/custom" },
   ];
 
@@ -145,14 +145,14 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-[white] w-full z-50 fixed top-0 left-0">
+    <header className="bg-[white] z-50 fixed top-0 left-0 w-full overflow-hidden">
       {/* Desktop Top Navigation bg-gradient-to-r from-gray-50 to-white border-b border-blue-100 */}
       <div className="hidden md:block">
         <div
           ref={sidebarRef}
-          className="bg-[##1b2e3c]  fixed top-0 left-0 w-full h-16 z-50 shadow-md"
+          className="bg-white  fixed top-0 left-0 w-full h-16 z-50 shadow-md"
         >
-          <div className="flex items-center justify-between h-full px-6 mx-auto max-w-7xl">
+          <div className="flex items-center justify-between h-full px-4 sm:px-6 mx-auto max-w-7xl w-full">
             {/* Logo */}
             <Link href="/" className="text-teal-600 group">
               <div className="transform transition-transform duration-500 group-hover:scale-105">
@@ -203,7 +203,7 @@ const Header = () => {
 
                     {hasSubMenu && (
                       <div
-                        className={`absolute top-full left-0 bg-white shadow-xl rounded-lg border border-blue-50 min-w-[180px] transition-all duration-300 ${
+                        className={`absolute top-full left-0 bg-white shadow-xl rounded-lg border border-blue-50 min-w-[200px] transition-all duration-300 ${
                           isProductsOpen
                             ? "opacity-100 visible translate-y-1"
                             : "opacity-0 invisible translate-y-4 pointer-events-none"
@@ -239,15 +239,16 @@ const Header = () => {
       </div>
 
       {/* Mobile menu button */}
-      <div className="flex md:hidden items-center justify-between px-4 py-3 bg-white border-b border-blue-100 shadow-sm fixed top-0 left-0 w-full z-50">
+      <div className="flex md:hidden items-center justify-between px-3 sm:px-4 py-3 bg-white border-b border-blue-100 shadow-sm fixed top-0 left-0 w-full z-50">
+        {" "}
         <Link href="/" className="group">
           <div className="transform transition-transform duration-200 group-hover:scale-105">
             <Image
-              width={120}
+              width={100}
               height={35}
               src={Logo2}
               alt="STC company logo"
-              className="filter drop-shadow-sm"
+              className="filter drop-shadow-sm w-[100px] sm:w-[120px] h-auto"
             />
           </div>
         </Link>
@@ -289,6 +290,7 @@ const Header = () => {
                   height={30}
                   src={Logo2}
                   alt="Faychem company logo"
+                  className="w-[100px] h-auto"
                 />
                 <button
                   onClick={handleToggle}

@@ -1,8 +1,7 @@
 "use client";
 import Image from "next/image";
 import Logo2 from "../images/logo1.png";
-import EmailIcon from "../images/email.png";
-import PhoneIcon from "../images/call.png";
+import { FaEnvelopeOpen, FaPhone } from "react-icons/fa";
 
 const Footer = () => (
   <footer className="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-800 pt-12 pb-8 min-h-[300px]">
@@ -82,12 +81,12 @@ const Footer = () => (
             </li>
             <li>
               <a href="/custom" className="hover:text-blue-600">
-                Industrial Salt
+                Salt Bricks
               </a>
             </li>
             <li>
               <a href="/custom" className="hover:text-blue-600">
-                Salt Products
+                Custom Crafted Items
               </a>
             </li>
           </ul>
@@ -99,7 +98,7 @@ const Footer = () => (
             CONTACT US
           </h3>
           <div className="flex items-center gap-3 mb-2">
-            <Image src={EmailIcon} alt="Email" width={22} height={22} />
+            <FaEnvelopeOpen className="w-5 h-5" />
             <a
               href="mailto:info@silverlinetrading.com"
               className="font-semibold text-blue-600 hover:text-blue-800 transition-colors"
@@ -108,7 +107,7 @@ const Footer = () => (
             </a>
           </div>
           <div className="flex items-center gap-3">
-            <Image src={PhoneIcon} alt="Phone" width={22} height={22} />
+            <FaPhone className="w-5 h-5 rotate-90" />
             <a
               href="tel:+971566494784"
               className="font-semibold text-blue-600 hover:text-blue-800 transition-colors"

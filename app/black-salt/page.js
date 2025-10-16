@@ -98,8 +98,8 @@ const BlackSalt = () => {
             </h1>
           </div>
 
-                  {/* Professional Product Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-16 items-stretch">
+          {/* Professional Product Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-16 items-stretch">
             {saltVariants.map((salt, index) => (
               <div
                 key={salt.id}
@@ -111,7 +111,7 @@ const BlackSalt = () => {
               >
                 <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 group h-full flex flex-col">
                   {/* Professional Image Section */}
-                  <div className="relative h-60 w-auto bg-gray-50 overflow-hidden">
+                  <div className="relative h-56 w-auto bg-gray-50 overflow-hidden">
                     <Image
                       src={salt.image}
                       alt={salt.name}
@@ -120,8 +120,8 @@ const BlackSalt = () => {
                     />
                   </div>{" "}
                   {/* Professional Content Section */}
-                  <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  <div className="p-4 flex-1 flex flex-col">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">
                       {salt.name}
                     </h3>
                     <p className="text-gray-600 text-sm leading-relaxed mb-4">
@@ -133,10 +133,12 @@ const BlackSalt = () => {
             ))}
           </div>
 
-                    {/* Professional CTA Section (enhanced) */}
+          {/* Professional CTA Section (enhanced) */}
           <div
             className={`text-center transition-all duration-1000 delay-700 transform ${
-              isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+              isVisible
+                ? "translate-y-0 opacity-100"
+                : "translate-y-8 opacity-0"
             }`}
           >
             <div className="relative overflow-hidden max-w-5xl mx-auto my-16">
@@ -159,22 +161,35 @@ const BlackSalt = () => {
                 </h2>
 
                 <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto">
-                  Private labeling, custom mesh sizes, and export-ready packaging—delivered on time with rigorous QC.
+                  Private labeling, custom mesh sizes, and export-ready
+                  packaging—delivered on time with rigorous QC.
                 </p>
 
                 {/* value bullets */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 text-left max-w-4xl mx-auto">
                   <div className="flex items-start gap-3">
-                    <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-white">✓</span>
-                    <p className="text-gray-700"><strong>ISO-certified facility</strong> with 99.8% purity</p>
+                    <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-white">
+                      ✓
+                    </span>
+                    <p className="text-gray-700">
+                      <strong>ISO-certified facility</strong> with 99.8% purity
+                    </p>
                   </div>
                   <div className="flex items-start gap-3">
-                    <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-white">✓</span>
-                    <p className="text-gray-700"><strong>MOQ from 500 kg</strong> with flexible packaging</p>
+                    <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-white">
+                      ✓
+                    </span>
+                    <p className="text-gray-700">
+                      <strong>MOQ from 500 kg</strong> with flexible packaging
+                    </p>
                   </div>
                   <div className="flex items-start gap-3">
-                    <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-white">✓</span>
-                    <p className="text-gray-700"><strong>Global shipping</strong> to 50+ countries</p>
+                    <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-white">
+                      ✓
+                    </span>
+                    <p className="text-gray-700">
+                      <strong>Global shipping</strong> to 50+ countries
+                    </p>
                   </div>
                 </div>
 
@@ -184,8 +199,18 @@ const BlackSalt = () => {
                     href="/contact"
                     className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-7 py-4 rounded-xl font-semibold text-lg shadow transition-all duration-200"
                   >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M5 12h14M12 5l7 7-7 7"
+                      />
                     </svg>
                     Contact Sales
                   </a>
@@ -198,7 +223,8 @@ const BlackSalt = () => {
                 </div>
 
                 <p className="mt-6 text-sm text-gray-500">
-                  Lead time: 5–7 days · Samples available · Custom branding & barcodes supported
+                  Lead time: 5–7 days · Samples available · Custom branding &
+                  barcodes supported
                 </p>
               </div>
             </div>
