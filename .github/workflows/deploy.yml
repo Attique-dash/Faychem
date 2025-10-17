@@ -1,0 +1,31 @@
+name: Faychem Deployment
+
+on:
+  push:
+    branches:
+      - main  # Runs automatically when you push to main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code from repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Setup SSH using your GitHub secret
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      # Step 3: Example deployment commands (edit these for your project)
+      - name: Deploy project
+        run: |
+          echo "Deploying Faychem..."
+          # npm install
+          # npm run build
+          # npm run deploy
