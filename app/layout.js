@@ -17,8 +17,6 @@ export const metadata = {
   },
   title: "Silverline Trading Company | STC",
   description: "Your Global Source for High-Quality Salt",
-  viewport:
-    "width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes",
 };
 
 export default function RootLayout({ children }) {
