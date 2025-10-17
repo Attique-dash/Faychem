@@ -75,7 +75,7 @@ const Header = () => {
     { name: "Himalayan Pink Salt", href: "/pink-salt" },
     { name: "Himalayan White Salt", href: "/white-salt" },
     { name: "Himalayan Black Salt", href: "/black-salt" },
-    { name: "Crafted Products", href: "/custom" },
+    { name: "Crafted Items", href: "/custom" },
   ];
 
   const activeLink = useActiveLink(sections.map((section) => section.name));

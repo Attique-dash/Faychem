@@ -5,8 +5,6 @@ import Header from "@/components/Header";
 import ContextProvider from "@/Context/Context";
 import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
-import { Icon } from "lucide-react";
-import { Sr } from "react-flags-select";
 import Logo from "@/images/mlogo.png";
 
 const inter = Montserrat({ subsets: ["latin"] });

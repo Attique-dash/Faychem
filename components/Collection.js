@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Black from "@/images/blackpr.png";
@@ -7,15 +7,10 @@ import Pink from "@/images/pinkpr.png";
 import White from "@/images/whitepr.png";
 import Custom from "@/images/custompr.png";
 import aboImg from "@/images/about.png";
-
 import globe from "@/images/globe.png";
 import shield from "@/images/shield.png";
 import badge from "@/images/badge.png";
 import trust from "@/images/dependable.png";
-import minImg from "@/images/stock.jpg";
-import custa1 from "@/images/Lamp_1.jpeg";
-import custa2 from "@/images/Globe_1.jpeg";
-import custa3 from "@/images/Candel_1.jpeg";
 import industry from "@/images/industry.png";
 import pot from "@/images/pot.png";
 import wellness from "@/images/wellness.png";
@@ -509,7 +504,6 @@ const Collection = () => {
               loading="lazy"
               objectFit="contain"
               className="z-0"
-              priority
             />
           </div>
           <div className="relative z-10 max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center gap-10">

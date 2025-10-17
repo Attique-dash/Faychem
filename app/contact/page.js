@@ -1,13 +1,12 @@
 "use client";
 import { useContext, useState, useEffect, useRef } from "react";
 import { Context } from "@/Context/Context";
-import Image from "next/image";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { emailConfig } from "@/utils/emailConfig";
 import ReactFlagsSelect from "react-flags-select";
-import { FaPaperPlane, FaEnvelopeOpen, FaPhone } from "react-icons/fa";
+import { FaPaperPlane } from "react-icons/fa";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({

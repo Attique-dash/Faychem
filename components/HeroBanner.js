@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import banner from "@/images/banner2.jpg";
 import banner2 from "@/images/banner.jpeg";
 import banner3 from "@/images/banner3.jpg";
@@ -154,7 +153,6 @@ const HeroBanner = () => {
                       height={300}
                       src={image.src}
                       alt={image.alt}
-                      loading="lazy"
                       className="rounded-lg w-[500px] lg:w-auto object-cover transition-transform duration-500 group-hover:scale-110"
                     />
 
