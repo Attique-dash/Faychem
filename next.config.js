@@ -9,7 +9,7 @@ const nextConfig = {
       "i.postimg.cc",
       "firebasestorage.googleapis.com",
     ],
-    unoptimized: false,
+    unoptimized: true,
   },
   typescript: {
     ignoreBuildErrors: true,
