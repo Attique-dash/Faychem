@@ -5,8 +5,6 @@ import Black1 from "@/images/p2.1.png";
 import Black2 from "@/images/p2.2.png";
 import Black3 from "@/images/p2.3.png";
 import Black4 from "@/images/p2.4.png";
-import Link from "next/link";
-import BlackBanner from "@/images/banner23.png";
 
 const BlackSalt = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -116,6 +114,7 @@ const BlackSalt = () => {
                       src={salt.image}
                       alt={salt.name}
                       fill
+                      loading="lazy"
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>{" "}

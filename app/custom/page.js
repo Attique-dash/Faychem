@@ -12,10 +12,6 @@ import img8 from "@/images/1.8.png";
 import img9 from "@/images/1.9.png";
 import img10 from "@/images/1.10.png";
 
-import Link from "next/link";
-import BlackBanner from "@/images/banner23.png";
-import { LampDesk, LampWallDown } from "lucide-react";
-
 const BlackSalt = () => {
   const [isVisible, setIsVisible] = useState(false);
   const componentRef = useRef(null);
@@ -179,6 +175,7 @@ const BlackSalt = () => {
                       src={salt.image}
                       alt={salt.name}
                       fill
+                      loading="lazy"
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>{" "}

@@ -29,6 +29,7 @@ const industries = [
         alt="Industrial Salt"
         width={60}
         height={60}
+        loading="lazy"
         className="mx-auto mb-6"
       />
     ),
@@ -42,6 +43,7 @@ const industries = [
         alt="Industrial Salt"
         width={60}
         height={60}
+        loading="lazy"
         className="mx-auto mb-6"
       />
     ),
@@ -55,6 +57,7 @@ const industries = [
         alt="Industrial Salt"
         width={60}
         height={60}
+        loading="lazy"
         className="mx-auto mb-6"
       />
     ),
@@ -117,6 +120,7 @@ const Collection = () => {
                 alt="salt image"
                 width={380}
                 height={"auto"}
+                loading="lazy"
                 className="object-cover transition-transform duration-700 hover:scale-110"
               />
             </div>
@@ -265,6 +269,7 @@ const Collection = () => {
                       alt={item.alt}
                       width={400}
                       height={280}
+                      loading="lazy"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-20"
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
@@ -410,6 +415,7 @@ const Collection = () => {
                     alt="Industrial Salt"
                     width={60}
                     height={60}
+                    loading="lazy"
                     className="mx-auto mb-6 transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
@@ -431,6 +437,7 @@ const Collection = () => {
                     alt="Industrial Salt"
                     width={60}
                     height={60}
+                    loading="lazy"
                     className="mx-auto mb-6 transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
@@ -452,6 +459,7 @@ const Collection = () => {
                     alt="Industrial Salt"
                     width={60}
                     height={60}
+                    loading="lazy"
                     className="mx-auto mb-6 transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
@@ -473,6 +481,7 @@ const Collection = () => {
                     alt="Industrial Salt"
                     width={60}
                     height={60}
+                    loading="lazy"
                     className="mx-auto mb-6 transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
@@ -497,6 +506,7 @@ const Collection = () => {
               alt="World Map"
               width={"auto"}
               height={480}
+              loading="lazy"
               objectFit="contain"
               className="z-0"
               priority

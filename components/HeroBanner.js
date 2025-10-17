@@ -154,6 +154,7 @@ const HeroBanner = () => {
                       height={300}
                       src={image.src}
                       alt={image.alt}
+                      loading="lazy"
                       className="rounded-lg w-[500px] lg:w-auto object-cover transition-transform duration-500 group-hover:scale-110"
                     />
 
