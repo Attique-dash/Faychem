@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "export",
   images: {
-     domains: [
+    domains: [
       "tailwindui.com",
       "images.unsplash.com",
       "i.ibb.co",
@@ -19,5 +20,3 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
-
-
