@@ -69,60 +69,33 @@ const ContactForm = () => {
     });
 
   const Sendmail = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+    e?.preventDefault();
 
-    const {
-      name,
-      lastName,
-      email,
-      message,
-      companyName,
-      companyAddress,
-      country,
-    } = formData;
-
+    // Validate required fields first
     if (
-      !name ||
-      !email ||
-      !message ||
-      !companyName ||
-      !companyAddress ||
-      !country
+      !formData.name ||
+      !formData.email ||
+      !formData.message ||
+      !formData.companyName
     ) {
-      showError("Please fill all required fields.");
-      setIsSubmitting(false);
+      showError("Please fill all required fields");
       return;
     }
 
-    const wordCountCheck = message.trim().split(/\s+/).filter(Boolean).length;
-    if (wordCountCheck > wordLimit) {
-      showError("Message exceeds 500-word limit.");
-      setIsSubmitting(false);
-      return;
-    }
-
-    const toastId = toast.loading("Sending your message...", {
-      position: "top-center",
-      autoClose: false,
-    });
-
+    setIsSubmitting(true);
     try {
-      await axios.post(emailConfig.apiEndpoint, {
-        name: `${name} ${lastName}`.trim(),
-        email,
-        message,
-        companyName,
-        companyAddress,
-        country,
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
 
-      toast.dismiss(toastId);
-      toast.success("Email sent successfully! We will get back to you soon.", {
-        position: "top-center",
-        autoClose: 4000,
-      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data?.error || "Failed to send message");
+      }
 
+      toast.success("Message sent successfully!");
       setFormData({
         name: "",
         lastName: "",
@@ -132,12 +105,10 @@ const ContactForm = () => {
         companyAddress: "",
         country: "",
       });
-      setSelected("");
       setWordCount(0);
     } catch (err) {
-      toast.dismiss(toastId);
-      showError("Something went wrong. Please try again.");
-      console.error(err);
+      showError(err.message || "Failed to send email");
+      console.error("Send error:", err);
     } finally {
       setIsSubmitting(false);
     }
