@@ -1,70 +1,97 @@
-import { Red_Rose } from "next/font/google";
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 function toBool(v, def = false) {
   if (v === undefined || v === null) return def;
   return String(v).toLowerCase() === "true";
 }
-
-// Extract a plain email address from strings like "Name <email@domain>"
 function normalizeAddress(v) {
   if (!v) return "";
   const s = String(v).trim();
   const m = s.match(/<([^>]+)>/);
   return (m ? m[1] : s).replace(/[ \t\r\n]+/g, "");
 }
-
 function isValidEmail(addr) {
   if (!addr) return false;
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(addr);
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(addr));
 }
-
-// Strip CRLF to avoid header injection
 function safeHeader(v) {
   return String(v || "")
     .replace(/[\r\n]+/g, " ")
     .trim();
 }
-
-function createSmtpTransport() {
+function corsHeaders(origin) {
+  const allow = process.env.ALLOW_ORIGIN || origin || "*"; // set to your domain in prod
+  return {
+    "Access-Control-Allow-Origin": allow,
+    "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  };
+}
+async function parseBody(request) {
+  const ct = (request.headers.get("content-type") || "").toLowerCase();
+  if (ct.includes("application/json")) {
+    return (await request.json()) || {};
+  }
+  // support HTML form posts
+  const form = await request.formData();
+  const get = (k) => form.get(k) || "";
+  return {
+    name: get("name"),
+    lastName: get("lastName"),
+    email: get("email"),
+    message: get("message"),
+    companyName: get("companyName"),
+    companyAddress: get("companyAddress"),
+    country: get("country"),
+  };
+}
+function createTransport() {
   const host = process.env.EMAIL_HOST || "smtp.hostinger.com";
-  const port = Number(process.env.EMAIL_PORT || 587); // prefer 587 STARTTLS
-  const secure = toBool(process.env.EMAIL_SECURE, port === 465); // true only for 465
+  const port = Number(process.env.EMAIL_PORT || 587);
+  const secure = toBool(process.env.EMAIL_SECURE, port === 465);
   const user = process.env.EMAIL_USER;
   const pass = process.env.EMAIL_PASS;
   const debug = toBool(process.env.EMAIL_DEBUG, false);
-
   if (!user || !pass) throw new Error("Missing EMAIL_USER/EMAIL_PASS");
-
   return nodemailer.createTransport({
     host,
     port,
-    secure, // 587 => false, 465 => true
+    secure, // 587 => false (STARTTLS), 465 => true (SSL)
     auth: { user, pass },
-    pool: true,
-    maxConnections: 1,
-    maxMessages: 5,
-    rateDelta: 15000,
-    rateLimit: 5,
+    pool: false,
+    keepAlive: false,
     connectionTimeout: 30000,
     greetingTimeout: 15000,
     socketTimeout: 30000,
     family: 4,
-    tls: {
-      minVersion: "TLSv1.2",
-      servername: host,
-    },
+    tls: { minVersion: "TLSv1.2", servername: host },
     logger: debug,
     debug,
   });
 }
 
+export async function OPTIONS(request) {
+  return new NextResponse(null, {
+    status: 204,
+    headers: corsHeaders(request.headers.get("origin")),
+  });
+}
+
+export async function GET(request) {
+  return NextResponse.json(
+    { ok: true, message: "Use POST /api/send-email" },
+    { headers: corsHeaders(request.headers.get("origin")) }
+  );
+}
+
 export async function POST(request) {
+  const origin = request.headers.get("origin");
   try {
-    const b = await request.json();
+    const b = await parseBody(request);
     const {
       name,
       lastName,
@@ -77,27 +104,22 @@ export async function POST(request) {
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: "Missing required fields (name, email, message)" },
-        { status: 400 }
+        { status: 400, headers: corsHeaders(origin) }
       );
     }
 
-    const rawTo = process.env.EMAIL_TO || "info@silverlinetradingcompany.com";
-    const rawFrom = process.env.EMAIL_FROM || process.env.EMAIL_USER || rawTo;
-
-    const TO = normalizeAddress(rawTo);
-    const FROM = normalizeAddress(rawFrom);
+    const TO = normalizeAddress(
+      process.env.EMAIL_TO || "info@silverlinetradingcompany.com"
+    );
+    const FROM = normalizeAddress(
+      process.env.EMAIL_FROM || process.env.EMAIL_USER || TO
+    );
     const REPLY = normalizeAddress(email);
 
-    if (!isValidEmail(FROM)) {
+    if (!isValidEmail(TO) || !isValidEmail(FROM)) {
       return NextResponse.json(
-        { error: "EMAIL_FROM invalid", details: FROM },
-        { status: 500 }
-      );
-    }
-    if (!isValidEmail(TO)) {
-      return NextResponse.json(
-        { error: "EMAIL_TO invalid", details: TO },
-        { status: 500 }
+        { error: "EMAIL_TO or EMAIL_FROM invalid" },
+        { status: 500, headers: corsHeaders(origin) }
       );
     }
 
@@ -109,62 +131,42 @@ Email: ${REPLY}
 Company: ${companyName || ""}
 Address: ${companyAddress || ""}
 Country: ${country || ""}
-Message: ${message}
+Message:
+${message}
 `;
 
-    const transporter = createSmtpTransport();
+    const transporter = createTransport();
     await transporter.verify();
 
-    const mailOptions = {
-      from: { name: fullName, address: REPLY },
-      sender: FROM, // explicit Sender header
+    const info = await transporter.sendMail({
+      from: { name: fullName, address: FROM }, // shows user name; address = your mailbox
+      sender: FROM,
       to: TO,
       subject,
       text: textBody,
-      // only set replyTo if valid
       ...(isValidEmail(REPLY)
         ? { replyTo: { address: REPLY, name: fullName } }
         : {}),
-      // force SMTP envelope to match real addresses
+      headers: isValidEmail(REPLY) ? { "Reply-To": REPLY } : undefined,
       envelope: { from: FROM, to: [TO] },
-    };
-
-    const info = await transporter.sendMail(mailOptions);
-
-    const accepted = Array.isArray(info?.accepted) ? info.accepted : [];
-    const rejected = Array.isArray(info?.rejected) ? info.rejected : [];
-    console.log("SMTP result:", {
-      messageId: info?.messageId,
-      response: info?.response,
-      envelope: info?.envelope,
-      accepted,
-      rejected,
     });
 
-    if (!accepted.includes(TO)) {
-      return NextResponse.json(
-        {
-          error: "SMTP did not accept recipient",
-          details: info?.response || "No server response",
-          accepted,
-          rejected,
-          envelope: info?.envelope,
-        },
-        { status: 502 }
-      );
-    }
-
-    return NextResponse.json({
-      message: "Email sent",
-      transport: "SMTP (Hostinger)",
-      messageId: info?.messageId,
-      response: info?.response,
-    });
+    const res = NextResponse.json(
+      {
+        message: "Email sent",
+        transport: "SMTP",
+        messageId: info?.messageId,
+        response: info?.response,
+        accepted: info?.accepted,
+        rejected: info?.rejected,
+      },
+      { headers: corsHeaders(origin) }
+    );
+    return res;
   } catch (err) {
-    console.error("SMTP send error:", err?.message || err);
     return NextResponse.json(
       { error: "SMTP send failed", details: err?.message || String(err) },
-      { status: 500 }
+      { status: 500, headers: corsHeaders(origin) }
     );
   }
 }
