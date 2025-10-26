@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import sgMail from "@sendgrid/mail";
 
 export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
 
 function toBool(v, def = false) {
   if (v === undefined || v === null) return def;
@@ -24,7 +23,7 @@ function safeHeader(v) {
     .trim();
 }
 function corsHeaders(origin) {
-  const allow = process.env.ALLOW_ORIGIN || origin || "*"; // set to your domain in prod
+  const allow = process.env.ALLOW_ORIGIN || origin || "*";
   return {
     "Access-Control-Allow-Origin": allow,
     "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
@@ -33,10 +32,7 @@ function corsHeaders(origin) {
 }
 async function parseBody(request) {
   const ct = (request.headers.get("content-type") || "").toLowerCase();
-  if (ct.includes("application/json")) {
-    return (await request.json()) || {};
-  }
-  // support HTML form posts
+  if (ct.includes("application/json")) return (await request.json()) || {};
   const form = await request.formData();
   const get = (k) => form.get(k) || "";
   return {
@@ -48,30 +44,6 @@ async function parseBody(request) {
     companyAddress: get("companyAddress"),
     country: get("country"),
   };
-}
-function createTransport() {
-  const host = process.env.EMAIL_HOST || "smtp.hostinger.com";
-  const port = Number(process.env.EMAIL_PORT || 587);
-  const secure = toBool(process.env.EMAIL_SECURE, port === 465);
-  const user = process.env.EMAIL_USER;
-  const pass = process.env.EMAIL_PASS;
-  const debug = toBool(process.env.EMAIL_DEBUG, false);
-  if (!user || !pass) throw new Error("Missing EMAIL_USER/EMAIL_PASS");
-  return nodemailer.createTransport({
-    host,
-    port,
-    secure, // 587 => false (STARTTLS), 465 => true (SSL)
-    auth: { user, pass },
-    pool: false,
-    keepAlive: false,
-    connectionTimeout: 30000,
-    greetingTimeout: 15000,
-    socketTimeout: 30000,
-    family: 4,
-    tls: { minVersion: "TLSv1.2", servername: host },
-    logger: debug,
-    debug,
-  });
 }
 
 export async function OPTIONS(request) {
@@ -91,7 +63,7 @@ export async function GET(request) {
 export async function POST(request) {
   const origin = request.headers.get("origin");
   try {
-    const b = await parseBody(request);
+    const body = await parseBody(request);
     const {
       name,
       lastName,
@@ -100,7 +72,8 @@ export async function POST(request) {
       companyName,
       companyAddress,
       country,
-    } = b || {};
+    } = body || {};
+
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: "Missing required fields (name, email, message)" },
@@ -108,12 +81,19 @@ export async function POST(request) {
       );
     }
 
+    const apiKey = process.env.SENDGRID_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json(
+        { error: "SENDGRID_API_KEY is not configured" },
+        { status: 500, headers: corsHeaders(origin) }
+      );
+    }
+    sgMail.setApiKey(apiKey);
+
     const TO = normalizeAddress(
       process.env.EMAIL_TO || "info@silverlinetradingcompany.com"
     );
-    const FROM = normalizeAddress(
-      process.env.EMAIL_FROM || process.env.EMAIL_USER || TO
-    );
+    const FROM = normalizeAddress(process.env.EMAIL_FROM || TO);
     const REPLY = normalizeAddress(email);
 
     if (!isValidEmail(TO) || !isValidEmail(FROM)) {
@@ -125,47 +105,49 @@ export async function POST(request) {
 
     const fullName = safeHeader(`${name}${lastName ? " " + lastName : ""}`);
     const subjCompany = safeHeader(companyName || "");
-    const subject = `Web: ${fullName}${subjCompany ? " from " + subjCompany : ""}`;
-    const textBody = `Name: ${fullName}
+    const subject = `New Inquiry From ${fullName}`;
+    const textBody = `NEW INQUIRY RECEIVED
+    
+Name: ${fullName}
 Email: ${REPLY}
 Company: ${companyName || ""}
 Address: ${companyAddress || ""}
 Country: ${country || ""}
-Message:
-${message}
+Message: ${message}
 `;
 
-    const transporter = createTransport();
-    await transporter.verify();
-
-    const info = await transporter.sendMail({
-      from: { name: fullName, address: FROM }, // shows user name; address = your mailbox
-      sender: FROM,
+    const msg = {
       to: TO,
+      from: { email: FROM, name: `${fullName}` }, // display shows "Name <email>" but address must be verified
       subject,
       text: textBody,
-      ...(isValidEmail(REPLY)
-        ? { replyTo: { address: REPLY, name: fullName } }
-        : {}),
-      headers: isValidEmail(REPLY) ? { "Reply-To": REPLY } : undefined,
-      envelope: { from: FROM, to: [TO] },
-    });
 
-    const res = NextResponse.json(
+      ...(isValidEmail(REPLY)
+        ? { replyTo: { email: REPLY, name: fullName } }
+        : {}),
+      mailSettings: {
+        sandboxMode: { enable: toBool(process.env.SENDGRID_SANDBOX, false) },
+      },
+    };
+
+    const [resp] = await sgMail.send(msg);
+
+    return NextResponse.json(
       {
         message: "Email sent",
-        transport: "SMTP",
-        messageId: info?.messageId,
-        response: info?.response,
-        accepted: info?.accepted,
-        rejected: info?.rejected,
+        transport: "SendGrid",
+        statusCode: resp?.statusCode,
+        messageId: resp?.headers?.["x-message-id"],
       },
       { headers: corsHeaders(origin) }
     );
-    return res;
   } catch (err) {
+    console.error(
+      "SendGrid Error:",
+      err?.response?.body || err?.message || err
+    );
     return NextResponse.json(
-      { error: "SMTP send failed", details: err?.message || String(err) },
+      { error: "Failed to send email." },
       { status: 500, headers: corsHeaders(origin) }
     );
   }
