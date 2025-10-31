@@ -1,6 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  //output: "export",
+  reactStrictMode: true,
+
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "silverlinetradingcompany.com" }],
+        destination: "https://www.silverlinetradingcompany.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
+
   images: {
     domains: [
       "tailwindui.com",

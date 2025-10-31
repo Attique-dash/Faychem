@@ -1,3 +1,5 @@
+{
+  /*
 "use client";
 import { Context } from "@/Context/Context";
 import useActiveLink from "@/utils/observe";
@@ -9,7 +11,7 @@ import Image from "next/image";
 
 const Mobile = ({ setIsOpen, categories }) => {
   const { user } = useContext(Context);
-  const name = user?.data?.name.replace(/ .*/, "");
+  const name = user?.data?.name.replace(/ .*, "");
 
   const sections = [
     "home",
@@ -77,3 +79,6 @@ const Mobile = ({ setIsOpen, categories }) => {
 };
 
 export default Mobile;
+
+*/
+}

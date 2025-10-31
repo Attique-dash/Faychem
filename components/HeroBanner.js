@@ -111,11 +111,10 @@ const HeroBanner = () => {
                 <div className="relative">
                   <h1 className="text-xl text-center lg:text-left sm:text-2xl lg:text-3xl font-bold tracking-tight text-white leading-tight">
                     Global Trader in Premium <br />
-                    <span className=" text-blue-800 bg-clip-text">
+                    <span className="text-[var(--darker)] bg-clip-text">
                       Salt Products
                     </span>
                   </h1>
-                  <div className="absolute -top-2 -left-2 w-20 h-20 bg-blue-100 bg-opacity-50 rounded-full blur-xl"></div>
                 </div>
 
                 <p className="mt-4 sm:mt-6 text-center text-justify text-sm sm:text-base font-medium text-white leading-relaxed">
@@ -157,15 +156,12 @@ const HeroBanner = () => {
                     />
 
                     {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--black)] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
                       <div className="absolute bottom-4 left-4 text-white">
                         <h3 className="font-semibold text-sm">{image.title}</h3>
                         <p className="text-xs text-gray-200">Premium Quality</p>
                       </div>
                     </div>
-
-                    {/* Floating Animation Effect */}
-                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-500 bg-opacity-20 rounded-full blur-sm group-hover:scale-150 transition-transform duration-500"></div>
                   </div>
                 ))}
               </div>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Black from "@/images/blackpr.png";
@@ -14,7 +14,7 @@ import trust from "@/images/dependable.png";
 import industry from "@/images/industry.png";
 import pot from "@/images/pot.png";
 import wellness from "@/images/wellness.png";
-import WorldMap from "../images/world-map2.jpg";
+import WorldMap from "../images/world-map.png";
 
 const industries = [
   {
@@ -65,23 +65,23 @@ const Collection = () => {
   const [hoveredItem, setHoveredItem] = useState(null);
 
   return (
-    <div className="container mx-auto">
+    <div className="w-full">
       <section className=" w-auto pt-8 relative overflow-hidden">
         {/* About Us Section */}
         <header
           id="about"
-          className="py-6 flex flex-col items-center text-center px-4 sm:px-8 relative overflow-hidden scroll-mt-0"
+          className="py-6 flex flex-col items-center text-center px-4 sm:px-8 relative overflow-hidden scroll-mt-24"
         >
           <div className="flex flex-col sm:flex-row items-center">
             <div className="max-w-2xl flex flex-col sm:flex-col items-center mt-[1rem] sm:mt-[2rem] lg:mt-[3rem] ">
               <div className="relative">
-                <h2 className="mb-8 text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent sm:text-3xl animate-fade-in">
+                <h2 className="mb-8 text-xl font-bold text-[var(--black)] bg-clip-text sm:text-3xl animate-fade-in">
                   WHO ARE WE?
                 </h2>
                 {/*  <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full"></div> */}
               </div>
               <p className>
-                <span className="font-bold text-indigo-500">
+                <span className="font-bold text-[var(--primary)]">
                   Silverline Trading Company
                 </span>
                 &nbsp;specializes in general trading services, with a primary
@@ -94,18 +94,21 @@ const Collection = () => {
               </p>
               {/*text-justify text-lg sm:p-0 w-full text-gray-600 mb-6 sm:mb-0 md:ml-[40px] lg:ml-[60px] leading-relaxed*/}
               <p className="mt-4">
-                "Our mission is to provide the purest form of salt, sourced
-                from&nbsp;
-                <span className="font-bold text-indigo-500">
-                  KHEWRA SALT MINE
+                <span className="font-bold text-[var(--primary)]"> " </span>
+                Our
+                <span className="font-bold text-[var(--primary)]">
+                  {" "}
+                  Mission{" "}
                 </span>{" "}
-                (Punjab, Pakistan) and minimally processed, to meet quality and
-                purity standards. We dedicate ourselves to providing reliable
-                and sustainable salt solutions to the culinary, industrial, and
-                agricultural sectors. We aspire to meet our clients'
-                expectations, contribute to their success, and help to create a
-                healthier, more sustainable world by cultivating innovation and
-                ethical conduct."
+                is to provide the purest form of salt, sourced from&nbsp; KHEWRA
+                SALT MINE (Punjab, Pakistan) and minimally processed, to meet
+                quality and purity standards. We dedicate ourselves to providing
+                reliable and sustainable salt solutions to the culinary,
+                industrial, and agricultural sectors. We aspire to meet our
+                clients' expectations, contribute to their success, and help to
+                create a healthier, more sustainable world by cultivating
+                innovation and ethical conduct.{" "}
+                <span className="font-bold text-[var(--primary)]"> " </span>
               </p>
             </div>
             <div className="relative rounded-2xl overflow-hidden sm:ml-[45px] mt-12 mb-4 sm:mt-16 md:block lg:block shadow-xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105">
@@ -160,10 +163,11 @@ const Collection = () => {
           </p>
         </div>
       </header>*/}
+
         {/* Industries We Serve Section */}
-        <section className="mt-14 bg-white">
+        <section className="mt-14 bg-[var(--primary)] mb-16 py-16 relative overflow-hidden">
           <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">
+            <h2 className="text-4xl font-bold text-center text-white mb-12">
               Industries We Serve
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -172,16 +176,16 @@ const Collection = () => {
                   key={idx}
                   onMouseEnter={() => setHoveredItem(idx)}
                   onMouseLeave={() => setHoveredItem(null)}
-                  className={`bg-white  p-8 text-center shadow transition-all duration-300 cursor-pointer
+                  className={`bg-white p-8 text-center shadow transition-all duration-300 cursor-pointer border rounded-lg
             ${
               hoveredItem === idx
-                ? "border-orange-400 shadow-xl scale-105 border rounded-xl"
-                : "border-gray-200 hover:shadow-lg hover:scale-105 "
+                ? "border-gray-200 shadow-xl scale-105"
+                : "border-gray-300 hover:shadow-lg hover:scale-105 "
             }
           `}
                   style={{
                     boxShadow:
-                      hoveredItem === idx ? "0 8px 32px #cbdeffff" : undefined,
+                      hoveredItem === idx ? "0 8px 32px #010814ff" : undefined,
                     borderColor: hoveredItem === idx ? "#102446ff" : undefined,
                   }}
                 >
@@ -199,7 +203,7 @@ const Collection = () => {
           className="mt-16 flex flex-col items-center justify-center pt-4 px-4 sm:px-6 lg:px-8 rounded-4xl scroll-mt-24 relative overflow-hidden"
         >
           <div className="relative">
-            <h2 className="mb-4 text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent sm:text-4xl">
+            <h2 className="mb-4 text-xl font-bold text-[var(--black)] bg-clip-text sm:text-4xl">
               Himalayan Rock Salt
             </h2>
           </div>
@@ -219,7 +223,6 @@ const Collection = () => {
                 content:
                   "Salt from ancient sea deposits with natural minerals and a unique pink hue, ideal for gourmet dishes.",
                 href: "/pink-salt",
-                color: "from-gray-600 to-black",
               },
 
               {
@@ -230,7 +233,6 @@ const Collection = () => {
                 content:
                   "Pure, crystalline salt that enhances flavor and is essential in culinary applications.",
                 href: "/white-salt",
-                color: "from-gray-600 to-black",
               },
               {
                 id: "salt-b",
@@ -240,7 +242,6 @@ const Collection = () => {
                 content:
                   "Mineral-rich rock salt with a distinctive smoky flavor, commonly used in South Asian cuisine.",
                 href: "/black-salt",
-                color: "from-gray-600 to-black",
               },
               {
                 id: "salt-c",
@@ -250,28 +251,23 @@ const Collection = () => {
                 content:
                   "Salt from ancient sea deposits with natural minerals and a unique pink hue, ideal for gourmet dishes.",
                 href: "/custom",
-                color: "from-gray-600 to-black",
               },
             ].map((item, index) => (
               <Link key={index} href={item.href} id={item.id} passHref>
                 <div className="mb-20 group relative overflow-hidden rounded-3xl bg-white shadow-xl hover:shadow-2xl transition-all duration-700 transform hover:scale-105 border border-gray-100 cursor-pointer h-[380px] w-full max-w-[280px] mx-auto flex flex-col">
                   <div className="relative h-[220px] overflow-hidden flex-shrink-0">
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-t ${item.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500 z-10`}
-                    ></div>
                     <Image
                       src={item.src}
                       alt={item.alt}
                       width={400}
                       height={280}
                       loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-20"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
                   </div>
                   <div className="p-4 transform group-hover:translate-y-[-4px] transition-transform duration-500 flex-1 flex flex-col">
                     <h3
-                      className={`text-xl font-bold bg-gradient-to-r ${item.color} bg-clip-text text-transparent mb-3 text-center w-full group-hover:scale-20 transition-transform duration-300`}
+                      className={`text-xl font-bold text-[var(--primary)] bg-clip-text mb-3 text-center w-full group-hover:scale-20 transition-transform duration-300`}
                     >
                       {item.label}
                     </h3>
@@ -390,11 +386,11 @@ const Collection = () => {
 
         {/* Why Choose Us Section */}
         <section className="mt-0 px-4">
-          <div className="max-w-6xl mx-auto bg-white/90 rounded-3xl p-8">
-            <h2 className="text-4xl font-bold text-center mb-4">
+          <div className="max-w-6xl mx-auto bg-[var(--primary)] rounded-3xl p-8">
+            <h2 className="text-4xl text-white font-bold text-center mb-4">
               What makes us different?
             </h2>
-            <p className="text-center text-gray-600 max-w-2xl mx-auto mb-10 text-lg">
+            <p className="text-center text-white max-w-2xl mx-auto mb-10 text-lg">
               We go beyond just task management—we provide a seamless,
               intuitive, and powerful experience that helps you stay productive
               without the complexity. Here’s what sets us apart:
@@ -402,7 +398,7 @@ const Collection = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {/* Card 1 */}
-              <div className="group bg-gray-100 rounded-2xl shadow p-6 flex flex-col items-center transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl hover:-translate-y-1 hover:bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-200">
+              <div className="group bg-gray-100 rounded-2xl shadow p-6 flex flex-col items-center transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl hover:-translate-y-1 hover:bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--light)]">
                 <div className="">
                   {/* Replace with your icon */}
                   <Image
@@ -414,7 +410,7 @@ const Collection = () => {
                     className="mx-auto mb-6 transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
-                <h3 className="font-bold text-lg mb-2 transition-colors duration-300 group-hover:text-indigo-600">
+                <h3 className="font-bold text-lg mb-2 transition-colors duration-300 group-hover:text-[var(--primary)]">
                   Trusted Quality
                 </h3>
                 <p className="text-gray-600 transition-colors duration-300 group-hover:text-gray-800 text-center">
@@ -424,7 +420,7 @@ const Collection = () => {
               </div>
 
               {/* Card 2 */}
-              <div className="group bg-gray-100 rounded-2xl shadow p-6 flex flex-col items-center transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl hover:-translate-y-1 hover:bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-200">
+              <div className="group bg-gray-100 rounded-2xl shadow p-6 flex flex-col items-center transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl hover:-translate-y-1 hover:bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--light)]">
                 <div className="">
                   {/* Replace with your icon */}
                   <Image
@@ -436,7 +432,7 @@ const Collection = () => {
                     className="mx-auto mb-6 transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
-                <h3 className="font-bold text-lg mb-2 transition-colors duration-300 group-hover:text-indigo-600">
+                <h3 className="font-bold text-lg mb-2 transition-colors duration-300 group-hover:text-[var(--primary)]">
                   Global Reach
                 </h3>
                 <p className="text-gray-600 transition-colors duration-300 group-hover:text-gray-800 text-center">
@@ -446,7 +442,7 @@ const Collection = () => {
               </div>
 
               {/* Card 3 */}
-              <div className="group bg-gray-100 rounded-2xl shadow p-6 flex flex-col items-center transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl hover:-translate-y-1 hover:bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-200">
+              <div className="group bg-gray-100 rounded-2xl shadow p-6 flex flex-col items-center transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl hover:-translate-y-1 hover:bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--light)]">
                 <div className="">
                   {/* Replace with your icon */}
                   <Image
@@ -458,7 +454,7 @@ const Collection = () => {
                     className="mx-auto mb-6 transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
-                <h3 className="font-bold text-lg mb-2 transition-colors duration-300 group-hover:text-indigo-600">
+                <h3 className="font-bold text-lg mb-2 transition-colors duration-300 group-hover:text-[var(--primary)]">
                   Trust Driven Service
                 </h3>
                 <p className="text-gray-600 transition-colors duration-300 group-hover:text-gray-800 text-center">
@@ -468,7 +464,7 @@ const Collection = () => {
               </div>
 
               {/* Card 4 */}
-              <div className="group bg-gray-100 rounded-2xl shadow p-6 flex flex-col items-center transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl hover:-translate-y-1 hover:bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-200">
+              <div className="group bg-gray-100 rounded-2xl shadow p-6 flex flex-col items-center transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl hover:-translate-y-1 hover:bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--light)]">
                 <div className="">
                   {/* Replace with your icon */}
                   <Image
@@ -480,7 +476,7 @@ const Collection = () => {
                     className="mx-auto mb-6 transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
-                <h3 className="font-bold text-lg mb-2 transition-colors duration-300 group-hover:text-indigo-600">
+                <h3 className="font-bold text-lg mb-2 transition-colors duration-300 group-hover:text-[var(--primary)]">
                   Competitive Pricing
                 </h3>
                 <p className="text-gray-600 transition-colors duration-300 group-hover:text-gray-800 text-center">
@@ -493,14 +489,14 @@ const Collection = () => {
         </section>
 
         {/* Get a Quote Section */}
-        <section className="mt-12 py-28 bg-gradient-to-br from-blue-50 to-white relative overflow-hidden">
+        <section className="mt-12 py-28 bg-gradient-to-br from-[var(--light)] relative overflow-hidden">
           {/* World Map Background */}
-          <div className="absolute inset-0 flex justify-end items-center pointer-events-none select-none opacity-30">
+          <div className="absolute inset-0 flex justify-end items-center pointer-events-none select-none ">
             <Image
               src={WorldMap}
               alt="World Map"
               width={"auto"}
-              height={480}
+              height={380}
               loading="lazy"
               objectFit="contain"
               className="z-0"
@@ -509,7 +505,7 @@ const Collection = () => {
           <div className="relative z-10 max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center gap-10">
             {/* Left: Text & Buttons */}
             <div className="ml-8 flex-1">
-              <h2 className="mb-4 text-5xl font-bold text-gray-800 mb-2">
+              <h2 className="mb-4 text-5xl font-bold text-[var(--black)] mb-2">
                 Contact Us
               </h2>
               {/* <div className="flex items-center mb-6">
@@ -531,7 +527,7 @@ const Collection = () => {
         {/* Related Videos Section */}
         <div className="mt-12 mb-8 flex flex-col items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
           <div className="relative text-center">
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--black)] bg-clip-text">
               Explore More About Himalayan Salt
             </h2>
           </div>

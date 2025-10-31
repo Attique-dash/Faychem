@@ -1,12 +1,12 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import Black1 from "@/images/p2.1.png";
-import Black2 from "@/images/p2.2.png";
-import Black3 from "@/images/p2.3.png";
-import Black4 from "@/images/p2.4.png";
+import Pink1 from "@/images/p2.1.png";
+import Pink2 from "@/images/p2.2.png";
+import Pink3 from "@/images/p2.3.png";
+import Pink4 from "@/images/p2.4.png";
 
-const BlackSalt = () => {
+const PinkSalt = () => {
   const [isVisible, setIsVisible] = useState(false);
   const componentRef = useRef(null);
 
@@ -39,7 +39,7 @@ const BlackSalt = () => {
       name: "Pink Salt 2-5mm",
       description:
         "Premium granule size perfect for seasoning and everyday culinary applications.",
-      image: Black1,
+      image: Pink1,
       price: "$12.99",
       features: ["Premium Quality", "Natural", "Versatile"],
     },
@@ -48,7 +48,7 @@ const BlackSalt = () => {
       name: "Pink Salt 1-2mm",
       description:
         "Ideal for professional cooking applications and commercial use.",
-      image: Black2,
+      image: Pink2,
       price: "$14.99",
       features: ["Cooking Grade", "Professional", "Pure"],
     },
@@ -57,7 +57,7 @@ const BlackSalt = () => {
       name: "Pink Salt Fine",
       description:
         "Fine texture designed for delicate dishes and precise seasoning control.",
-      image: Black3,
+      image: Pink3,
       price: "$16.99",
       features: ["Fine Grade", "Delicate", "Premium"],
     },
@@ -66,7 +66,7 @@ const BlackSalt = () => {
       name: "Pink Salt Powder",
       description:
         "Ultra-fine powder ensuring even distribution and instant flavor enhancement.",
-      image: Black4,
+      image: Pink4,
       price: "$18.99",
       features: ["Powder Form", "Even Mixing", "Professional"],
     },
@@ -133,26 +133,22 @@ const BlackSalt = () => {
           </div>
 
           {/* Professional CTA Section */}
-          <div
-            className={`text-center transition-all duration-1000 delay-700 transform ${
-              isVisible
-                ? "translate-y-0 opacity-100"
-                : "translate-y-8 opacity-0"
-            }`}
-          >
+          <div className="text-center transition-all duration-1000 delay-700 transform ">
             <div className="bg-white rounded-2xl shadow-lg p-10 max-w-3xl mx-auto my-16">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 text-center tracking-tight">
-                Ready to Experience{" "}
-                <span className="text-blue-600">Premium Quality?</span>
+                Discover Excellence in{" "}
+                <span className="block text-[var(--primary)]">
+                  Every Grain.
+                </span>
               </h2>
               <p className="text-gray-600 text-lg md:text-xl mb-8 text-center max-w-2xl mx-auto">
-                Contact our team for bulk orders, custom specifications, and
-                professional consultation.
+                Contact us for premium salt products, crafted items, and
+                reliable service.
               </p>
               <div className="flex justify-center">
                 <a
                   href="/contact"
-                  className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow transition-all duration-200"
+                  className="button flex items-center gap-2 text-lg px-8 py-4 rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--light)]"
                 >
                   <svg
                     className="w-5 h-5"
@@ -178,4 +174,4 @@ const BlackSalt = () => {
   );
 };
 
-export default BlackSalt;
+export default PinkSalt;

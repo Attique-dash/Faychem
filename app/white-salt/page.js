@@ -1,12 +1,12 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import Black1 from "@/images/w2.1.png";
-import Black2 from "@/images/w2.2.png";
-import Black3 from "@/images/w2.3.png";
-import Black4 from "@/images/w2.4.png";
+import White1 from "@/images/w4.1.png";
+import White2 from "@/images/w4.2.png";
+import White3 from "@/images/w4.3.png";
+import White4 from "@/images/w4.4.png";
 
-const BlackSalt = () => {
+const WhiteSalt = () => {
   const [isVisible, setIsVisible] = useState(false);
   const componentRef = useRef(null);
 
@@ -39,7 +39,7 @@ const BlackSalt = () => {
       name: "White Salt 2-5mm",
       description:
         "Premium granule size perfect for seasoning and everyday culinary applications.",
-      image: Black1,
+      image: White1,
       price: "$12.99",
       features: ["Premium Quality", "Natural", "Versatile"],
     },
@@ -48,7 +48,7 @@ const BlackSalt = () => {
       name: "White Salt 1-2mm",
       description:
         "Ideal for professional cooking applications and commercial use.",
-      image: Black2,
+      image: White2,
       price: "$14.99",
       features: ["Cooking Grade", "Professional", "Pure"],
     },
@@ -57,7 +57,7 @@ const BlackSalt = () => {
       name: "White Salt Fine",
       description:
         "Fine texture designed for delicate dishes and precise seasoning control.",
-      image: Black3,
+      image: White3,
       price: "$16.99",
       features: ["Fine Grade", "Delicate", "Premium"],
     },
@@ -66,7 +66,7 @@ const BlackSalt = () => {
       name: "White Salt Powder",
       description:
         "Ultra-fine powder ensuring even distribution and instant flavor enhancement.",
-      image: Black4,
+      image: White4,
       price: "$18.99",
       features: ["Powder Form", "Even Mixing", "Professional"],
     },
@@ -178,4 +178,4 @@ const BlackSalt = () => {
   );
 };
 
-export default BlackSalt;
+export default WhiteSalt;

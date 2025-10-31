@@ -2,7 +2,7 @@
 import useActiveLink from "@/utils/observe";
 import { useContext, useState, useEffect, useRef } from "react";
 import { Context } from "@/Context/Context";
-import Logo2 from "@/images/logo1.png";
+import CompanyLogo from "@/images/Company_Logo.png";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -30,36 +30,11 @@ const Header = () => {
   const router = useRouter();
 
   const socialLinks = [
-    {
-      icon: FaFacebook,
-      label: "Facebook",
-      color: "hover:text-blue-600",
-      href: "https://facebook.com",
-    },
-    {
-      icon: FaTwitter,
-      label: "Twitter",
-      color: "hover:text-blue-400",
-      href: "https://twitter.com",
-    },
-    {
-      icon: FaInstagram,
-      label: "Instagram",
-      color: "hover:text-pink-500",
-      href: "https://instagram.com",
-    },
-    {
-      icon: FaYoutube,
-      label: "YouTube",
-      color: "hover:text-red-600",
-      href: "https://youtube.com",
-    },
-    {
-      icon: FaLinkedin,
-      label: "LinkedIn",
-      color: "hover:text-blue-700",
-      href: "https://linkedin.com",
-    },
+    { icon: FaFacebook, label: "Facebook", href: "https://facebook.com" },
+    { icon: FaTwitter, label: "Twitter", href: "https://twitter.com" },
+    { icon: FaInstagram, label: "Instagram", href: "https://instagram.com" },
+    { icon: FaYoutube, label: "YouTube", href: "https://youtube.com" },
+    { icon: FaLinkedin, label: "LinkedIn", href: "https://linkedin.com" },
   ];
 
   const sections = [
@@ -145,22 +120,22 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-[white] z-50 fixed top-0 left-0 w-full overflow-hidden">
+    <header className="bg-[white] z-50 fixed top-0 left-0 w-full overflow-hidden shadow-md">
       {/* Desktop Top Navigation bg-gradient-to-r from-gray-50 to-white border-b border-blue-100 */}
       <div className="hidden md:block">
         <div
           ref={sidebarRef}
-          className="bg-white  fixed top-0 left-0 w-full h-16 z-50 shadow-md"
+          className="bg-white fixed top-0 left-0 w-full h-16 z-50"
         >
           <div className="flex items-center justify-between h-full px-4 sm:px-6 mx-auto max-w-7xl w-full">
             {/* Logo */}
-            <Link href="/" className="text-teal-600 group">
+            <Link href="/" className="text-[var(--primary)] group ml-2">
               <div className="transform transition-transform duration-500 group-hover:scale-105">
                 <Image
                   width={"auto"}
                   height={40}
-                  src={Logo2}
-                  alt="Faychem company logo"
+                  src={CompanyLogo}
+                  alt="Silverline Trading Company logo"
                   className="filter drop-shadow-sm"
                 />
               </div>
@@ -175,8 +150,8 @@ const Header = () => {
                       ref={hasSubMenu ? dropdownRef : null}
                       className={`flex items-center rounded-lg transition-all duration-300 ${
                         activeLink === name
-                          ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md"
-                          : "text-gray-700 hover:bg-blue-50 hover:to-blue-100 hover:text-blue-600"
+                          ? "bg-[var(--primary)] text-white shadow-md"
+                          : "text-[var(--black)] hover:bg-[var(--lightestx2)] hover:text-[var(--primary)]"
                       } px-3 py-2 mx-1 group cursor-pointer`}
                     >
                       <div className="flex items-center flex-1 min-w-0">
@@ -190,11 +165,16 @@ const Header = () => {
                             <FaChevronDown
                               className={`ml-1.5 text-xs transition-all duration-300 ${
                                 isProductsOpen ? "rotate-180" : "rotate-0"
-                              } ${activeLink === name ? "text-white" : "text-blue-400"}`}
+                              } ${activeLink === name ? "text-white" : "text-[var(--black)] group-hover:text-[var(--primary)]"}`}
                             />
                           </button>
                         ) : (
-                          <Link href={href} className={`w-full font-medium`}>
+                          <Link
+                            href={href}
+                            className={
+                              "w-full font-medium transition-colors duration-200 group-hover:text-[var(--primary)] text-[var(--black)]"
+                            }
+                          >
                             {name}
                           </Link>
                         )}
@@ -203,7 +183,7 @@ const Header = () => {
 
                     {hasSubMenu && (
                       <div
-                        className={`absolute top-full left-0 bg-white shadow-xl rounded-lg border border-blue-50 min-w-[200px] transition-all duration-300 ${
+                        className={`absolute top-full left-0 bg-white shadow-xl rounded-lg min-w-[200px] transition-all duration-300 ${
                           isProductsOpen
                             ? "opacity-100 visible translate-y-1"
                             : "opacity-0 invisible translate-y-4 pointer-events-none"
@@ -215,7 +195,7 @@ const Header = () => {
                               <Link
                                 href={href}
                                 onClick={() => setIsProductsOpen(false)}
-                                className="block w-full text-left py-2 px-4 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 hover:pl-6"
+                                className="block w-full text-left py-2 px-4 text-sm text-[var(--black)] hover:text-[var(--primary)] hover:bg-[var(--lightestx2)] transition-all duration-200 hover:pl-6"
                               >
                                 {name.trim()}
                               </Link>
@@ -239,22 +219,22 @@ const Header = () => {
       </div>
 
       {/* Mobile menu button */}
-      <div className="flex md:hidden items-center justify-between px-3 sm:px-4 py-3 bg-white border-b border-blue-100 shadow-sm fixed top-0 left-0 w-full z-50">
+      <div className="flex md:hidden items-center justify-between px-3 sm:px-4 py-3 bg-white shadow-none fixed top-0 left-0 w-full z-50">
         {" "}
         <Link href="/" className="group">
           <div className="transform transition-transform duration-200 group-hover:scale-105">
             <Image
-              width={100}
-              height={35}
-              src={Logo2}
+              width={160}
+              height={45}
+              src={CompanyLogo}
               alt="STC company logo"
-              className="filter drop-shadow-sm w-[100px] sm:w-[120px] h-auto"
+              className="filter drop-shadow-sm h-8 sm:h-10 w-auto"
             />
           </div>
         </Link>
         <button
           onClick={handleToggle}
-          className="rounded-lg bg-gray-50 p-2.5 text-gray-600 transition-all duration-200 hover:bg-blue-50 hover:text-blue-600 hover:shadow-md active:scale-95"
+          className="rounded-lg bg-gray-50 p-2.5 text-[var(--black)] transition-all duration-200 hover:bg-[#eef3e8] hover:text-[var(--primary)] hover:shadow-md active:scale-95"
         >
           <span className="sr-only">Toggle menu</span>
           <svg
@@ -282,15 +262,13 @@ const Header = () => {
             ref={mobileMenuRef}
             className="fixed top-0 left-0 w-80 max-w-[90vw] h-full bg-white shadow-2xl z-50 md:hidden transform transition-transform duration-300 ease-out"
           >
-            <div className="flex flex-col h-full">
+            <div className="flex flex-col h-full pb-6 pb-[env(safe-area-inset-bottom)]">
               {/* Mobile Header */}
               <div className="flex items-center justify-between p-4 border-b border-gray-200">
                 <Image
-                  width={110}
-                  height={30}
-                  src={Logo2}
+                  src={CompanyLogo}
                   alt="Faychem company logo"
-                  className="w-[100px] h-auto"
+                  className="w-auto h-[35px]"
                 />
                 <button
                   onClick={handleToggle}
@@ -324,10 +302,10 @@ const Header = () => {
                             onClick={() =>
                               setMobileProductsOpen(!mobileProductsOpen)
                             }
-                            className={`flex items-center justify-between w-full p-3 rounded-lg text-left transition-all duration-300 ${
+                            className={`flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-left transition-all duration-300 ${
                               activeLink === name
-                                ? "bg-blue-500 text-white shadow-md"
-                                : "text-gray-800 hover:bg-blue-50 hover:text-blue-600"
+                                ? "bg-[var(--primary)] text-white shadow-md"
+                                : "text-[var(--black)] hover:bg-[#eef3e8] hover:text-[var(--primary)]"
                             }`}
                           >
                             <span className="font-medium">
@@ -346,12 +324,12 @@ const Header = () => {
                                 : "max-h-0 opacity-0"
                             }`}
                           >
-                            <ul className="ml-4 space-y-1 border-l-2 border-blue-200 pl-4">
+                            <ul className="ml-4 space-y-1 border-l-2 border-[var(--light)] pl-4">
                               {subSections.map(({ name, href }) => (
                                 <li key={name}>
                                   <button
                                     onClick={() => handleLinkClick(href)}
-                                    className="block w-full p-2 text-left text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-all duration-200"
+                                    className="block w-full px-3 py-1.5 text-left text-sm text-gray-600 hover:text-[var(--primary)] hover:bg-[#eef3e8] rounded-md transition-all duration-200"
                                   >
                                     {name.trim()}
                                   </button>
@@ -365,8 +343,8 @@ const Header = () => {
                           onClick={() => handleLinkClick(href)}
                           className={`block w-full p-3 rounded-lg text-left transition-all duration-300 font-medium ${
                             activeLink === name
-                              ? "bg-blue-500 text-white shadow-md"
-                              : "text-gray-800 hover:bg-blue-50 hover:text-blue-600"
+                              ? "bg-[var(--primary)] text-white shadow-md"
+                              : "text-[var(--black)] hover:bg-[#eef3e8] hover:text-[var(--primary)]"
                           }`}
                         >
                           {name.charAt(0).toUpperCase() + name.slice(1)}
@@ -377,7 +355,7 @@ const Header = () => {
                 </ul>
               </nav>
 
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 mb-6">
                 <div className="flex justify-center gap-4 mb-4">
                   {socialLinks.map(({ icon: Icon, label, color, href }) => (
                     <a
@@ -386,7 +364,7 @@ const Header = () => {
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`text-gray-500 ${color} cursor-pointer text-xl transition-all duration-200 hover:scale-125`}
+                      className={`text-gray-500 hover:text-[var(--primary)] cursor-pointer text-xl transition-all duration-200 hover:scale-125`}
                     >
                       <Icon />
                     </a>
@@ -394,7 +372,7 @@ const Header = () => {
                 </div>
                 <button
                   onClick={() => handleLinkClick("/contact")}
-                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white p-3 rounded-lg text-center transition-all duration-300 font-medium shadow-md"
+                  className="button self-center w-fit min-w-[160px] text-sm"
                 >
                   Let's Talk Business
                 </button>

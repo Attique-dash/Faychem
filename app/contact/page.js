@@ -166,13 +166,13 @@ const ContactForm = () => {
   };
 
   const inputClasses =
-    "bg-white block w-full px-5 py-3 mt-2 placeholder-gray-400 bg-gray-50 border border-gray-300 rounded-2xl transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none hover:border-blue-400 shadow-sm focus:shadow-lg transform hover:scale-[1.02]";
+    "bg-white block w-full px-5 py-3 mt-2 placeholder-gray-400 bg-gray-50 border border-gray-400 rounded-2xl transition-all duration-300 focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--light)] focus:outline-none hover:border-[var(--light)] shadow-sm focus:shadow-lg transform hover:scale-[1.02]";
 
   return (
     <section
       id="contact"
       ref={contactRef}
-      className="bg-gradient-to-br from-blue-50 to-white relative overflow-hidden"
+      className="bg-gradient-to-br from-[var(--lightest)] to-white relative overflow-hidden"
     >
       <div className="min-h-screen flex justify-center px-4">
         <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-16 bg-white/0">
@@ -182,7 +182,7 @@ const ContactForm = () => {
               We're here to help you
             </span>
             <h1 className="font-bold text-4xl md:text-5xl mb-4">
-              <span className="text-blue-900">Discuss</span> Your Salt Solution
+              <span className="text-[var(--dark)]">Discuss</span> Your Salt
               Needs
             </h1>
             <p className="text-gray-600 mb-8">
@@ -191,14 +191,14 @@ const ContactForm = () => {
             </p>
 
             <div className="mb-4">
-              <div className="text-xs text-gray-500">E-mail</div>
+              <div className="text-xs text-[var(--darker)]">E-mail</div>
               <div className="text-base text-gray-800">
                 info@silverlinetradingcompany.com
               </div>
             </div>
 
             <div>
-              <div className="text-xs text-gray-500">Phone number</div>
+              <div className="text-xs text-[var(--darker)]">Phone number</div>
               <div className="text-base text-gray-800">+971 56 649 4784</div>
             </div>
           </div>
@@ -272,7 +272,7 @@ const ContactForm = () => {
                   placeholder="Select Country *"
                   searchable
                   className="w-full"
-                  selectButtonClassName="!w-full !bg-white !rounded-2xl !border !border-gray-300 !bg-gray-50 !px-5 !py-2 !mt-2 !text-gray-400 !shadow-sm !focus:outline-none !focus:ring-2 !focus:ring-blue-100 !focus:border-blue-500 !hover:border-blue-400 !hover:scale-[1.02] !transform !transition-all !duration-300"
+                  selectButtonClassName="!w-full !bg-white !rounded-2xl !border !border-gray-300 !bg-gray-50 !px-5 !py-2 !mt-2 !text-gray-400 !shadow-sm !focus:outline-none !focus:ring-2 !focus:ring-[var(--light)] !focus:border-[var(--primary)] !hover:border-[var(--light)] !hover:scale-[1.02] !transform !transition-all !duration-300"
                   optionsListClassName="!bg-white !z-[9999] !rounded-lg !border !border-gray-200 !shadow-xl !max-h-[800px] !overflow-y-auto"
                   required
                 />
@@ -281,7 +281,7 @@ const ContactForm = () => {
               {/* Message */}
               <div className="mt-4">
                 <textarea
-                  className="block w-full px-5 py-3 mt-2 bg-white border-2 border-gray-200 rounded-xl transition-all duration-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 focus:outline-none hover:border-blue-300 transform hover:scale-[1.02] resize-none min-h-[100px] max-h-[150px]"
+                  className={`${inputClasses} resize-none min-h-[100px] max-h-[150px]`}
                   placeholder="Tell us about your requirements *"
                   value={formData.message}
                   onChange={handleMessageChange}
@@ -306,7 +306,7 @@ const ContactForm = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex justify-center items-center gap-3 mt-8 px-6 py-4 text-sm font-semibold tracking-wide text-white bg-gradient-to-r from-blue-600 to-teal-500 rounded-xl hover:from-blue-700 hover:to-teal-600 focus:ring-4 focus:ring-blue-200 transition-all duration-300 disabled:opacity-70"
+                className="w-full flex justify-center items-center gap-3 mt-8 px-6 py-4 text-sm font-semibold tracking-wide text-white bg-gradient-to-r from-[var(--primary)] to-[var(--dark)] rounded-xl hover:from-[var(--dark)] hover:to-[var(--black)] hover:scale-105 focus:ring-4 focus:ring-[var(--light)] transition-all duration-300"
               >
                 {isSubmitting ? (
                   <>
