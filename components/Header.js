@@ -1,8 +1,7 @@
 "use client";
 import useActiveLink from "@/utils/observe";
-import { useContext, useState, useEffect, useRef } from "react";
-import { Context } from "@/Context/Context";
-import CompanyLogo from "@/images/Company_Logo.png";
+import { useState, useEffect, useRef } from "react";
+import CompanyLogo from "@/images/CompanyLogo.png";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -21,9 +20,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
-  const { user } = useContext(Context);
-  const [categories, setCategories] = useState([]);
-  const name = user?.data?.name.replace(/ .*/, "");
+
   const sidebarRef = useRef(null);
   const mobileMenuRef = useRef(null);
   const dropdownRef = useRef(null);
@@ -102,22 +99,6 @@ const Header = () => {
     }
   };
 
-  const handleDropdownClick = (href) => {
-    setIsProductsOpen(false);
-
-    // Add small delay to ensure dropdown closes before navigation
-    setTimeout(() => {
-      if (href.startsWith("/#")) {
-        const id = href.substring(2);
-        const section = document.getElementById(id);
-        if (section) {
-          section.scrollIntoView({ behavior: "smooth" });
-        }
-      } else if (href.startsWith("/")) {
-        router.push(href);
-      }
-    }, 100);
-  };
 
   return (
     <header className="bg-[white] z-50 fixed top-0 left-0 w-full overflow-hidden shadow-md">
@@ -142,8 +123,8 @@ const Header = () => {
             </Link>
 
             {/* Navigation */}
-            <nav aria-label="Global" className="flex-1 px-8">
-              <ul className="flex flex-row gap-1 items-center justify-center">
+            <nav aria-label="Main navigation" className="flex-1 px-8">
+              <ul role="menubar" aria-label="Main menu" className="flex flex-row gap-1 items-center justify-center">
                 {sections.map(({ name, href, hasSubMenu }) => (
                   <li key={name} className="relative">
                     <div
@@ -235,6 +216,9 @@ const Header = () => {
         <button
           onClick={handleToggle}
           className="rounded-lg bg-gray-50 p-2.5 text-[var(--black)] transition-all duration-200 hover:bg-[#eef3e8] hover:text-[var(--primary)] hover:shadow-md active:scale-95"
+          aria-label="Toggle mobile menu"
+          aria-expanded={isOpen}
+          aria-controls="mobile-menu"
         >
           <span className="sr-only">Toggle menu</span>
           <svg
@@ -257,7 +241,11 @@ const Header = () => {
       {/* Mobile Menu Sidebar */}
       {isOpen && (
         <>
-          <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300" />
+          <div  id="mobile-menu"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Mobile navigation menu"
+ className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300" />
           <div
             ref={mobileMenuRef}
             className="fixed top-0 left-0 w-80 max-w-[90vw] h-full bg-white shadow-2xl z-50 md:hidden transform transition-transform duration-300 ease-out"
@@ -357,7 +345,7 @@ const Header = () => {
 
               <div className="flex flex-col gap-4 mb-6">
                 <div className="flex justify-center gap-4 mb-4">
-                  {socialLinks.map(({ icon: Icon, label, color, href }) => (
+                  {socialLinks.map(({ icon: Icon, label, href }) => (
                     <a
                       key={label}
                       aria-label={label}

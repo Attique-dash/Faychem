@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import CompanyLogo from "../images/Company_Logo.png";
+import CompanyLogo from "../images/CompanyLogo.png";
 import { FaEnvelope, FaPhone } from "react-icons/fa";
 
 const Footer = () => (
@@ -116,7 +116,7 @@ const Footer = () => (
               href="tel:+971566494784"
               className="font-semibold text-[var(--primary)] hover:text-[var(--dark)] transition-colors"
             >
-              +92 302 5509624
+              +92 320 5509624
             </a>
           </div>
         </div>

@@ -74,6 +74,29 @@ const PinkSalt = () => {
 
   return (
     <div className="">
+       <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: "https://www.silverlinetradingcompany.com",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Himalayan Pink Salt",
+                item: "https://www.silverlinetradingcompany.com/pink-salt",
+              },
+            ],
+          }),
+        }}
+      />
       <div
         ref={componentRef}
         className={`transition-all duration-1000 transform ${
@@ -114,7 +137,9 @@ const PinkSalt = () => {
                       src={salt.image}
                       alt={salt.name}
                       fill
-                      loading="lazy"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                     
+                      aria-describedby={`product-${salt.id}-description`}
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>{" "}

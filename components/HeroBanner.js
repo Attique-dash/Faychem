@@ -153,7 +153,11 @@ const HeroBanner = () => {
                       src={image.src}
                       alt={image.alt}
                       className="rounded-lg w-[500px] lg:w-auto object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
+                      priority={index === 0} // Priority for first image
+                      loading="eager"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    
+                  />
 
                     {/* Hover Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-[var(--black)] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
