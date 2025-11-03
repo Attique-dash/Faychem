@@ -14,11 +14,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Ensure Tailwind CSS is loaded */
-body {
-  font-family: "Montserrat", sans-serif;
-}
-
 /* Custom scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
@@ -35,18 +30,6 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--dark); /* Darker on hover */
-}
-
-/* Firefox scrollbar */
-.scrollbar-thin {
-  scrollbar-width: thin;
-  scrollbar-color: var(--primary) #f1f1f1; /* Thumb and track colors */
-}
-
-/* Ensure overflow and max-height for scrollable sub-menu */
-.scrollable-submenu {
-  max-height: 240px; /* Adjust this based on the design */
-  overflow-y: auto;
 }
 
 :root {

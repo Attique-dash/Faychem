@@ -199,7 +199,7 @@ const ContactForm = () => {
 
             <div>
               <div className="text-xs text-[var(--darker)]">Phone number</div>
-              <div className="text-base text-gray-800">+971 56 649 4784</div>
+              <div className="text-base text-gray-800">+92 320 5509624</div>
             </div>
           </div>
 

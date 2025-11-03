@@ -74,6 +74,29 @@ const BlackSalt = () => {
 
   return (
     <div className="">
+       <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: "https://www.silverlinetradingcompany.com",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Himalayan Black Salt",
+                item: "https://www.silverlinetradingcompany.com/black-salt",
+              },
+            ],
+          }),
+        }}
+      />
       <div
         ref={componentRef}
         className={`transition-all duration-1000 transform ${
@@ -114,7 +137,8 @@ const BlackSalt = () => {
                       src={salt.image}
                       alt={salt.name}
                       fill
-                      loading="lazy"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                     
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>{" "}
