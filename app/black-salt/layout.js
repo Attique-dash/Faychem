@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Himalayan Black Salt | Silverline Trading Company",
+  title: "Himalayan Black Salt",
   description:
     "STC offers premium Himalayan Black Salt products in various sizes. Natural, mineral-rich black salt from Pakistan. Bulk pricing available for export.",
   keywords: [
@@ -24,12 +24,6 @@ export const metadata = {
         alt: "Himalayan Black Salt Products",
       },
     ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Himalayan Black Salt | Premium Black Salt Products",
-    description: "Premium Himalayan Black Salt in various granule sizes.",
-    images: ["https://www.silverlinetradingcompany.com/images/b1.1.png"],
   },
   alternates: {
     canonical: "/black-salt",

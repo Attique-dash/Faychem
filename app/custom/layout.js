@@ -1,6 +1,7 @@
 export const metadata = {
-  title: "Crafted Salt Products | Custom Salt Items | STC",
-  description: "Custom crafted Himalayan salt products including salt lamps, candle holders, wellness & spa items, decorative pieces, animal lick salt, and salt bricks. Personalized salt creations available.",
+  title: "Crafted Salt Products",
+  description:
+    "Custom crafted Himalayan salt products including salt lamps, candle holders, wellness & spa items, decorative pieces, animal lick salt, and salt bricks. Personalized salt creations available.",
   keywords: [
     "salt lamps",
     "crafted salt products",
@@ -13,7 +14,8 @@ export const metadata = {
   ],
   openGraph: {
     title: "Crafted Salt Products | Custom Salt Items",
-    description: "Custom crafted Himalayan salt products including salt lamps, candle holders, and decorative pieces.",
+    description:
+      "Custom crafted Himalayan salt products including salt lamps, candle holders, and decorative pieces.",
     url: "https://www.silverlinetradingcompany.com/custom",
     type: "website",
     images: [
@@ -24,12 +26,6 @@ export const metadata = {
         alt: "Crafted Salt Products",
       },
     ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Crafted Salt Products | Custom Salt Items",
-    description: "Custom crafted Himalayan salt products including salt lamps and decorative pieces.",
-    images: ["https://www.silverlinetradingcompany.com/images/1.1.png"],
   },
   alternates: {
     canonical: "/custom",

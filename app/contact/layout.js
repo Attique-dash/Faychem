@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Contact Us | Silverline Trading Company",
+  title: "Contact Us",
   description:
     "Contact STC for premium Himalayan salt products. Get quotes for bulk orders, custom specifications, and professional consultation. Email: info@silverlinetradingcompany.com",
   keywords: [
@@ -15,12 +15,6 @@ export const metadata = {
       "Contact us for premium Himalayan salt products, bulk orders, and custom specifications.",
     url: "https://www.silverlinetradingcompany.com/contact",
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Contact Us | Get a Quote",
-    description:
-      "Contact us for premium Himalayan salt products and bulk orders.",
   },
   alternates: {
     canonical: "/contact",

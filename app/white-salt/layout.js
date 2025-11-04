@@ -1,6 +1,7 @@
 export const metadata = {
-  title: "Himalayan White Salt | Premium White Salt Products | STC",
-  description: "Premium Himalayan White Salt products in various granule sizes (2-5mm, 1-2mm, fine, powder). Natural, pure white salt from Pakistan. Bulk pricing available for export.",
+  title: "Himalayan White Salt",
+  description:
+    "Premium Himalayan White Salt products in various granule sizes (2-5mm, 1-2mm, fine, powder). Natural, pure white salt from Pakistan. Bulk pricing available for export.",
   keywords: [
     "Himalayan white salt",
     "white salt 2-5mm",
@@ -11,7 +12,8 @@ export const metadata = {
   ],
   openGraph: {
     title: "Himalayan White Salt | Premium White Salt Products",
-    description: "Premium Himalayan White Salt in various granule sizes. Natural, pure salt from Pakistan.",
+    description:
+      "Premium Himalayan White Salt in various granule sizes. Natural, pure salt from Pakistan.",
     url: "https://www.silverlinetradingcompany.com/white-salt",
     type: "website",
     images: [
@@ -22,12 +24,6 @@ export const metadata = {
         alt: "Himalayan White Salt Products",
       },
     ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Himalayan White Salt | Premium White Salt Products",
-    description: "Premium Himalayan White Salt in various granule sizes.",
-    images: ["https://www.silverlinetradingcompany.com/images/w4.1.png"],
   },
   alternates: {
     canonical: "/white-salt",

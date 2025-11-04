@@ -43,7 +43,7 @@ const organizationSchema = {
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${siteName} | Premium Salt Exporter | STC`,
+    default: `${siteName} | Global Exporter of Himalayan Salt`,
     template: `%s | ${siteName}`,
   },
   description: defaultDescription,
@@ -63,11 +63,11 @@ export const metadata = {
   authors: [{ name: siteName }],
   creator: siteName,
   publisher: siteName,
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-  },
+  //viewport: {
+  //width: "device-width",
+  //initialScale: 1,
+  //maximumScale: 5,
+  //}
   formatDetection: {
     email: false,
     address: false,
@@ -80,7 +80,7 @@ export const metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: siteName,
-    title: `${siteName} | Premium Salt Exporter`,
+    title: `${siteName} | STC`,
     description: defaultDescription,
     images: [
       {
