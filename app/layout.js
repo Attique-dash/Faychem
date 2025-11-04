@@ -20,6 +20,7 @@ const defaultDescription =
 
 const organizationSchema = {
   "@context": "https://schema.org",
+
   "@type": "Organization",
   name: siteName,
   url: siteUrl,

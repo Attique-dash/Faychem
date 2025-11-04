@@ -14,32 +14,44 @@ const nextConfig = {
   },
 
   images: {
-    domains: [
-      "tailwindui.com",
-      "images.unsplash.com",
-      "i.ibb.co",
-      "i.postimg.cc",
-      "firebasestorage.googleapis.com",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "tailwindui.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "i.ibb.co",
+      },
+      {
+        protocol: "https",
+        hostname: "i.postimg.cc",
+      },
+      {
+        protocol: "https",
+        hostname: "firebasestorage.googleapis.com",
+      },
     ],
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 31536000,
   },
- 
- // Enable compression
- compress: true,
-  
- // Optimize bundle
- experimental: {
-   optimizeCss: true,
- },
+
+  // Enable compression
+  compress: true,
+
+  // Optimize bundle
+  experimental: {
+    optimizeCss: true,
+  },
 
   typescript: {
     ignoreBuildErrors: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
   },
 };
 
