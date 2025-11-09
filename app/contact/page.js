@@ -7,6 +7,7 @@ import {
   useMemo,
   useCallback,
 } from "react";
+import Link from "next/link";
 import { Context } from "@/Context/Context";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -18,8 +19,8 @@ import { FaPaperPlane } from "react-icons/fa";
 const wordLimit = 500;
 
 const ContactForm = () => {
-  const { user } = useContext(Context);
-  const contactRef = useRef(null);
+  useContext(Context);
+  const componentRef = useRef(null);
 
   const regionNames = useMemo(() => {
     try {
@@ -41,20 +42,16 @@ const ContactForm = () => {
   const [selected, setSelected] = useState("");
   const [wordCount, setWordCount] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
-  /** Observe visibility (for animation or lazy load) */
+  // Trigger animation on component mount
+
   useEffect(() => {
-    const element = contactRef.current;
-    if (!element) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.2 }
-    );
-    observer.observe(element);
-    return () => observer.disconnect();
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 100); // 100ms delay
+
+    return () => clearTimeout(timer);
   }, []);
 
   /** Helper for toast errors */
@@ -135,7 +132,7 @@ const ContactForm = () => {
       });
 
       toast.update(toastId, {
-        render: "Email sent successfully! We’ll get back to you soon.",
+        render: "Email sent successfully! We'll get back to you soon.",
         type: "success",
         isLoading: false,
         autoClose: 4000,
@@ -152,6 +149,7 @@ const ContactForm = () => {
         country: "",
       });
       setWordCount(0);
+      setSelected("");
     } catch (err) {
       console.error("Email send error:", err);
       toast.update(toastId, {
@@ -171,160 +169,221 @@ const ContactForm = () => {
   return (
     <section
       id="contact"
-      ref={contactRef}
+      //ref={componentRef}
       className="bg-gradient-to-br from-[var(--lightest)] to-white relative overflow-hidden"
     >
-      <div className="min-h-screen flex justify-center px-4">
-        <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-16 bg-white/0">
-          {/* Left Info */}
-          <div className="flex flex-col justify-start mt-24">
-            <span className="uppercase text-gray-500 text-sm mb-2">
-              We're here to help you
-            </span>
-            <h1 className="font-bold text-4xl md:text-5xl mb-4">
-              <span className="text-[var(--dark)]">Discuss</span> Your Salt
-              Needs
-            </h1>
-            <p className="text-gray-600 mb-8">
-              Are you looking for top-quality salt solutions tailored to your
-              needs? Reach out to us.
-            </p>
+      <div
+        ref={componentRef}
+        className={`transition-all duration-1000 transform ${
+          isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+        }`}
+      >
+        <div className="min-h-screen flex justify-center px-4">
+          <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-12 bg-white/0">
+            {/* Left Info */}
+            <div
+              className={`flex flex-col justify-start mt-16 sm:mt-20 md:mt-24 transition-all duration-700 transform delay-100 ${
+                isVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-8 opacity-0"
+              }`}
+            >
+              <span className="uppercase text-gray-500 text-sm mb-2">
+                We're here to help you
+              </span>
+              <h1 className="font-bold text-4xl md:text-5xl mb-4">
+                <span className="text-[var(--dark)]">Discuss</span> Your Salt
+                Needs
+              </h1>
+              <p className="text-gray-600 mb-8">
+                Are you looking for quality salt solutions tailored to your
+                needs? Reach out to us.
+              </p>
 
-            <div className="mb-4">
-              <div className="text-xs text-[var(--darker)]">E-mail</div>
-              <div className="text-base text-gray-800">
-                info@silverlinetradingcompany.com
+              <div className="mb-4">
+                <div className="text-xs text-[var(--darker)]">E-mail</div>
+                <Link
+                  href="mailto:info@silverlinetradingcompany.com"
+                  className="text-base text-gray-800"
+                >
+                  info@silverlinetradingcompany.com
+                </Link>
+              </div>
+
+              <div>
+                <div className="text-xs text-[var(--darker)]">Phone number</div>
+                <Link
+                  href="https://wa.me/923205509624?text=Hi%2C%20I%27m%20interested%20in%20your%20Himalayan%20salt%20products.%20Can%20you%20provide%20more%20information%3F"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-base text-gray-800"
+                >
+                  +92 320 5509624
+                </Link>
               </div>
             </div>
 
-            <div>
-              <div className="text-xs text-[var(--darker)]">Phone number</div>
-              <div className="text-base text-gray-800">+92 320 5509624</div>
-            </div>
-          </div>
-
-          {/* Form */}
-          <div className="relative my-8 p-6 py-8 rounded-3xl">
-            <form onSubmit={SendMail}>
-              {/* Name Fields */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                <input
-                  type="text"
-                  placeholder="First Name *"
-                  className={inputClasses}
-                  value={formData.name}
-                  onChange={handleChange("name")}
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Last Name *"
-                  className={inputClasses}
-                  value={formData.lastName}
-                  onChange={handleChange("lastName")}
-                  required
-                />
-              </div>
-
-              {/* Company and Email */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
-                <input
-                  type="text"
-                  placeholder="Company Name *"
-                  className={inputClasses}
-                  value={formData.companyName}
-                  onChange={handleChange("companyName")}
-                  required
-                />
-                <input
-                  type="email"
-                  placeholder="Email Address *"
-                  className={inputClasses}
-                  value={formData.email}
-                  onChange={handleChange("email")}
-                  required
-                />
-              </div>
-
-              {/* Address */}
-              <div className="mt-4">
-                <input
-                  type="text"
-                  placeholder="Company Address *"
-                  className={inputClasses}
-                  value={formData.companyAddress}
-                  onChange={handleChange("companyAddress")}
-                  required
-                />
-              </div>
-
-              {/* Country */}
-              <div className="mt-4">
-                <ReactFlagsSelect
-                  selected={selected}
-                  onSelect={(code) => {
-                    setSelected(code);
-                    setFormData((prev) => ({
-                      ...prev,
-                      country: regionNames.of(code) || code,
-                    }));
-                  }}
-                  placeholder="Select Country *"
-                  searchable
-                  className="w-full"
-                  selectButtonClassName="!w-full !bg-white !rounded-2xl !border !border-gray-300 !bg-gray-50 !px-5 !py-2 !mt-2 !text-gray-400 !shadow-sm !focus:outline-none !focus:ring-2 !focus:ring-[var(--light)] !focus:border-[var(--primary)] !hover:border-[var(--light)] !hover:scale-[1.02] !transform !transition-all !duration-300"
-                  optionsListClassName="!bg-white !z-[9999] !rounded-lg !border !border-gray-200 !shadow-xl !max-h-[800px] !overflow-y-auto"
-                  required
-                />
-              </div>
-
-              {/* Message */}
-              <div className="mt-4">
-                <textarea
-                  className={`${inputClasses} resize-none min-h-[100px] max-h-[150px]`}
-                  placeholder="Tell us about your requirements *"
-                  value={formData.message}
-                  onChange={handleMessageChange}
-                  required
-                  style={{ overflow: "hidden" }}
-                />
-                <div className="flex justify-between items-center mt-2">
-                  <p
-                    className={`text-sm ${wordCount > 0.8 * wordLimit ? "text-orange-500" : "text-gray-500"} ${wordCount === wordLimit ? "text-red-500" : ""}`}
-                  >
-                    {wordCount} / {wordLimit} words
-                  </p>
-                  {wordCount === wordLimit && (
-                    <p className="text-sm text-red-500 animate-pulse">
-                      Word limit reached!
-                    </p>
-                  )}
+            {/* Form */}
+            <div
+              className={`relative mt-2 sm:mt-8 md:mt-8 mb-10 p-6 py-8 rounded-3xl transition-all duration-1000 transform ${
+                isVisible
+                  ? "translate-x-0 opacity-100 delay-300"
+                  : "translate-x-8 opacity-0"
+              }`}
+            >
+              <form onSubmit={SendMail}>
+                {/* Name Fields */}
+                <div
+                  className={`grid grid-cols-1 md:grid-cols-2 gap-2 transition-all duration-700 transform ${
+                    isVisible
+                      ? "translate-y-0 opacity-100 delay-200"
+                      : "translate-y-6 opacity-0"
+                  }`}
+                >
+                  <input
+                    type="text"
+                    placeholder="First Name *"
+                    className={inputClasses}
+                    value={formData.name}
+                    onChange={handleChange("name")}
+                    required
+                  />
+                  <input
+                    type="text"
+                    placeholder="Last Name *"
+                    className={inputClasses}
+                    value={formData.lastName}
+                    onChange={handleChange("lastName")}
+                    required
+                  />
                 </div>
-              </div>
 
-              {/* Submit */}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full flex justify-center items-center gap-3 mt-8 px-6 py-4 text-sm font-semibold tracking-wide text-white bg-gradient-to-r from-[var(--primary)] to-[var(--dark)] rounded-xl hover:from-[var(--dark)] hover:to-[var(--black)] hover:scale-105 focus:ring-4 focus:ring-[var(--light)] transition-all duration-300"
-              >
-                {isSubmitting ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    <FaPaperPlane />
-                    Send Message
-                  </>
-                )}
-              </button>
-            </form>
+                {/* Company and Email */}
+                <div
+                  className={`grid grid-cols-1 md:grid-cols-2 gap-2 mt-4 transition-all duration-700 transform ${
+                    isVisible
+                      ? "translate-y-0 opacity-100 delay-300"
+                      : "translate-y-6 opacity-0"
+                  }`}
+                >
+                  <input
+                    type="text"
+                    placeholder="Company Name *"
+                    className={inputClasses}
+                    value={formData.companyName}
+                    onChange={handleChange("companyName")}
+                    required
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email Address *"
+                    className={inputClasses}
+                    value={formData.email}
+                    onChange={handleChange("email")}
+                    required
+                  />
+                </div>
+
+                {/* Address */}
+                <div
+                  className={`mt-4 transition-all duration-700 transform ${
+                    isVisible
+                      ? "translate-y-0 opacity-100 delay-400"
+                      : "translate-y-6 opacity-0"
+                  }`}
+                >
+                  <input
+                    type="text"
+                    placeholder="Company Address *"
+                    className={inputClasses}
+                    value={formData.companyAddress}
+                    onChange={handleChange("companyAddress")}
+                    required
+                  />
+                </div>
+
+                {/* Country */}
+                <div className="mt-4">
+                  <ReactFlagsSelect
+                    selected={selected}
+                    onSelect={(code) => {
+                      setSelected(code);
+                      setFormData((prev) => ({
+                        ...prev,
+                        country: regionNames.of(code) || code,
+                      }));
+                    }}
+                    placeholder="Select Country *"
+                    searchable
+                    className="w-full"
+                    selectButtonClassName="!w-full !bg-white !rounded-2xl !border !border-gray-300 !bg-gray-50 !px-5 !py-2 !mt-2 !text-gray-400 !shadow-sm !focus:outline-none !focus:ring-2 !focus:ring-[var(--light)] !focus:border-[var(--primary)] !hover:border-[var(--light)] !hover:scale-[1.02] !transform !transition-all !duration-300"
+                    optionsListClassName="!bg-white !z-[9999] !rounded-lg !border !border-gray-200 !shadow-xl !max-h-[800px] !overflow-y-auto"
+                    required
+                  />
+                </div>
+
+                {/* Message */}
+                <div
+                  className={`mt-4 transition-all duration-700 transform ${
+                    isVisible
+                      ? "translate-y-0 opacity-100 delay-500"
+                      : "translate-y-6 opacity-0"
+                  }`}
+                >
+                  <textarea
+                    className={`${inputClasses} resize-none min-h-[100px] max-h-[150px]`}
+                    placeholder="Tell us about your requirements *"
+                    value={formData.message}
+                    onChange={handleMessageChange}
+                    required
+                    style={{ overflow: "hidden" }}
+                  />
+                  <div className="flex justify-between items-center mt-2">
+                    <p
+                      className={`text-sm ${wordCount > 0.8 * wordLimit ? "text-orange-500" : "text-gray-500"} ${wordCount === wordLimit ? "text-red-500" : ""}`}
+                    >
+                      {wordCount} / {wordLimit} words
+                    </p>
+                    {wordCount === wordLimit && (
+                      <p className="text-sm text-red-500 animate-pulse">
+                        Word limit reached!
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Submit */}
+                <div
+                  className={`mt-6 transition-all duration-700 transform ${
+                    isVisible
+                      ? "translate-y-0 opacity-100 delay-[650ms]"
+                      : "translate-y-6 opacity-0"
+                  }`}
+                >
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full flex justify-center items-center gap-3 px-6 py-4 text-sm font-semibold tracking-wide text-white bg-gradient-to-r from-[var(--primary)] to-[var(--dark)] rounded-xl hover:from-[var(--dark)] hover:to-[var(--black)] hover:scale-105 focus:ring-4 focus:ring-[var(--light)] transition-all duration-300"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <FaPaperPlane />
+                        Send Message
+                      </>
+                    )}
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
+        <ToastContainer />
       </div>
-      <ToastContainer />
     </section>
   );
 };

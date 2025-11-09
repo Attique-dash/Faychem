@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Link from "next/link";
 
 export default function Error({ error, reset }) {
   useEffect(() => {
@@ -31,19 +32,19 @@ export default function Error({ error, reset }) {
           </button>
 
           <div className="flex justify-center space-x-4">
-            <a
+            <Link
               href="/"
               className="text-red-600 hover:text-red-800 font-medium transition-colors duration-300"
             >
               Go Home
-            </a>
+            </Link>
             <span className="text-gray-400">|</span>
-            <a
+            <Link
               href="/contact"
               className="text-red-600 hover:text-red-800 font-medium transition-colors duration-300"
             >
               Contact Support
-            </a>
+            </Link>
           </div>
         </div>
       </div>

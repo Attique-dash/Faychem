@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import banner from "@/images/banner2.jpg";
+import banner from "@/images/banner233.png";
 import banner2 from "@/images/banner.jpeg";
 import banner3 from "@/images/banner3.jpg";
 import banner4 from "@/images/banner4.jpg";
@@ -109,7 +109,7 @@ const HeroBanner = () => {
                 }`}
               >
                 <div className="relative">
-                  <h1 className="text-xl text-center lg:text-left sm:text-2xl lg:text-3xl font-bold tracking-tight text-white leading-tight">
+                  <h1 className="text-3xl text-center lg:text-left sm:text-2xl lg:text-3xl font-bold tracking-tight text-white leading-tight">
                     Global Trader in Premium <br />
                     <span className="text-[var(--darker)] bg-clip-text">
                       Salt Products
@@ -118,11 +118,11 @@ const HeroBanner = () => {
                 </div>
 
                 <p className="mt-4 sm:mt-6 text-center text-justify text-sm sm:text-base font-medium text-white leading-relaxed">
-                  Silverline Trading Company specializes in exporting the
-                  purest, high-quality salt sourced from Pakistan to global
-                  markets. Our diverse offerings include culinary salt,
-                  industrial salt, and decorative salt, all tailored to meet the
-                  unique needs of our customers worldwide.
+                  Silverline Trading Company specializes in exporting the purest
+                  Himalayan salt from Pakistan to global markets. Our diverse
+                  offerings include edible salt, industrial salt, decorative
+                  salt, and crafted products, all tailored to meet the needs of
+                  our customers worldwide.
                 </p>
               </div>
             </div>
@@ -156,8 +156,7 @@ const HeroBanner = () => {
                       priority={index === 0} // Priority for first image
                       loading="eager"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    
-                  />
+                    />
 
                     {/* Hover Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-[var(--black)] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">

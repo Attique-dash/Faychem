@@ -1,50 +1,43 @@
-export default async function sitemap() {
-  const base = "https://www.silverlinetradingcompany.com";
-  const lastModified = new Date();
-  
-  const staticPages = [
+export default function sitemap() {
+  const baseUrl = "https://www.silverlinetradingcompany.com";
+  const currentDate = new Date().toISOString();
+
+  return [
     {
-      url: "",
-      lastModified,
+      url: baseUrl,
+      lastModified: currentDate,
       changeFrequency: "weekly",
       priority: 1.0,
     },
     {
-      url: "/contact",
-      lastModified,
+      url: `${baseUrl}/contact`,
+      lastModified: currentDate,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: "/pink-salt",
-      lastModified,
-      changeFrequency: "weekly",
+      url: `${baseUrl}/pink-salt`,
+      lastModified: currentDate,
+      changeFrequency: "monthly",
       priority: 0.9,
     },
     {
-      url: "/white-salt",
-      lastModified,
-      changeFrequency: "weekly",
+      url: `${baseUrl}/white-salt`,
+      lastModified: currentDate,
+      changeFrequency: "monthly",
       priority: 0.9,
     },
     {
-      url: "/black-salt",
-      lastModified,
-      changeFrequency: "weekly",
+      url: `${baseUrl}/black-salt`,
+      lastModified: currentDate,
+      changeFrequency: "monthly",
       priority: 0.9,
     },
     {
-      url: "/custom",
-      lastModified,
-      changeFrequency: "weekly",
-      priority: 0.8,
+      url: `${baseUrl}/custom`,
+      lastModified: currentDate,
+      changeFrequency: "monthly",
+      priority: 0.9,
     },
   ];
-
-  return staticPages.map((page) => ({
-    url: `${base}${page.url === "" ? "" : page.url}`,
-    lastModified: page.lastModified,
-    changeFrequency: page.changeFrequency,
-    priority: page.priority,
-  }));
 }

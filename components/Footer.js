@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import CompanyLogo from "../images/CompanyLogo.png";
 import { FaEnvelope, FaPhone } from "react-icons/fa";
 
@@ -32,22 +33,22 @@ const Footer = () => (
           </h3>
           <ul className="space-y-2 list-disc list-inside">
             <li>
-              <a
+              <Link
                 href="/"
                 className="hover:text-bold hover:text-[var(--primary)]"
               >
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/#about" className="hover:text-[var(--primary)]">
+              <Link href="/#about" className="hover:text-[var(--primary)]">
                 About Us
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/contact" className="hover:text-[var(--primary)]">
+              <Link href="/contact" className="hover:text-[var(--primary)]">
                 Let's Talk Business
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -59,39 +60,39 @@ const Footer = () => (
           </h3>
           <ul className="space-y-2 list-disc list-inside">
             <li>
-              <a href="/pink-salt" className="hover:text-[var(--primary)]">
+              <Link href="/pink-salt" className="hover:text-[var(--primary)]">
                 Pink Salt
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/white-salt" className="hover:text-[var(--primary)]">
+              <Link href="/white-salt" className="hover:text-[var(--primary)]">
                 White Salt
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/black-salt" className="hover:text-[var(--primary)]">
+              <Link href="/black-salt" className="hover:text-[var(--primary)]">
                 Black Salt
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/custom" className="hover:text-[var(--primary)]">
+              <Link href="/custom" className="hover:text-[var(--primary)]">
                 Salt Lamps
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/custom" className="hover:text-[var(--primary)]">
+              <Link href="/custom" className="hover:text-[var(--primary)]">
                 Animal Lick Salt
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/custom" className="hover:text-[var(--primary)]">
+              <Link href="/custom" className="hover:text-[var(--primary)]">
                 Salt Bricks
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/custom" className="hover:text-[var(--primary)]">
+              <Link href="/custom" className="hover:text-[var(--primary)]">
                 Custom Crafted Items
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -103,21 +104,23 @@ const Footer = () => (
           </h3>
           <div className="flex items-center gap-3 mb-2">
             <FaEnvelope className="w-5 h-5 shrink-0" aria-hidden="true" />
-            <a
+            <Link
               href="mailto:info@silverlinetradingcompany.com"
               className="font-semibold text-[var(--primary)] hover:text-[var(--dark)] transition-colors"
             >
               info@silverlinetradingcompany.com
-            </a>
+            </Link>
           </div>
           <div className="flex items-center gap-3">
             <FaPhone className="w-5 h-5 rotate-90 shrink-0" />
-            <a
-              href="tel:+971566494784"
+            <Link
+              href="https://wa.me/923205509624?text=Hi%2C%20I%27m%20interested%20in%20your%20Himalayan%20salt%20products.%20Can%20you%20provide%20more%20information%3F"
+              target="_blank"
+              rel="noopener noreferrer"
               className="font-semibold text-[var(--primary)] hover:text-[var(--dark)] transition-colors"
             >
               +92 320 5509624
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import White1 from "@/images/w4.1.png";
 import White2 from "@/images/w4.2.png";
@@ -40,8 +41,6 @@ const WhiteSalt = () => {
       description:
         "Premium granule size perfect for seasoning and everyday culinary applications.",
       image: White1,
-      price: "$12.99",
-      features: ["Premium Quality", "Natural", "Versatile"],
     },
     {
       id: 2,
@@ -49,8 +48,6 @@ const WhiteSalt = () => {
       description:
         "Ideal for professional cooking applications and commercial use.",
       image: White2,
-      price: "$14.99",
-      features: ["Cooking Grade", "Professional", "Pure"],
     },
     {
       id: 3,
@@ -58,8 +55,6 @@ const WhiteSalt = () => {
       description:
         "Fine texture designed for delicate dishes and precise seasoning control.",
       image: White3,
-      price: "$16.99",
-      features: ["Fine Grade", "Delicate", "Premium"],
     },
     {
       id: 4,
@@ -67,14 +62,12 @@ const WhiteSalt = () => {
       description:
         "Ultra-fine powder ensuring even distribution and instant flavor enhancement.",
       image: White4,
-      price: "$18.99",
-      features: ["Powder Form", "Even Mixing", "Professional"],
     },
   ];
 
   return (
     <div className="">
-       <script
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -103,24 +96,17 @@ const WhiteSalt = () => {
           isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
         }`}
       >
-        {/*        <div className="w-full">
-          <Image
-            src={BlackBanner}
-            alt="Black Salt Banner"
-            className="w-full object-cover"
-            priority
-          />
-        </div>*/}
-        <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto pt-10 pb-16">
+        <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto pt-10 pb-12">
           {/* Professional Header */}
           <div className="text-center mb-16 max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
               Himalayan White Salt
             </h1>
           </div>
 
           {/* Professional Product Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-16 items-stretch">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-4 lg:gap-6 max-w-sm sm:max-w-7xl mx-auto mb-12 sm:mb-16 items-stretch">
+            {" "}
             {saltVariants.map((salt, index) => (
               <div
                 key={salt.id}
@@ -132,16 +118,17 @@ const WhiteSalt = () => {
               >
                 <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 group h-full flex flex-col">
                   {/* Professional Image Section */}
-                  <div className="relative h-56 w-auto bg-gray-50 overflow-hidden">
+                  <div className="relative h-64 sm:h-52 lg:h-56 w-auto bg-gray-50 overflow-hidden">
                     <Image
                       src={salt.image}
                       alt={salt.name}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                     
+                      aria-describedby={`product-${salt.id}-description`}
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                  </div>{" "}
+                  </div>
+
                   {/* Professional Content Section */}
                   <div className="p-4 flex-1 flex flex-col">
                     <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -157,26 +144,20 @@ const WhiteSalt = () => {
           </div>
 
           {/* Professional CTA Section */}
-          <div
-            className={`text-center transition-all duration-1000 delay-700 transform ${
-              isVisible
-                ? "translate-y-0 opacity-100"
-                : "translate-y-8 opacity-0"
-            }`}
-          >
-            <div className="bg-white rounded-2xl shadow-lg p-10 max-w-3xl mx-auto my-16">
+          <div className="mt-20 text-center transition-all duration-1000 delay-700 transform ">
+            <div className="border border-gray-200 bg-white rounded-2xl shadow-lg p-10 max-w-3xl mx-auto my-12">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 text-center tracking-tight">
-                Ready to Experience{" "}
-                <span className="text-blue-600">Premium Quality?</span>
+                Discover Excellence in{" "}
+                <span className="block text-[var(--primary)]">Every Grain</span>
               </h2>
-              <p className="text-gray-600 text-lg md:text-xl mb-8 text-center max-w-2xl mx-auto">
-                Contact our team for bulk orders, custom specifications, and
-                professional consultation.
+              <p className="text-gray-600 text-base md:text-lg mb-8 text-center max-w-2xl mx-auto">
+                Contact us for salt in any mesh or granule size you need, backed
+                by a reliable export service.
               </p>
               <div className="flex justify-center">
-                <a
+                <Link
                   href="/contact"
-                  className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow transition-all duration-200"
+                  className="button flex items-center gap-2 text-lg px-8 py-4 rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--light)]"
                 >
                   <svg
                     className="w-5 h-5"
@@ -192,7 +173,7 @@ const WhiteSalt = () => {
                     />
                   </svg>
                   Contact Sales Team
-                </a>
+                </Link>
               </div>
             </div>
           </div>

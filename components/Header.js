@@ -83,22 +83,55 @@ const Header = () => {
     setIsOpen((prev) => !prev);
   };
 
+  // To:
   const handleLinkClick = (href) => {
     setIsOpen(false);
     setMobileProductsOpen(false);
 
     if (href.startsWith("/#")) {
       const id = href.substring(2);
-      const section = document.getElementById(id);
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth" });
+
+      // Check if we're already on the home page
+      if (window.location.pathname === "/") {
+        // Already on home page, just scroll
+        setTimeout(() => {
+          const section = document.getElementById(id);
+          if (section) {
+            const headerOffset = 80;
+            const elementPosition = section.getBoundingClientRect().top;
+            const offsetPosition =
+              elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth",
+            });
+          }
+        }, 300);
+      } else {
+        // On different page, navigate to home first
+        router.push("/");
+
+        // Wait for navigation and page load, then scroll
+        setTimeout(() => {
+          const section = document.getElementById(id);
+          if (section) {
+            const headerOffset = 80;
+            const elementPosition = section.getBoundingClientRect().top;
+            const offsetPosition =
+              elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth",
+            });
+          }
+        }, 800); // Longer delay for page navigation
       }
     } else if (href.startsWith("/")) {
-      // Use Next.js router instead of window.location
       router.push(href);
     }
   };
-
 
   return (
     <header className="bg-[white] z-50 fixed top-0 left-0 w-full overflow-hidden shadow-md">
@@ -124,7 +157,11 @@ const Header = () => {
 
             {/* Navigation */}
             <nav aria-label="Main navigation" className="flex-1 px-8">
-              <ul role="menubar" aria-label="Main menu" className="flex flex-row gap-1 items-center justify-center">
+              <ul
+                role="menubar"
+                aria-label="Main menu"
+                className="flex flex-row gap-1 items-center justify-center"
+              >
                 {sections.map(({ name, href, hasSubMenu }) => (
                   <li key={name} className="relative">
                     <div
@@ -239,136 +276,160 @@ const Header = () => {
       </div>
 
       {/* Mobile Menu Sidebar */}
-      {isOpen && (
-        <>
-          <div  id="mobile-menu"
-  role="dialog"
-  aria-modal="true"
-  aria-label="Mobile navigation menu"
- className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300" />
-          <div
-            ref={mobileMenuRef}
-            className="fixed top-0 left-0 w-80 max-w-[90vw] h-full bg-white shadow-2xl z-50 md:hidden transform transition-transform duration-300 ease-out"
-          >
-            <div className="flex flex-col h-full pb-6 pb-[env(safe-area-inset-bottom)]">
-              {/* Mobile Header */}
-              <div className="flex items-center justify-between p-4 border-b border-gray-200">
-                <Image
-                  src={CompanyLogo}
-                  alt="Faychem company logo"
-                  className="w-auto h-[35px]"
-                />
-                <button
-                  onClick={handleToggle}
-                  className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-all duration-200 active:scale-95"
-                >
-                  <span className="sr-only">Close menu</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </button>
-              </div>
+      <>
+        {/* Backdrop */}
+        <div
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile navigation menu"
+          onClick={handleToggle}
+          className={`fixed inset-0 bg-black backdrop-blur-sm z-40 md:hidden transition-all duration-500 ease-in-out ${
+            isOpen
+              ? "opacity-50 visible"
+              : "opacity-0 invisible pointer-events-none"
+          }`}
+        />
 
-              <nav aria-label="Global" className="flex-1 p-4 overflow-y-auto">
-                <ul className="space-y-2">
-                  {sections.map(({ name, href, hasSubMenu }) => (
-                    <li key={name}>
-                      {hasSubMenu ? (
-                        <div className="space-y-2">
-                          <button
-                            onClick={() =>
-                              setMobileProductsOpen(!mobileProductsOpen)
-                            }
-                            className={`flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-left transition-all duration-300 ${
-                              activeLink === name
-                                ? "bg-[var(--primary)] text-white shadow-md"
-                                : "text-[var(--black)] hover:bg-[#eef3e8] hover:text-[var(--primary)]"
-                            }`}
-                          >
-                            <span className="font-medium">
-                              {name.charAt(0).toUpperCase() + name.slice(1)}
-                            </span>
-                            <FaChevronDown
-                              className={`transition-transform duration-300 ${
-                                mobileProductsOpen ? "rotate-180" : "rotate-0"
-                              }`}
-                            />
-                          </button>
-                          <div
-                            className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                              mobileProductsOpen
-                                ? "max-h-96 opacity-100"
-                                : "max-h-0 opacity-0"
-                            }`}
-                          >
-                            <ul className="ml-4 space-y-1 border-l-2 border-[var(--light)] pl-4">
-                              {subSections.map(({ name, href }) => (
-                                <li key={name}>
-                                  <button
-                                    onClick={() => handleLinkClick(href)}
-                                    className="block w-full px-3 py-1.5 text-left text-sm text-gray-600 hover:text-[var(--primary)] hover:bg-[#eef3e8] rounded-md transition-all duration-200"
-                                  >
-                                    {name.trim()}
-                                  </button>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        </div>
-                      ) : (
+        {/* Sidebar */}
+        <div
+          ref={mobileMenuRef}
+          className={`fixed top-0 left-0 w-80 max-w-[90vw] h-full bg-white shadow-2xl z-50 md:hidden transition-all duration-500 ease-in-out ${
+            isOpen
+              ? "translate-x-0 opacity-100"
+              : "-translate-x-full opacity-0 pointer-events-none"
+          }`}
+        >
+          <div className="flex flex-col h-full pb-6 pb-[env(safe-area-inset-bottom)]">
+            {/* Mobile Header */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <Image
+                src={CompanyLogo}
+                alt="Faychem company logo"
+                className="w-auto h-[35px]"
+              />
+              <button
+                onClick={handleToggle}
+                className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-all duration-200 active:scale-95"
+              >
+                <span className="sr-only">Close menu</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <nav aria-label="Global" className="flex-1 p-4 overflow-y-auto">
+              <ul className="space-y-2">
+                {sections.map(({ name, href, hasSubMenu }) => (
+                  <li key={name}>
+                    {hasSubMenu ? (
+                      <div className="space-y-2">
                         <button
-                          onClick={() => handleLinkClick(href)}
-                          className={`block w-full p-3 rounded-lg text-left transition-all duration-300 font-medium ${
+                          onClick={() =>
+                            setMobileProductsOpen(!mobileProductsOpen)
+                          }
+                          className={`flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-left transition-all duration-300 ${
                             activeLink === name
                               ? "bg-[var(--primary)] text-white shadow-md"
                               : "text-[var(--black)] hover:bg-[#eef3e8] hover:text-[var(--primary)]"
                           }`}
                         >
-                          {name.charAt(0).toUpperCase() + name.slice(1)}
+                          <span className="font-medium">
+                            {name.charAt(0).toUpperCase() + name.slice(1)}
+                          </span>
+                          <FaChevronDown
+                            className={`transition-transform duration-300 ${
+                              mobileProductsOpen ? "rotate-180" : "rotate-0"
+                            }`}
+                          />
                         </button>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </nav>
+                        <div
+                          className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                            mobileProductsOpen
+                              ? "max-h-96 opacity-100"
+                              : "max-h-0 opacity-0"
+                          }`}
+                        >
+                          <ul className="ml-4 space-y-1 border-l-2 border-[var(--light)] pl-4">
+                            {subSections.map(({ name, href }, subIndex) => (
+                              <li
+                                key={name}
+                                className={`transition-all duration-300 ease-out ${
+                                  mobileProductsOpen
+                                    ? "opacity-100 translate-x-0"
+                                    : "opacity-0 -translate-x-4"
+                                }`}
+                                style={{
+                                  transitionDelay: mobileProductsOpen
+                                    ? `${subIndex * 50 + 100}ms`
+                                    : `${(subSections.length - subIndex - 1) * 30}ms`,
+                                }}
+                              >
+                                <button
+                                  onClick={() => handleLinkClick(href)}
+                                  className="block w-full px-3 py-1.5 text-left text-sm text-gray-600 hover:text-[var(--primary)] hover:bg-[#eef3e8] rounded-md transition-all duration-200 hover:translate-x-1"
+                                >
+                                  {name.trim()}
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>{" "}
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => handleLinkClick(href)}
+                        className={`block w-full p-3 rounded-lg text-left transition-all duration-300 font-medium ${
+                          activeLink === name
+                            ? "bg-[var(--primary)] text-white shadow-md"
+                            : "text-[var(--black)] hover:bg-[#eef3e8] hover:text-[var(--primary)]"
+                        }`}
+                      >
+                        {name.charAt(0).toUpperCase() + name.slice(1)}
+                      </button>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-              <div className="flex flex-col gap-4 mb-6">
-                <div className="flex justify-center gap-4 mb-4">
-                  {socialLinks.map(({ icon: Icon, label, href }) => (
-                    <a
-                      key={label}
-                      aria-label={label}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`text-gray-500 hover:text-[var(--primary)] cursor-pointer text-xl transition-all duration-200 hover:scale-125`}
-                    >
-                      <Icon />
-                    </a>
-                  ))}
-                </div>
-                <button
-                  onClick={() => handleLinkClick("/contact")}
-                  className="button self-center w-fit min-w-[160px] text-sm"
-                >
-                  Let's Talk Business
-                </button>
+            <div className="flex flex-col gap-4 mb-6">
+              <div className="flex justify-center gap-4 mb-4">
+                {socialLinks.map(({ icon: Icon, label, href }) => (
+                  <Link
+                    key={label}
+                    aria-label={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`text-gray-500 hover:text-[var(--primary)] cursor-pointer text-xl transition-all duration-200 hover:scale-125`}
+                  >
+                    <Icon />
+                  </Link>
+                ))}
               </div>
+              <button
+                onClick={() => handleLinkClick("/contact")}
+                className="button self-center w-fit min-w-[160px] text-sm"
+              >
+                Let's Talk Business
+              </button>
             </div>
           </div>
-        </>
-      )}
+        </div>
+      </>
     </header>
   );
 };
