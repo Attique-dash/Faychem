@@ -150,13 +150,13 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify(organizationSchema),
           }}
         />
+        <Analytics />
         <ContextProvider>
           <Header />
           <Toaster />
           <main className="pt-16">{children}</main>
           <Footer />
         </ContextProvider>
-        <Analytics />
       </body>
     </html>
   );
