@@ -90,7 +90,7 @@ export const metadata = {
     ],
   },
 
-  manifest: "/site.webmanifest",
+  //manifest: "/site.webmanifest",
 
   formatDetection: {
     email: false,
