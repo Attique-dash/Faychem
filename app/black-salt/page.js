@@ -1,11 +1,12 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import BlackSalt1 from "@/images/b1.1.png";
-import BlackSalt2 from "@/images/b1.2.png";
-import BlackSalt3 from "@/images/b1.3.png";
-import BlackSalt4 from "@/images/b1.4.png";
+import BlackSalt1 from "@/images/b1.1.webp";
+import BlackSalt2 from "@/images/b1.2.webp";
+import BlackSalt3 from "@/images/b1.3.webp";
+import BlackSalt4 from "@/images/b1.4.webp";
 
 const BlackSalt = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -99,9 +100,8 @@ const BlackSalt = () => {
       />
       <div
         ref={componentRef}
-        className={`transition-all duration-1000 transform ${
-          isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-        }`}
+        className={`transition-all duration-1000 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+          }`}
       >
         <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto pt-10 pb-12">
           {/* Professional Header */}
@@ -117,11 +117,10 @@ const BlackSalt = () => {
             {saltVariants.map((salt, index) => (
               <div
                 key={salt.id}
-                className={`transition-all duration-700 transform delay-${index * 100} ${
-                  isVisible
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-8 opacity-0"
-                } h-full`}
+                className={`transition-all duration-700 transform delay-${index * 100} ${isVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-8 opacity-0"
+                  } h-full`}
               >
                 <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 group h-full flex flex-col">
                   {/* Professional Image Section */}

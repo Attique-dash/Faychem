@@ -1,17 +1,18 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import img1 from "@/images/1.1.png";
-import img2 from "@/images/1.2.png";
-import img3 from "@/images/1.3.png";
-import img4 from "@/images/1.4.png";
-import img5 from "@/images/1.5.png";
-import img6 from "@/images/1.6.png";
-import img7 from "@/images/1.7.png";
-import img8 from "@/images/1.8.png";
-import img9 from "@/images/1.9.png";
-import img10 from "@/images/1.10.png";
+import img1 from "@/images/1.1.webp";
+import img2 from "@/images/1.2.webp";
+import img3 from "@/images/1.3.webp";
+import img4 from "@/images/1.4.webp";
+import img5 from "@/images/1.5.webp";
+import img6 from "@/images/1.6.webp";
+import img7 from "@/images/1.7.webp";
+import img8 from "@/images/1.8.webp";
+import img9 from "@/images/1.9.webp";
+import img10 from "@/images/1.10.webp";
 
 const CustomProducts = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -158,9 +159,8 @@ const CustomProducts = () => {
       />
       <div
         ref={componentRef}
-        className={`transition-all duration-1000 transform ${
-          isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-        }`}
+        className={`transition-all duration-1000 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+          }`}
       >
         <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto pt-10 pb-12">
           {/* Professional Header */}
@@ -175,11 +175,10 @@ const CustomProducts = () => {
             {saltVariants.map((salt, index) => (
               <div
                 key={salt.id}
-                className={`transition-all duration-700 transform ${delayClasses[index] || "delay-0"} ${
-                  isVisible
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-8 opacity-0"
-                } h-full`}
+                className={`transition-all duration-700 transform ${delayClasses[index] || "delay-0"} ${isVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-8 opacity-0"
+                  } h-full`}
               >
                 <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 group h-full flex flex-col">
                   {/* Professional Image Section */}

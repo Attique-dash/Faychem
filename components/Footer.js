@@ -1,7 +1,8 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import CompanyLogo from "../images/CompanyLogo.png";
+import CompanyLogo from "../images/CompanyLogo.webp";
 import { FaEnvelope, FaPhone } from "react-icons/fa";
 
 const Footer = () => (

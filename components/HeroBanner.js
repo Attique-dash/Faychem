@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import banner from "@/images/banner233.png";
-import banner2 from "@/images/banner.jpeg";
-import banner3 from "@/images/banner3.jpg";
-import banner4 from "@/images/banner4.jpg";
+import banner from "@/images/banner233.webp";
+import banner2 from "@/images/banner.webp";
+import banner3 from "@/images/banner3.webp";
+import banner4 from "@/images/banner4.webp";
 
 const HeroBanner = () => {
   const [bgImageIndex, setBgImageIndex] = useState(0);
@@ -77,9 +77,8 @@ const HeroBanner = () => {
         {images.map((image, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === bgImageIndex ? "opacity-100" : "opacity-0"
-            }`}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === bgImageIndex ? "opacity-100" : "opacity-0"
+              }`}
             style={{
               backgroundImage: `url(${image.src.src})`,
               backgroundSize: "cover",
@@ -93,20 +92,18 @@ const HeroBanner = () => {
       </div>
       {/* Main Content */}
       <div
-        className={`relative z-20 max-w-7xl mx-auto w-full transition-all duration-1000 transform ${
-          isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-        }`}
+        className={`relative z-20 max-w-7xl mx-auto w-full transition-all duration-1000 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+          }`}
       >
         <div className="bg-white/30 backdrop-blur-sm py-8 sm:py-12 lg:py-16 px-6 sm:px-8 lg:px-12 rounded-xl shadow-2xl border border-white border-opacity-20">
           <div className="lg:flex lg:items-center lg:justify-between max-w-6xl mx-auto">
             {/* Text Content */}
             <div className="lg:flex-1 lg:pr-8">
               <div
-                className={`relative mt-[3.5rem] md:mt-[1.5rem] sm:mt-8 px-4 sm:px-6 lg:px-0 text-left transition-all duration-1000 delay-300 transform ${
-                  isVisible
+                className={`relative mt-[3.5rem] md:mt-[1.5rem] sm:mt-8 px-4 sm:px-6 lg:px-0 text-left transition-all duration-1000 delay-300 transform ${isVisible
                     ? "translate-x-0 opacity-100"
                     : "-translate-x-8 opacity-0"
-                }`}
+                  }`}
               >
                 <div className="relative">
                   <h1 className="text-3xl text-center lg:text-left sm:text-2xl lg:text-3xl font-bold tracking-tight text-white leading-tight">
@@ -129,11 +126,10 @@ const HeroBanner = () => {
 
             {/* Product Images Grid */}
             <div
-              className={`lg:flex-shrink-0 lg:w-[400px] mt-8 lg:mt-0 transition-all duration-1000 delay-500 transform ${
-                isVisible
+              className={`lg:flex-shrink-0 lg:w-[400px] mt-8 lg:mt-0 transition-all duration-1000 delay-500 transform ${isVisible
                   ? "translate-x-0 opacity-100"
                   : "translate-x-8 opacity-0"
-              }`}
+                }`}
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 justify-items-center">
                 {productImages.map((image, index) => (

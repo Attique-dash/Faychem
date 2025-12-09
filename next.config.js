@@ -2,6 +2,14 @@
 const nextConfig = {
   reactStrictMode: true,
 
+  // Enable compression
+  compress: true,
+
+  // Remove console.logs in production
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+
   async redirects() {
     return [
       {
@@ -9,6 +17,38 @@ const nextConfig = {
         has: [{ type: "host", value: "silverlinetradingcompany.com" }],
         destination: "https://www.silverlinetradingcompany.com/:path*",
         permanent: true,
+      },
+    ];
+  },
+
+  async headers() {
+    return [
+      {
+        source: '/:all*(svg|jpg|jpeg|png|webp|gif|ico)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/:path*.css',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
       },
     ];
   },
@@ -42,9 +82,6 @@ const nextConfig = {
     minimumCacheTTL: 31536000,
   },
 
-  // Enable compression
-  compress: true,
-
   // Optimize bundle
   experimental: {
     optimizeCss: true,
@@ -55,4 +92,8 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+module.exports = withBundleAnalyzer(nextConfig);
