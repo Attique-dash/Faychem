@@ -2,8 +2,6 @@
 // import axios from "axios";
 import { useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
-import { debounce } from "lodash";
-import toast from "react-hot-toast";
 
 export const Context = createContext();
 const ContextProvider = ({ children }) => {
