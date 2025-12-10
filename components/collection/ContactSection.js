@@ -32,9 +32,9 @@ const ContactSection = () => {
                         <br />
                         Our Team will respond as soon as possible.
                     </p>
-                    <button className="button">
-                        <Link href="/contact">Contact Us</Link>
-                    </button>
+                    <Link href="/contact" className="button">
+                        Contact Us
+                    </Link>
                 </div>
             </div>
         </section>

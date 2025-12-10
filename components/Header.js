@@ -168,8 +168,8 @@ const Header = () => {
                     <div
                       ref={hasSubMenu ? dropdownRef : null}
                       className={`flex items-center rounded-lg transition-all duration-300 ${activeLink === name
-                          ? "bg-[var(--primary)] text-white shadow-md"
-                          : "text-[var(--black)] hover:bg-[var(--lightestx2)] hover:text-[var(--primary)]"
+                        ? "bg-[var(--primary)] text-white shadow-md"
+                        : "text-[var(--black)] hover:bg-[var(--lightestx2)] hover:text-[var(--primary)]"
                         } px-3 py-2 mx-1 group cursor-pointer`}
                     >
                       <div className="flex items-center flex-1 min-w-0">
@@ -201,8 +201,8 @@ const Header = () => {
                     {hasSubMenu && (
                       <div
                         className={`absolute top-full left-0 bg-white shadow-xl rounded-lg min-w-[200px] transition-all duration-300 ${isProductsOpen
-                            ? "opacity-100 visible translate-y-1"
-                            : "opacity-0 invisible translate-y-4 pointer-events-none"
+                          ? "opacity-100 visible translate-y-1"
+                          : "opacity-0 invisible translate-y-4 pointer-events-none"
                           }`}
                       >
                         <ul className="py-1">
@@ -226,9 +226,8 @@ const Header = () => {
             </nav>
 
             {/* CTA Button */}
-            <Link href="/contact">
-              {/*"bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-2.5 rounded-full font-medium shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-1.5"*/}
-              <button className="button">Let's Talk Business</button>
+            <Link href="/contact" className="button">
+              Let's Talk Business
             </Link>
           </div>
         </div>
@@ -283,8 +282,8 @@ const Header = () => {
           aria-label="Mobile navigation menu"
           onClick={handleToggle}
           className={`fixed inset-0 bg-black backdrop-blur-sm z-40 md:hidden transition-all duration-500 ease-in-out ${isOpen
-              ? "opacity-50 visible"
-              : "opacity-0 invisible pointer-events-none"
+            ? "opacity-50 visible"
+            : "opacity-0 invisible pointer-events-none"
             }`}
         />
 
@@ -292,8 +291,8 @@ const Header = () => {
         <div
           ref={mobileMenuRef}
           className={`fixed top-0 left-0 w-80 max-w-[90vw] h-full bg-white shadow-2xl z-50 md:hidden transition-all duration-500 ease-in-out ${isOpen
-              ? "translate-x-0 opacity-100"
-              : "-translate-x-full opacity-0 pointer-events-none"
+            ? "translate-x-0 opacity-100"
+            : "-translate-x-full opacity-0 pointer-events-none"
             }`}
         >
           <div className="flex flex-col h-full pb-6 pb-[env(safe-area-inset-bottom)]">
@@ -337,8 +336,8 @@ const Header = () => {
                             setMobileProductsOpen(!mobileProductsOpen)
                           }
                           className={`flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-left transition-all duration-300 ${activeLink === name
-                              ? "bg-[var(--primary)] text-white shadow-md"
-                              : "text-[var(--black)] hover:bg-[#eef3e8] hover:text-[var(--primary)]"
+                            ? "bg-[var(--primary)] text-white shadow-md"
+                            : "text-[var(--black)] hover:bg-[#eef3e8] hover:text-[var(--primary)]"
                             }`}
                         >
                           <span className="font-medium">
@@ -351,8 +350,8 @@ const Header = () => {
                         </button>
                         <div
                           className={`overflow-hidden transition-all duration-500 ease-in-out ${mobileProductsOpen
-                              ? "max-h-96 opacity-100"
-                              : "max-h-0 opacity-0"
+                            ? "max-h-96 opacity-100"
+                            : "max-h-0 opacity-0"
                             }`}
                         >
                           <ul className="ml-4 space-y-1 border-l-2 border-[var(--light)] pl-4">
@@ -360,8 +359,8 @@ const Header = () => {
                               <li
                                 key={name}
                                 className={`transition-all duration-300 ease-out ${mobileProductsOpen
-                                    ? "opacity-100 translate-x-0"
-                                    : "opacity-0 -translate-x-4"
+                                  ? "opacity-100 translate-x-0"
+                                  : "opacity-0 -translate-x-4"
                                   }`}
                                 style={{
                                   transitionDelay: mobileProductsOpen
@@ -384,8 +383,8 @@ const Header = () => {
                       <button
                         onClick={() => handleLinkClick(href)}
                         className={`block w-full p-3 rounded-lg text-left transition-all duration-300 font-medium ${activeLink === name
-                            ? "bg-[var(--primary)] text-white shadow-md"
-                            : "text-[var(--black)] hover:bg-[#eef3e8] hover:text-[var(--primary)]"
+                          ? "bg-[var(--primary)] text-white shadow-md"
+                          : "text-[var(--black)] hover:bg-[#eef3e8] hover:text-[var(--primary)]"
                           }`}
                       >
                         {name.charAt(0).toUpperCase() + name.slice(1)}

@@ -1,6 +1,5 @@
 "use client";
 
-
 import React, { useState } from "react";
 import dynamic from 'next/dynamic';
 import AboutSection from "./collection/AboutSection";
@@ -46,7 +45,6 @@ const Collection = () => {
                 className="absolute top-0 left-0 w-full h-full"
                 src="https://www.youtube.com/embed/9nWLNzZGOYA?rel=0&enablejsapi=1&autoplay=0&mute=0"
                 title="YouTube video player"
-                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
                 loading="lazy"
@@ -59,7 +57,6 @@ const Collection = () => {
                 className="absolute top-0 left-0 w-full h-full"
                 src="https://www.youtube.com/embed/h23rF0xrhTE?rel=0&enablejsapi=1&autoplay=0&mute=0"
                 title="YouTube video player"
-                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
                 loading="lazy"

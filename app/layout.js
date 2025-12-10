@@ -24,11 +24,11 @@ const organizationSchema = {
   "@type": "Organization",
   name: siteName,
   url: siteUrl,
-  logo: `${siteUrl}/images/CompanyLogo.png`,
+  logo: `${siteUrl}/android-chrome-512x512.webp`,
   description: defaultDescription,
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "+971-56-649-4784",
+    telephone: "+92 320 5509624",
     contactType: "Customer Service",
     email: "info@silverlinetradingcompany.com",
     areaServed: "Worldwide",
@@ -67,30 +67,15 @@ export const metadata = {
 
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/android-chrome-512x512.webp", sizes: "512x512", type: "image/webp" },
+
     ],
     apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon.webp", sizes: "180x180", type: "image/webp" },
     ],
     other: [
-      {
-        rel: "icon",
-        type: "image/png",
-        sizes: "192x192",
-        url: "/android-chrome-192x192.png",
-      },
-      {
-        rel: "icon",
-        type: "image/png",
-        sizes: "512x512",
-        url: "/android-chrome-512x512.png",
-      },
     ],
   },
-
-  //manifest: "/site.webmanifest",
 
   formatDetection: {
     email: false,
@@ -108,9 +93,9 @@ export const metadata = {
     description: defaultDescription,
     images: [
       {
-        url: `${siteUrl}/images/CompanyLogo.png`,
-        width: 1200,
-        height: 630,
+        url: `${siteUrl}/android-chrome-512x512.webp`,
+        width: 512,
+        height: 512,
         alt: `${siteName} Logo`,
       },
     ],
@@ -119,7 +104,7 @@ export const metadata = {
     card: "summary_large_image",
     title: `${siteName} | Premium Salt Exporter`,
     description: defaultDescription,
-    images: [`${siteUrl}/images/CompanyLogo.png`],
+    images: [`${siteUrl}/android-chrome-512x512.webp`],
   },
   robots: {
     index: true,
