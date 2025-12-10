@@ -15,8 +15,6 @@ import {
   FaChevronDown,
 } from "react-icons/fa";
 
-// Icons
-
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
@@ -38,7 +36,6 @@ const Header = () => {
   const sections = [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/#about" },
-
     // { name: "About Salt", href: "/#about_salt" },
     { name: "Products", href: "/#categories", hasSubMenu: true },
     { name: "Contact Us", href: "/contact" },

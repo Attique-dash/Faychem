@@ -32,7 +32,10 @@ const ContactSection = () => {
                         <br />
                         Our Team will respond as soon as possible.
                     </p>
-                    <Link href="/contact" className="button">
+                    <Link
+                        href="/contact"
+                        className="inline-flex items-center gap-2 px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-[var(--primary)] to-[var(--dark)] rounded-full shadow-lg hover:from-[var(--dark)] hover:to-[var(--darker)] hover:shadow-xl hover:scale-105 transition-all duration-300 transform"
+                    >
                         Contact Us
                     </Link>
                 </div>

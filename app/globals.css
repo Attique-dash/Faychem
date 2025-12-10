@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer base {
+
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -20,20 +21,24 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #dbdbdb; /* Light gray background */
+  background: #dbdbdb;
+  /* Light gray background */
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--light); /* thumb */
+  background-color: var(--light);
+  /* thumb */
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--dark); /* Darker on hover */
+  background-color: var(--dark);
+  /* Darker on hover */
 }
 
 :root {
-  --primary: #748758; /* Olive */
+  --primary: #748758;
+  /* Olive */
   --light: #859a65;
   --lighter: #9bac80;
   --lightest: #b1bf9c;
@@ -44,31 +49,37 @@ html {
 }
 
 .button {
-  background: linear-gradient(
-    to right,
-    var(--primary),
-    #495c27
-  ); /* blue-600 to blue-700 */
+  background: linear-gradient(to right,
+      var(--primary),
+      #495c27);
+  /* blue-600 to blue-700 */
   color: #fff;
-  padding: 0.625rem 1rem; /* py-2.5 px-4 */
-  border-radius: 9999px; /* rounded-full */
-  font-weight: 500; /* font-medium */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+  padding: 0.625rem 1rem;
+  /* py-2.5 px-4 */
+  border-radius: 9999px;
+  /* rounded-full */
+  font-weight: 500;
+  /* font-medium */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* shadow-md */
   transition:
     box-shadow 0.3s,
     transform 0.3s,
-    background-image 0.3s; /* transition-all duration-300 */
+    background-image 0.3s;
+  /* transition-all duration-300 */
   display: flex;
   align-items: center;
-  gap: 0.375rem; /* gap-1.5 */
+  gap: 0.375rem;
+  /* gap-1.5 */
 }
 
 .button:hover {
-  background: linear-gradient(
-    to right,
-    var(--dark),
-    #3d472e
-  ); /* hover:from-blue-700 hover:to-blue-800 */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* hover:shadow-lg */
-  transform: scale(1.05); /* hover:scale-105 */
+  background: linear-gradient(to right,
+      var(--dark),
+      #3d472e);
+  /* hover:from-blue-700 hover:to-blue-800 */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  /* hover:shadow-lg */
+  transform: scale(1.05);
+  /* hover:scale-105 */
 }

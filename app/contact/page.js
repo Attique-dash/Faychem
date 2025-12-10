@@ -1,27 +1,24 @@
 "use client";
+
 import {
-  useContext,
   useState,
   useEffect,
-  useRef,
   useMemo,
   useCallback,
 } from "react";
 import Link from "next/link";
-import { Context } from "@/Context/Context";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
 import { emailConfig } from "@/utils/emailConfig";
 import ReactFlagsSelect from "react-flags-select";
 import { FaPaperPlane } from "react-icons/fa";
 
 const wordLimit = 500;
 
-const ContactForm = () => {
-  useContext(Context);
-  const componentRef = useRef(null);
+// Email validation regex
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const ContactForm = () => {
   const regionNames = useMemo(() => {
     try {
       return new Intl.DisplayNames(["en"], { type: "region" });
@@ -45,21 +42,84 @@ const ContactForm = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   // Trigger animation on component mount
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
-    }, 100); // 100ms delay
+    }, 100);
 
     return () => clearTimeout(timer);
   }, []);
 
-  /** Helper for toast errors */
+  /** Reusable function to style SweetAlert buttons */
+  const styleSweetAlertButton = useCallback((backgroundColor, hoverColor) => {
+    const confirmBtn = document.querySelector('.swal2-confirm');
+    if (!confirmBtn) return;
+
+    // Set initial styles
+    const styles = {
+      backgroundColor,
+      color: '#ffffff',
+      border: 'none',
+      outline: 'none',
+      boxShadow: 'none',
+      padding: '10px 24px',
+      borderRadius: '6px',
+      fontSize: '16px',
+      fontWeight: '500',
+      cursor: 'pointer',
+      opacity: '1',
+      display: 'inline-block',
+      transition: 'background-color 0.2s ease'
+    };
+
+    Object.assign(confirmBtn.style, styles);
+
+    // Event handlers
+    const handleMouseEnter = (e) => {
+      e.target.style.backgroundColor = hoverColor;
+      e.target.style.transform = 'none';
+      e.target.style.boxShadow = 'none';
+      e.target.style.outline = 'none';
+    };
+
+    const handleMouseLeave = (e) => {
+      e.target.style.backgroundColor = backgroundColor;
+    };
+
+    const handleFocus = (e) => {
+      e.target.style.outline = 'none';
+      e.target.style.boxShadow = 'none';
+    };
+
+    // Add event listeners
+    confirmBtn.addEventListener('mouseenter', handleMouseEnter);
+    confirmBtn.addEventListener('mouseleave', handleMouseLeave);
+    confirmBtn.addEventListener('focus', handleFocus);
+
+    // Cleanup function to prevent memory leaks
+    return () => {
+      confirmBtn.removeEventListener('mouseenter', handleMouseEnter);
+      confirmBtn.removeEventListener('mouseleave', handleMouseLeave);
+      confirmBtn.removeEventListener('focus', handleFocus);
+    };
+  }, []);
+
+  /** Helper for showing error alerts */
   const showError = useCallback((msg) => {
-    toast.error(msg, {
-      position: "top-center",
-      autoClose: 3000,
-      draggable: true,
+    Swal.fire({
+      icon: "error",
+      title: "Oops!",
+      text: msg,
+      confirmButtonText: "Got it",
+      confirmButtonColor: "#dc2626",
+      background: "#ffffff",
+      backdrop: `rgba(0,0,0,0.4)`,
+      showClass: {
+        popup: "animate__animated animate__fadeInDown animate__faster",
+      },
+      hideClass: {
+        popup: "animate__animated animate__fadeOutUp animate__faster",
+      },
     });
   }, []);
 
@@ -99,8 +159,10 @@ const ContactForm = () => {
     } = formData;
     const fullName = `${name} ${lastName}`.trim();
 
+    // Validate all required fields including lastName
     if (
       !name ||
+      !lastName ||
       !email ||
       !message ||
       !companyName ||
@@ -108,17 +170,33 @@ const ContactForm = () => {
       !country
     ) {
       showError("Please fill all required fields.");
-      return setIsSubmitting(false);
+      setIsSubmitting(false);
+      return;
     }
 
+    // Validate email format
+    if (!EMAIL_REGEX.test(email)) {
+      showError("Please enter a valid email address.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Validate word limit
     if (message.trim().split(/\s+/).filter(Boolean).length > wordLimit) {
       showError("Message exceeds 500-word limit.");
-      return setIsSubmitting(false);
+      setIsSubmitting(false);
+      return;
     }
 
-    const toastId = toast.loading("Sending your message...", {
-      position: "top-center",
-      autoClose: false,
+    // Show loading state
+    Swal.fire({
+      title: "Sending Message...",
+      html: "Please wait while we process your request",
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
     });
 
     try {
@@ -131,11 +209,26 @@ const ContactForm = () => {
         country,
       });
 
-      toast.update(toastId, {
-        render: "Email sent successfully! We'll get back to you soon.",
-        type: "success",
-        isLoading: false,
-        autoClose: 4000,
+      // Show success message
+      await Swal.fire({
+        icon: "success",
+        title: "Message Sent Successfully!",
+        html: `<p style="color: #6b7280; font-size: 0.95rem; margin-top: 0.5rem;">Thank you for reaching out! <br/> We've received your message and will get back to you soon.</p>`,
+        confirmButtonText: "Close",
+        confirmButtonColor: "#c5c5c5ff",
+        background: "linear-gradient(135deg, #ffffff 0%, #f9fafb 100%)",
+        backdrop: `rgba(0,0,0,0.4)`,
+        showClass: {
+          popup: "animate__animated animate__zoomIn animate__faster",
+        },
+        hideClass: {
+          popup: "animate__animated animate__zoomOut animate__faster",
+        },
+        customClass: {
+          title: "text-2xl font-bold text-gray-800",
+          htmlContainer: "text-gray-600",
+        },
+        didOpen: () => styleSweetAlertButton('#c5c5c5ff', '#999f9dff'),
       });
 
       // Reset form
@@ -152,11 +245,24 @@ const ContactForm = () => {
       setSelected("");
     } catch (err) {
       console.error("Email send error:", err);
-      toast.update(toastId, {
-        render: "Something went wrong. Please try again.",
-        type: "error",
-        isLoading: false,
-        autoClose: 4000,
+      await Swal.fire({
+        icon: "error",
+        title: "Failed to Send Message",
+        html: `<p style="color: #6b7280; font-size: 0.95rem; margin-top: 0.5rem;">Something went wrong.<br/> Please try again or contact us directly via email at <a style="color: var(--dark-color)" href="mailto:info@silverlinetradingcompany.com">info@silverlinetradingcompany.com</a></p>`,
+        confirmButtonText: "Try Again",
+        confirmButtonColor: "#dc2626",
+        background: "#ffffff",
+        backdrop: `rgba(0,0,0,0.4)`,
+        customClass: {
+          confirmButton: "swal2-confirm-no-hover",
+        },
+        showClass: {
+          popup: "animate__animated animate__shakeX animate__faster",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp animate__faster",
+        },
+        didOpen: () => styleSweetAlertButton('#dc2626', '#c21c1cff'),
       });
     } finally {
       setIsSubmitting(false);
@@ -169,24 +275,20 @@ const ContactForm = () => {
   return (
     <section
       id="contact"
-      //ref={componentRef}
       className="bg-gradient-to-br from-[var(--lightest)] to-white relative overflow-hidden"
     >
       <div
-        ref={componentRef}
-        className={`transition-all duration-1000 transform ${
-          isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-        }`}
+        className={`transition-all duration-1000 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+          }`}
       >
         <div className="min-h-screen flex justify-center px-4">
           <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-12 bg-white/0">
             {/* Left Info */}
             <div
-              className={`flex flex-col justify-start mt-16 sm:mt-20 md:mt-24 transition-all duration-700 transform delay-100 ${
-                isVisible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-8 opacity-0"
-              }`}
+              className={`flex flex-col justify-start mt-16 sm:mt-20 md:mt-24 transition-all duration-700 transform delay-100 ${isVisible
+                ? "translate-y-0 opacity-100"
+                : "translate-y-8 opacity-0"
+                }`}
             >
               <span className="uppercase text-gray-500 text-sm mb-2">
                 We're here to help you
@@ -225,20 +327,18 @@ const ContactForm = () => {
 
             {/* Form */}
             <div
-              className={`relative mt-2 sm:mt-8 md:mt-8 mb-10 p-6 py-8 rounded-3xl transition-all duration-1000 transform ${
-                isVisible
-                  ? "translate-x-0 opacity-100 delay-300"
-                  : "translate-x-8 opacity-0"
-              }`}
+              className={`relative mt-2 sm:mt-8 md:mt-8 mb-10 p-6 py-8 rounded-3xl transition-all duration-1000 transform ${isVisible
+                ? "translate-x-0 opacity-100 delay-300"
+                : "translate-x-8 opacity-0"
+                }`}
             >
               <form onSubmit={SendMail}>
                 {/* Name Fields */}
                 <div
-                  className={`grid grid-cols-1 md:grid-cols-2 gap-2 transition-all duration-700 transform ${
-                    isVisible
-                      ? "translate-y-0 opacity-100 delay-200"
-                      : "translate-y-6 opacity-0"
-                  }`}
+                  className={`grid grid-cols-1 md:grid-cols-2 gap-2 transition-all duration-700 transform ${isVisible
+                    ? "translate-y-0 opacity-100 delay-200"
+                    : "translate-y-6 opacity-0"
+                    }`}
                 >
                   <input
                     type="text"
@@ -260,11 +360,10 @@ const ContactForm = () => {
 
                 {/* Company and Email */}
                 <div
-                  className={`grid grid-cols-1 md:grid-cols-2 gap-2 mt-4 transition-all duration-700 transform ${
-                    isVisible
-                      ? "translate-y-0 opacity-100 delay-300"
-                      : "translate-y-6 opacity-0"
-                  }`}
+                  className={`grid grid-cols-1 md:grid-cols-2 gap-2 mt-4 transition-all duration-700 transform ${isVisible
+                    ? "translate-y-0 opacity-100 delay-300"
+                    : "translate-y-6 opacity-0"
+                    }`}
                 >
                   <input
                     type="text"
@@ -286,11 +385,10 @@ const ContactForm = () => {
 
                 {/* Address */}
                 <div
-                  className={`mt-4 transition-all duration-700 transform ${
-                    isVisible
-                      ? "translate-y-0 opacity-100 delay-400"
-                      : "translate-y-6 opacity-0"
-                  }`}
+                  className={`mt-4 transition-all duration-700 transform ${isVisible
+                    ? "translate-y-0 opacity-100 delay-400"
+                    : "translate-y-6 opacity-0"
+                    }`}
                 >
                   <input
                     type="text"
@@ -324,11 +422,10 @@ const ContactForm = () => {
 
                 {/* Message */}
                 <div
-                  className={`mt-4 transition-all duration-700 transform ${
-                    isVisible
-                      ? "translate-y-0 opacity-100 delay-500"
-                      : "translate-y-6 opacity-0"
-                  }`}
+                  className={`mt-4 transition-all duration-700 transform ${isVisible
+                    ? "translate-y-0 opacity-100 delay-500"
+                    : "translate-y-6 opacity-0"
+                    }`}
                 >
                   <textarea
                     className={`${inputClasses} resize-none min-h-[100px] max-h-[150px]`}
@@ -354,11 +451,10 @@ const ContactForm = () => {
 
                 {/* Submit */}
                 <div
-                  className={`mt-6 transition-all duration-700 transform ${
-                    isVisible
-                      ? "translate-y-0 opacity-100 delay-[650ms]"
-                      : "translate-y-6 opacity-0"
-                  }`}
+                  className={`mt-6 transition-all duration-700 transform ${isVisible
+                    ? "translate-y-0 opacity-100 delay-[650ms]"
+                    : "translate-y-6 opacity-0"
+                    }`}
                 >
                   <button
                     type="submit"
@@ -382,7 +478,6 @@ const ContactForm = () => {
             </div>
           </div>
         </div>
-        <ToastContainer />
       </div>
     </section>
   );
