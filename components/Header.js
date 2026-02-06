@@ -297,7 +297,7 @@ const Header = () => {
             <div className="flex items-center justify-between p-4 border-b border-gray-200">
               <Image
                 src={CompanyLogo}
-                alt="Faychem company logo"
+                alt="Silverline Trading Company logo"
                 className="w-auto h-[35px]"
               />
               <button

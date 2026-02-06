@@ -20,8 +20,8 @@ const HeroBanner = () => {
 
   const productImages = [
     { src: banner, alt: "Premium salt crystals", title: "Premium Salt" },
-    { src: banner3, alt: "Pure white salt", title: "White Salt" },
-    { src: banner2, alt: "Salt mining operations", title: "Rock Salt" },
+    { src: banner3, alt: "Pure white salt", title: "Salt Lamps" },
+    { src: banner2, alt: "Salt mining operations", title: "Edible Salt" },
     {
       src: banner4,
       alt: "Industrial salt processing",
@@ -53,7 +53,7 @@ const HeroBanner = () => {
       { threshold: 0.1 },
     );
 
-    const currentElement = heroRef.current; // ✅ take a snapshot
+    const currentElement = heroRef.current;
 
     if (currentElement) {
       observer.observe(currentElement);
@@ -61,7 +61,7 @@ const HeroBanner = () => {
 
     return () => {
       if (currentElement) {
-        observer.unobserve(currentElement); // ✅ cleanup always uses the same node
+        observer.unobserve(currentElement);
       }
     };
   }, []);
@@ -72,7 +72,7 @@ const HeroBanner = () => {
       id="home"
       className="relative flex justify-center items-center min-h-screen mb-[-2rem] p-4 sm:p-6 lg:p-8 overflow-hidden pt-20"
     >
-      {/* Background Image with Overlay */}
+      {/* Background Image with Next.js Image - CHANGED ✅ */}
       <div className="absolute inset-0 z-0">
         {images.map((image, index) => (
           <div
@@ -80,17 +80,22 @@ const HeroBanner = () => {
             className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
               index === bgImageIndex ? "opacity-100" : "opacity-0"
             }`}
-            style={{
-              backgroundImage: `url(${image.src.src})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
           >
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              priority={index === 0}
+              quality={85}
+              sizes="100vw"
+              className="object-cover"
+            />
             {/* Dark overlay for better text readability */}
-            <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+            <div className="absolute inset-0 bg-black bg-opacity-30 z-10"></div>
           </div>
         ))}
       </div>
+
       {/* Main Content */}
       <div
         className={`relative z-20 max-w-7xl mx-auto w-full transition-all duration-1000 transform ${
@@ -127,7 +132,7 @@ const HeroBanner = () => {
               </div>
             </div>
 
-            {/* Product Images Grid */}
+            {/* Product Images Grid - UNCHANGED ✅ */}
             <div
               className={`lg:flex-shrink-0 lg:w-[400px] mt-8 lg:mt-0 transition-all duration-1000 delay-500 transform ${
                 isVisible
@@ -139,7 +144,7 @@ const HeroBanner = () => {
                 {productImages.map((image, index) => (
                   <div
                     key={index}
-                    className="group relative overflow-hidden rounded-lg shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:rotate-4"
+                    className="group relative w-full h-28 sm:h-28 overflow-hidden rounded-lg shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:rotate-4"
                     style={{
                       animationDelay: `${index * 200}ms`,
                       animation: isVisible
@@ -148,13 +153,10 @@ const HeroBanner = () => {
                     }}
                   >
                     <Image
-                      width={200}
-                      height={300}
                       src={image.src}
                       alt={image.alt}
-                      className="rounded-lg w-[500px] lg:w-auto object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="rounded-lg w-full h-auto object-cover transition-transform duration-500 group-hover:scale-110"
                       priority={true}
-                      fetchPriority="high"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 200px"
                     />
 

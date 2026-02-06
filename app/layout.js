@@ -3,7 +3,6 @@ import "./globals.css";
 import Header from "@/components/Header";
 import ContextProvider from "@/Context/Context";
 import Footer from "@/components/Footer";
-import Analytics from "@/components/Analytics";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const montserrat = Montserrat({
@@ -132,10 +131,23 @@ export default function RootLayout({ children }) {
     <html lang="en" className="scroll-smooth">
       <head>
         {/* Animate.css for SweetAlert2 animations */}
+        {/* Async load animate.css to prevent render-blocking */}
         <link
-          rel="stylesheet"
+          rel="preload"
+          as="style"
           href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+          onLoad="this.onload=null;this.rel='stylesheet'"
         />
+
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.clarity.ms" />
+        <link rel="dns-prefetch" href="https://c.bing.com" />
+
+        <noscript>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+        </noscript>
         {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{
@@ -165,7 +177,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             __html: JSON.stringify(organizationSchema),
           }}
         />
-        <Analytics />
         <SpeedInsights />
         <ContextProvider>
           <Header />

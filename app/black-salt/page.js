@@ -20,7 +20,7 @@ const BlackSalt = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
 
     const currentElement = componentRef.current;
@@ -100,8 +100,9 @@ const BlackSalt = () => {
       />
       <div
         ref={componentRef}
-        className={`transition-all duration-1000 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-          }`}
+        className={`transition-all duration-1000 transform ${
+          isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+        }`}
       >
         <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto pt-10 pb-12">
           {/* Professional Header */}
@@ -117,10 +118,11 @@ const BlackSalt = () => {
             {saltVariants.map((salt, index) => (
               <div
                 key={salt.id}
-                className={`transition-all duration-700 transform delay-${index * 100} ${isVisible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-8 opacity-0"
-                  } h-full`}
+                className={`transition-all duration-700 transform delay-${index * 100} ${
+                  isVisible
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-8 opacity-0"
+                } h-full`}
               >
                 <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 group h-full flex flex-col">
                   {/* Professional Image Section */}

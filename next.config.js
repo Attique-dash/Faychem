@@ -31,16 +31,16 @@ const nextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              // Script sources - Added Clarity domains
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://www.youtube.com https://s.ytimg.com https://static.doubleclick.net https://www.clarity.ms https://c.bing.com",
-              // Style sources - Added CDN for animate.css
-              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com",
+              // Script sources - Added ALL Clarity and CDN domains
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://www.youtube.com https://s.ytimg.com https://static.doubleclick.net https://www.clarity.ms https://c.bing.com https://scripts.clarity.ms https://cdn.jsdelivr.net",
+              // Style sources - Added CDN domains
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net",
               // Image sources
               "img-src 'self' data: https: blob:",
               // Font sources
-              "font-src 'self' data: https://fonts.gstatic.com",
-              // Connect sources - Added Clarity domains
-              "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://www.youtube.com https://i.ytimg.com https://static.doubleclick.net https://www.clarity.ms https://c.bing.com",
+              "font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net",
+              // Connect sources - Added ALL Clarity domains
+              "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://www.youtube.com https://i.ytimg.com https://static.doubleclick.net https://www.clarity.ms https://c.bing.com https://scripts.clarity.ms",
               // Frame sources
               "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://www.googletagmanager.com",
               // Object sources
@@ -55,6 +55,7 @@ const nextConfig = {
               "upgrade-insecure-requests",
             ].join("; "),
           },
+
           // X-Content-Type-Options - Prevents MIME type sniffing
           {
             key: "X-Content-Type-Options",
@@ -152,6 +153,15 @@ const nextConfig = {
         protocol: "https",
         hostname: "firebasestorage.googleapis.com",
       },
+      // YouTube Thumbnails - REQUIRED for VideoPlayer component
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+      },
+      {
+        protocol: "https",
+        hostname: "img.youtube.com",
+      },
     ],
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -162,6 +172,7 @@ const nextConfig = {
   // Optimize bundle
   experimental: {
     optimizeCss: true,
+    optimizePackageImports: ['react-icons', '@heroicons/react'],
   },
 
   typescript: {

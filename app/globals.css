@@ -13,6 +13,14 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  /* Momentum scrolling on iOS */
+}
+
+/* Optimize scrolling performance */
+body {
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
 }
 
 /* Custom scrollbar styling */
@@ -82,4 +90,13 @@ html {
   /* hover:shadow-lg */
   transform: scale(1.05);
   /* hover:scale-105 */
+}
+
+@layer base {
+  html {
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
