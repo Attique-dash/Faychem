@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import ContextProvider from "@/Context/Context";
 import Footer from "@/components/Footer";
 import Analytics from "@/components/Analytics";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -66,14 +67,16 @@ export const metadata = {
 
   icons: {
     icon: [
-      { url: "/android-chrome-512x512.webp", sizes: "512x512", type: "image/webp" },
-
+      {
+        url: "/android-chrome-512x512.webp",
+        sizes: "512x512",
+        type: "image/webp",
+      },
     ],
     apple: [
       { url: "/apple-touch-icon.webp", sizes: "180x180", type: "image/webp" },
     ],
-    other: [
-    ],
+    other: [],
   },
 
   formatDetection: {
@@ -134,13 +137,15 @@ export default function RootLayout({ children }) {
           href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         />
         {/* Google Tag Manager */}
-        <script dangerouslySetInnerHTML={{
-          __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PVZQKQXD');`
-        }} />
+})(window,document,'script','dataLayer','GTM-PVZQKQXD');`,
+          }}
+        />
         {/* End Google Tag Manager */}
       </head>
       <body className={montserrat.className}>
@@ -150,7 +155,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             src="https://www.googletagmanager.com/ns.html?id=GTM-PVZQKQXD"
             height="0"
             width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
+            style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
         {/* End Google Tag Manager (noscript) */}
@@ -161,6 +166,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
         <Analytics />
+        <SpeedInsights />
         <ContextProvider>
           <Header />
           <main className="pt-16">{children}</main>
