@@ -1,6 +1,6 @@
 export default function robots() {
   const baseUrl = "https://www.silverlinetradingcompany.com";
-  
+
   return {
     rules: [
       {
@@ -25,6 +25,5 @@ export default function robots() {
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
-    host: baseUrl,
   };
 }
