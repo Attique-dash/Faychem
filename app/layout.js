@@ -4,6 +4,8 @@ import Header from "@/components/Header";
 import ContextProvider from "@/Context/Context";
 import Footer from "@/components/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Script from "next/script";
+
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -148,29 +150,29 @@ export default function RootLayout({ children }) {
         <noscript>
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
         </noscript>
-        {/* Google Tag Manager */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PVZQKQXD');`,
-          }}
+
+
+
+
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-ZTRPKW5ZW5"
+          strategy="afterInteractive"
         />
-        {/* End Google Tag Manager */}
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZTRPKW5ZW5');
+  `}
+        </Script>
+
+
+
       </head>
       <body className={montserrat.className}>
         {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-PVZQKQXD"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
-        {/* End Google Tag Manager (noscript) */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
