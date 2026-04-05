@@ -90,7 +90,7 @@ const ProductsSection = () => {
             </h2>
 
             {/* Mobile: vertical full-width cards */}
-            <div className="mt-8 flex sm:hidden flex-col gap-5 w-full max-w-[60vw] mx-auto mb-16">
+            <div className="mt-8 flex sm:hidden flex-col gap-5 w-full max-w-[70vw] mx-auto mb-16">
                 {products.map((item, idx) => (
                     <Link
                         key={item.id}
