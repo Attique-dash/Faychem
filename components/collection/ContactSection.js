@@ -1,14 +1,39 @@
-"use client";
-
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import WorldMap from "@/images/world-map.webp";
 
 const ContactSection = () => {
+    const [isVisible, setIsVisible] = useState(false);
+    const [hasAnimated, setHasAnimated] = useState(false);
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+        const el = sectionRef.current;
+        if (!el) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                    setTimeout(() => setHasAnimated(true), 1200);
+                }
+            },
+            { threshold: 0.1 }
+        );
+
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <section className="mt-20 py-28 bg-gradient-to-br from-[var(--color-primary-light)] relative overflow-hidden">
+        <section
+            ref={sectionRef}
+            className="mt-20 py-16 sm:py-20 lg:py-28 bg-gradient-to-br from-[var(--color-primary-light)] relative overflow-hidden"
+        >
             {/* World Map Background */}
-            <div className="absolute inset-0 flex justify-end items-center pointer-events-none select-none ">
+            <div className="absolute inset-0 flex justify-end items-center pointer-events-none select-none">
                 <Image
                     src={WorldMap}
                     alt="World Map"
@@ -18,15 +43,26 @@ const ContactSection = () => {
                     className="z-0 opacity-20 sm:opacity-20 md:opacity-100"
                 />
             </div>
-            <div className="relative z-10 max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center gap-10">
-                {/* Left: Text & Buttons */}
-                <div className="ml-8 flex-1">
-                    <h2 className="mb-6 text-5xl font-bold text-[var(--color-text)] mb-2">
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 flex flex-col md:flex-row items-center gap-10">
+                {/* Left: Text & Button */}
+                <div
+                    className={`flex-1 ml-0 sm:ml-8 transition-all duration-1000 ${
+                        isVisible
+                            ? "translate-y-0 opacity-100"
+                            : "translate-y-8 opacity-0"
+                    }`}
+                >
+                    <h2 className="mb-4 text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--color-text)]">
                         Contact Us
                     </h2>
 
-                    {/* Move the text here, under the heading */}
-                    <p className="text-lg text-gray-700 text-left max-w-md mb-8">
+                    <p
+                        className={`text-base sm:text-lg text-gray-700 text-left max-w-md mb-8 transition-all duration-1000 delay-200 ${
+                            isVisible
+                                ? "translate-y-0 opacity-100"
+                                : "translate-y-8 opacity-0"
+                        }`}
+                    >
                         If you need our Product Catalog, Want Pricing, Have Questions
                         about Shipping, or anything else, reach out to us.
                         <br />
@@ -34,14 +70,19 @@ const ContactSection = () => {
                     </p>
                     <Link
                         href="/contact"
-                        className="inline-flex items-center gap-2 px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-dark)] rounded-full shadow-lg hover:from-[var(--color-primary-dark)] hover:to-[var(--color-primary-darker)] hover:shadow-xl hover:scale-105 transition-all duration-300 transform"
+                        className={`button w-fit transition-all duration-300 ${
+                            isVisible
+                                ? "translate-y-0 opacity-100"
+                                : "translate-y-8 opacity-0"
+                        }`}
+                        style={!hasAnimated ? { transitionDelay: "400ms" } : undefined}
                     >
-                        Contact Us
+                         Contact Us 
                     </Link>
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
 export default ContactSection;
