@@ -37,10 +37,10 @@ const ContactSection = () => {
                 <Image
                     src={WorldMap}
                     alt="World Map"
-                    width={"auto"}
+                    width={700}
                     height={380}
                     style={{ objectFit: "contain" }}
-                    className="z-0 opacity-20 sm:opacity-20 md:opacity-100"
+                    className="z-0 opacity-20 md:opacity-40"
                 />
             </div>
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 flex flex-col md:flex-row items-center gap-10">

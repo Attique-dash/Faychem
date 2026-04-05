@@ -33,16 +33,10 @@ const CustomProducts = () => {
       },
     );
 
-    const currentElement = componentRef.current;
-    if (currentElement) {
-      observer.observe(currentElement);
-    }
+    const el = componentRef.current;
+    if (el) observer.observe(el);
 
-    return () => {
-      if (currentElement) {
-        observer.unobserve(currentElement);
-      }
-    };
+    return () => observer.disconnect();
   }, []);
 
   const saltVariants = [
@@ -150,12 +144,15 @@ const CustomProducts = () => {
           isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
         }`}
       >
-        <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto pt-10 pb-12">
+        <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto pt-10 pb-8">
           {/* Professional Header */}
           <div className="text-center mb-16 max-w-4xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-5 leading-tight">
               Crafted Products
             </h1>
+            <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto">
+              Handcrafted Himalayan salt lamps, candle holders, spa products, and custom designs — tailored to your brand and needs.
+            </p>
           </div>
 
           {/* Professional Product Grid */}
@@ -188,7 +185,7 @@ const CustomProducts = () => {
                     <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">
                       {salt.name}
                     </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed mb-4 text-center">
+                    <p id={`product-${salt.id}-description`} className="text-gray-600 text-sm leading-relaxed mb-4 text-center">
                       {salt.description}
                     </p>
                   </div>
@@ -200,9 +197,9 @@ const CustomProducts = () => {
           {/* Professional CTA Section */}
           <div className="mt-20 text-center transition-all duration-1000 delay-700">
             <div className="border border-gray-200 bg-white rounded-2xl shadow-lg p-10 max-w-3xl mx-auto my-12">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 text-center tracking-tight">
-                Discover Excellence in{" "}
-                <span className="block text-[var(--color-primary)]">Every Grain</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 text-center tracking-tight">
+                Ready to Order?{" "}
+                <span className="block text-[var(--color-primary)]">Contact Our Team.</span>
               </h2>
               <p className="text-gray-600 text-base md:text-lg mb-8 text-center max-w-2xl mx-auto">
                 Contact us for any custom item you need, backed by a reliable

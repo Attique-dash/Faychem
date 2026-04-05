@@ -17,8 +17,8 @@ const Footer = () => (
             className="mb-4 hover:scale-105 transition-transform duration-300"
           />
           <p className="text-sm mb-2 max-w-[240px]">
-            specializes in exporting the premium Himalayan salt products
-            worldwide.
+            Silverline Trading Company specializes in exporting premium
+            Himalayan salt products worldwide.
           </p>
         </div>
 

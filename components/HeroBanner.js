@@ -71,6 +71,7 @@ const HeroBanner = () => {
               alt={image.alt}
               fill
               priority={index === 0}
+              placeholder={index === 0 ? "blur" : undefined}
               quality={85}
               sizes="100vw"
               className="object-cover"

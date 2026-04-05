@@ -39,9 +39,9 @@ const WhyChooseUs = () => {
                     What makes us different?
                 </h2>
                 <p className="text-center text-white max-w-2xl mx-auto mb-10 text-base sm:text-lg">
-                    We go beyond just task management—we provide a smooth, intuitive,
-                    and powerful experience that helps you stay productive without the
-                    complexity. Here&#39;s what sets us apart:
+                    We go beyond just exporting salt—we deliver a seamless,
+                    quality-driven experience that helps your business grow
+                    globally. Here&#39;s what sets us apart:
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">

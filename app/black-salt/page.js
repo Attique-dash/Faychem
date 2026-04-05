@@ -12,27 +12,22 @@ const BlackSalt = () => {
   const [isVisible, setIsVisible] = useState(false);
   const componentRef = useRef(null);
 
-  // Intersection observer for animations
   useEffect(() => {
+    const el = componentRef.current;
+    if (!el) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          observer.disconnect();
         }
       },
       { threshold: 0.2 },
     );
 
-    const currentElement = componentRef.current;
-    if (currentElement) {
-      observer.observe(currentElement);
-    }
-
-    return () => {
-      if (currentElement) {
-        observer.unobserve(currentElement);
-      }
-    };
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   const saltVariants = [
@@ -42,8 +37,6 @@ const BlackSalt = () => {
       description:
         "Premium granule size perfect for seasoning and everyday culinary applications.",
       image: BlackSalt1,
-
-      features: ["Premium Quality", "Natural", "Versatile"],
     },
     {
       id: 2,
@@ -51,8 +44,6 @@ const BlackSalt = () => {
       description:
         "Ideal for professional cooking applications and commercial use.",
       image: BlackSalt2,
-
-      features: ["Cooking Grade", "Professional", "Pure"],
     },
     {
       id: 3,
@@ -60,8 +51,6 @@ const BlackSalt = () => {
       description:
         "Fine texture designed for delicate dishes and precise seasoning control.",
       image: BlackSalt3,
-
-      features: ["Fine Grade", "Delicate", "Premium"],
     },
     {
       id: 4,
@@ -69,7 +58,6 @@ const BlackSalt = () => {
       description:
         "Ultra-fine powder ensuring even distribution and instant flavor enhancement.",
       image: BlackSalt4,
-      features: ["Powder Form", "Even Mixing", "Professional"],
     },
   ];
 
@@ -100,21 +88,23 @@ const BlackSalt = () => {
       />
       <div
         ref={componentRef}
-        className={`transition-all duration-1000 transform ${
+        className={`transition-all duration-1000 ${
           isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
         }`}
       >
-        <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto pt-10 pb-12">
+        <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto pt-10 pb-8">
           {/* Professional Header */}
           <div className="text-center mb-16 max-w-4xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-5 leading-tight">
               Himalayan Black Salt
             </h1>
+            <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto">
+              Distinctive smoky flavor and mineral-rich composition — a staple in South Asian cuisine, available in bulk for food and wellness industries.
+            </p>
           </div>
 
           {/* Professional Product Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-4 lg:gap-6 max-w-sm sm:max-w-7xl mx-auto mb-12 sm:mb-16 items-stretch">
-            {" "}
             {saltVariants.map((salt, index) => (
               <div
                 key={salt.id}
@@ -143,7 +133,7 @@ const BlackSalt = () => {
                     <h3 className="text-xl font-bold text-gray-900 mb-2">
                       {salt.name}
                     </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                    <p id={`product-${salt.id}-description`} className="text-gray-600 text-sm leading-relaxed mb-4">
                       {salt.description}
                     </p>
                   </div>
@@ -153,11 +143,11 @@ const BlackSalt = () => {
           </div>
 
           {/* Professional CTA Section */}
-          <div className="mt-20 text-center transition-all duration-1000 delay-700 transform ">
+          <div className="mt-20 text-center transition-all duration-1000 delay-700">
             <div className="border border-gray-200 bg-white rounded-2xl shadow-lg p-10 max-w-3xl mx-auto my-12">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 text-center tracking-tight">
-                Discover Excellence in{" "}
-                <span className="block text-[var(--color-primary)]">Every Grain</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 text-center tracking-tight">
+                Ready to Order?{" "}
+                <span className="block text-[var(--color-primary)]">Contact Our Team.</span>
               </h2>
               <p className="text-gray-600 text-base md:text-lg mb-8 text-center max-w-2xl mx-auto">
                 Contact us for salt in any mesh or granule size you need, backed

@@ -1,7 +1,6 @@
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
-import ContextProvider from "@/Context/Context";
 import Footer from "@/components/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
@@ -180,11 +179,9 @@ export default function RootLayout({ children }) {
           }}
         />
         <SpeedInsights />
-        <ContextProvider>
-          <Header />
-          <main className="pt-16">{children}</main>
-          <Footer />
-        </ContextProvider>
+        <Header />
+        <main className="pt-16">{children}</main>
+        <Footer />
       </body>
     </html>
   );

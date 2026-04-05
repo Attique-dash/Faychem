@@ -21,7 +21,6 @@ const Header = () => {
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const sidebarRef = useRef(null);
   const mobileMenuRef = useRef(null);
   const dropdownRef = useRef(null);
   const router = useRouter();
@@ -145,7 +144,6 @@ const Header = () => {
       {/* Desktop Navigation */}
       <div className="hidden md:block">
         <div
-          ref={sidebarRef}
           className={`fixed z-50 transition-all duration-500 ease-in-out ${
             scrolled
               ? "top-3 left-4 right-4 h-14 bg-white/70 backdrop-blur-xl rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)]"
