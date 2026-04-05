@@ -6,7 +6,7 @@ import WorldMap from "@/images/world-map.webp";
 
 const ContactSection = () => {
     return (
-        <section className="mt-20 py-28 bg-gradient-to-br from-[var(--light)] relative overflow-hidden">
+        <section className="mt-20 py-28 bg-gradient-to-br from-[var(--color-primary-light)] relative overflow-hidden">
             {/* World Map Background */}
             <div className="absolute inset-0 flex justify-end items-center pointer-events-none select-none ">
                 <Image
@@ -21,7 +21,7 @@ const ContactSection = () => {
             <div className="relative z-10 max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center gap-10">
                 {/* Left: Text & Buttons */}
                 <div className="ml-8 flex-1">
-                    <h2 className="mb-6 text-5xl font-bold text-[var(--black)] mb-2">
+                    <h2 className="mb-6 text-5xl font-bold text-[var(--color-text)] mb-2">
                         Contact Us
                     </h2>
 
@@ -34,7 +34,7 @@ const ContactSection = () => {
                     </p>
                     <Link
                         href="/contact"
-                        className="inline-flex items-center gap-2 px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-[var(--primary)] to-[var(--dark)] rounded-full shadow-lg hover:from-[var(--dark)] hover:to-[var(--darker)] hover:shadow-xl hover:scale-105 transition-all duration-300 transform"
+                        className="inline-flex items-center gap-2 px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-dark)] rounded-full shadow-lg hover:from-[var(--color-primary-dark)] hover:to-[var(--color-primary-darker)] hover:shadow-xl hover:scale-105 transition-all duration-300 transform"
                     >
                         Contact Us
                     </Link>

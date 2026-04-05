@@ -14,7 +14,7 @@ const ProductsSection = () => {
             className="mt-16 sm:mt-16 flex flex-col items-center justify-center pt-4 px-4 sm:px-6 lg:px-8 scroll-mt-24 relative overflow-hidden"
         >
             <div className="relative">
-                <h2 className="mb-4 text-3xl sm:text-4xl lg:text-4xl font-bold text-[var(--black)]">
+                <h2 className="mb-4 text-3xl sm:text-4xl lg:text-4xl font-bold text-[var(--color-text)]">
                     Himalayan Rock Salt
                 </h2>
             </div>
@@ -74,7 +74,7 @@ const ProductsSection = () => {
                             </div>
                             <div className="p-4 transform group-hover:translate-y-[-4px] transition-transform duration-500 flex-1 flex flex-col">
                                 <h3
-                                    className={`text-xl font-bold text-[var(--primary)] mb-3 text-center`}
+                                    className={`text-xl font-bold text-[var(--color-primary)] mb-3 text-center`}
                                 >
                                     {item.label}
                                 </h3>

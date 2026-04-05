@@ -248,7 +248,7 @@ const ContactForm = () => {
       await Swal.fire({
         icon: "error",
         title: "Failed to Send Message",
-        html: `<p style="color: #6b7280; font-size: 0.95rem; margin-top: 0.5rem;">Something went wrong.<br/> Please try again or contact us directly via email at <a style="color: var(--dark-color)" href="mailto:info@silverlinetradingcompany.com">info@silverlinetradingcompany.com</a></p>`,
+        html: `<p style="color: #6b7280; font-size: 0.95rem; margin-top: 0.5rem;">Something went wrong.<br/> Please try again or contact us directly via email at <a style="color: var(--color-primary-dark)" href="mailto:info@silverlinetradingcompany.com">info@silverlinetradingcompany.com</a></p>`,
         confirmButtonText: "Try Again",
         confirmButtonColor: "#dc2626",
         background: "#ffffff",
@@ -270,12 +270,12 @@ const ContactForm = () => {
   };
 
   const inputClasses =
-    "bg-white block w-full px-5 py-3 mt-2 placeholder-gray-400 bg-gray-50 border border-gray-400 rounded-2xl transition-all duration-300 focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--light)] focus:outline-none hover:border-[var(--light)] shadow-sm focus:shadow-lg transform hover:scale-[1.02]";
+    "bg-white block w-full px-5 py-3 mt-2 placeholder-gray-400 bg-gray-50 border border-gray-400 rounded-2xl transition-all duration-300 focus:border-[var(--color-primary)] focus:ring-1 focus:ring-[var(--color-primary-light)] focus:outline-none hover:border-[var(--color-primary-light)] shadow-sm focus:shadow-lg transform hover:scale-[1.02]";
 
   return (
     <section
       id="contact"
-      className="bg-gradient-to-br from-[var(--lightest)] to-white relative overflow-hidden"
+      className="bg-gradient-to-br from-[var(--color-accent)] to-white relative overflow-hidden"
     >
       <div
         className={`transition-all duration-1000 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
@@ -294,7 +294,7 @@ const ContactForm = () => {
                 We're here to help you
               </span>
               <h1 className="font-bold text-4xl md:text-5xl mb-4">
-                <span className="text-[var(--dark)]">Discuss</span> Your Salt
+                <span className="text-[var(--color-primary)]">Discuss</span> Your Salt
                 Needs
               </h1>
               <p className="text-gray-600 mb-8">
@@ -303,7 +303,7 @@ const ContactForm = () => {
               </p>
 
               <div className="mb-4">
-                <div className="text-xs text-[var(--darker)]">E-mail</div>
+                <div className="text-xs text-[var(--color-primary-darker)]">E-mail</div>
                 <Link
                   href="mailto:info@silverlinetradingcompany.com"
                   className="text-base text-gray-800"
@@ -313,7 +313,7 @@ const ContactForm = () => {
               </div>
 
               <div>
-                <div className="text-xs text-[var(--darker)]">Phone number</div>
+                <div className="text-xs text-[var(--color-primary-darker)]">Phone number</div>
                 <Link
                   href="https://wa.me/923205509624?text=Hi%2C%20I%27m%20interested%20in%20your%20Himalayan%20salt%20products.%20Can%20you%20provide%20more%20information%3F"
                   target="_blank"
@@ -414,7 +414,7 @@ const ContactForm = () => {
                     placeholder="Select Country *"
                     searchable
                     className="w-full"
-                    selectButtonClassName="!w-full !bg-white !rounded-2xl !border !border-gray-300 !bg-gray-50 !px-5 !py-2 !mt-2 !text-gray-400 !shadow-sm !focus:outline-none !focus:ring-2 !focus:ring-[var(--light)] !focus:border-[var(--primary)] !hover:border-[var(--light)] !hover:scale-[1.02] !transform !transition-all !duration-300"
+                    selectButtonClassName="!w-full !bg-white !rounded-2xl !border !border-gray-300 !bg-gray-50 !px-5 !py-2 !mt-2 !text-gray-400 !shadow-sm !focus:outline-none !focus:ring-2 !focus:ring-[var(--color-primary-light)] !focus:border-[var(--color-primary)] !hover:border-[var(--color-primary-light)] !hover:scale-[1.02] !transform !transition-all !duration-300"
                     optionsListClassName="!bg-white !z-[9999] !rounded-lg !border !border-gray-200 !shadow-xl !max-h-[800px] !overflow-y-auto"
                     required
                   />
@@ -459,7 +459,7 @@ const ContactForm = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full flex justify-center items-center gap-3 px-6 py-4 text-sm font-semibold tracking-wide text-white bg-gradient-to-r from-[var(--primary)] to-[var(--dark)] rounded-xl hover:from-[var(--dark)] hover:to-[var(--black)] hover:scale-105 focus:ring-4 focus:ring-[var(--light)] transition-all duration-300"
+                    className="w-full flex justify-center items-center gap-3 px-6 py-4 text-sm font-semibold tracking-wide text-white bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-dark)] rounded-xl hover:from-[var(--color-primary-dark)] hover:to-[var(--color-text)] hover:scale-105 focus:ring-4 focus:ring-[var(--color-primary-light)] transition-all duration-300"
                   >
                     {isSubmitting ? (
                       <>

@@ -116,7 +116,7 @@ const HeroBanner = () => {
                 <div className="relative">
                   <h1 className="text-3xl text-center lg:text-left sm:text-2xl lg:text-3xl font-bold tracking-tight text-white leading-tight">
                     Global Trader in Premium <br />
-                    <span className="text-[var(--darker)] bg-clip-text">
+                    <span className="text-[var(--color-primary-darker)] bg-clip-text">
                       Salt Products
                     </span>
                   </h1>
@@ -161,7 +161,7 @@ const HeroBanner = () => {
                     />
 
                     {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--black)] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-text)] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
                       <div className="absolute bottom-4 left-4 text-white">
                         <h3 className="font-semibold text-sm">{image.title}</h3>
                         <p className="text-xs text-gray-200">Premium Quality</p>

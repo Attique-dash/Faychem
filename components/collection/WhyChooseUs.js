@@ -11,7 +11,7 @@ const WhyChooseUs = () => {
     const [hoveredItem, setHoveredItem] = useState(null);
     return (
         <section className="mt-0 px-4">
-            <div className="max-w-lg sm:max-w-6xl mx-auto bg-[var(--primary)] rounded-3xl p-8 sm:p-8">
+            <div className="max-w-lg sm:max-w-6xl mx-auto bg-[var(--color-primary)] rounded-3xl p-8 sm:p-8">
                 <h2 className="mt-4 text-3xl sm:text-4xl lg:text-4xl text-white font-bold text-center mb-8 sm:mb-4 lg:mb-6">
                     What makes us different?
                 </h2>
@@ -23,7 +23,7 @@ const WhyChooseUs = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {/* Card 1 */}
-                    <div className="group bg-gray-100 rounded-2xl shadow p-6 flex flex-col items-center transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl hover:-translate-y-1 hover:bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--light)]">
+                    <div className="group bg-gray-100 rounded-2xl shadow p-6 flex flex-col items-center transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl hover:-translate-y-1 hover:bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-light)]">
                         <div className="">
                             {/* Replace with your icon */}
                             <Image
@@ -34,7 +34,7 @@ const WhyChooseUs = () => {
                                 className="mx-auto mb-6 transition-transform duration-500 group-hover:scale-110"
                             />
                         </div>
-                        <h3 className="font-bold text-lg mb-2 transition-colors duration-300 group-hover:text-[var(--primary)]">
+                        <h3 className="font-bold text-lg mb-2 transition-colors duration-300 group-hover:text-[var(--color-primary)]">
                             Trusted Quality
                         </h3>
                         <p className="text-gray-600 transition-colors duration-300 group-hover:text-gray-800 text-center">
@@ -44,7 +44,7 @@ const WhyChooseUs = () => {
                     </div>
 
                     {/* Card 2 */}
-                    <div className="group bg-gray-100 rounded-2xl shadow p-6 flex flex-col items-center transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl hover:-translate-y-1 hover:bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--light)]">
+                    <div className="group bg-gray-100 rounded-2xl shadow p-6 flex flex-col items-center transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl hover:-translate-y-1 hover:bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-light)]">
                         <div className="">
                             {/* Replace with your icon */}
                             <Image
@@ -55,7 +55,7 @@ const WhyChooseUs = () => {
                                 className="mx-auto mb-6 transition-transform duration-500 group-hover:scale-110"
                             />
                         </div>
-                        <h3 className="font-bold text-lg mb-2 transition-colors duration-300 group-hover:text-[var(--primary)]">
+                        <h3 className="font-bold text-lg mb-2 transition-colors duration-300 group-hover:text-[var(--color-primary)]">
                             Global Reach
                         </h3>
                         <p className="text-gray-600 transition-colors duration-300 group-hover:text-gray-800 text-center">
@@ -65,7 +65,7 @@ const WhyChooseUs = () => {
                     </div>
 
                     {/* Card 3 */}
-                    <div className="group bg-gray-100 rounded-2xl shadow p-6 flex flex-col items-center transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl hover:-translate-y-1 hover:bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--light)]">
+                    <div className="group bg-gray-100 rounded-2xl shadow p-6 flex flex-col items-center transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl hover:-translate-y-1 hover:bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-light)]">
                         <div className="">
                             {/* Replace with your icon */}
                             <Image
@@ -76,7 +76,7 @@ const WhyChooseUs = () => {
                                 className="mx-auto mb-6 transition-transform duration-500 group-hover:scale-110"
                             />
                         </div>
-                        <h3 className="font-bold text-lg mb-2 transition-colors duration-300 group-hover:text-[var(--primary)]">
+                        <h3 className="font-bold text-lg mb-2 transition-colors duration-300 group-hover:text-[var(--color-primary)]">
                             Trust Driven Service
                         </h3>
                         <p className="text-gray-600 transition-colors duration-300 group-hover:text-gray-800 text-center">
@@ -86,7 +86,7 @@ const WhyChooseUs = () => {
                     </div>
 
                     {/* Card 4 */}
-                    <div className="group bg-gray-100 rounded-2xl shadow p-6 flex flex-col items-center transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl hover:-translate-y-1 hover:bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--light)]">
+                    <div className="group bg-gray-100 rounded-2xl shadow p-6 flex flex-col items-center transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl hover:-translate-y-1 hover:bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-light)]">
                         <div className="">
                             {/* Replace with your icon */}
                             <Image
@@ -97,7 +97,7 @@ const WhyChooseUs = () => {
                                 className="mx-auto mb-6 transition-transform duration-500 group-hover:scale-110"
                             />
                         </div>
-                        <h3 className="font-bold text-lg mb-2 transition-colors duration-300 group-hover:text-[var(--primary)]">
+                        <h3 className="font-bold text-lg mb-2 transition-colors duration-300 group-hover:text-[var(--color-primary)]">
                             Competitive Pricing
                         </h3>
                         <p className="text-gray-600 transition-colors duration-300 group-hover:text-gray-800 text-center">

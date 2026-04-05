@@ -20,15 +20,6 @@ module.exports = {
       scrollBehavior: {
         smooth: 'smooth',
       },
-         // Add custom colors
-         colors: {
-          "Org_them": "#1e40af",
-          "brand-primary": "#1D4ED8", // Custom blue
-          "brand-secondary": "#F59E0B", // Custom amber
-          "brand-accent": "#10B981", // Custom green
-          "brand-dark": "#111827", // Custom dark
-          "brand-light": "#F3F4F6", // Custom light
-        },
     },
     screens: {
       'xs': '340px',

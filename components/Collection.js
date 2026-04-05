@@ -36,7 +36,7 @@ const Collection = () => {
         {/* Related Videos Section - OPTIMIZED */}
         <div className="mt-12 mb-8 flex flex-col items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
           <div className="relative text-center">
-            <h2 className="mb-4 text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--black)]">
+            <h2 className="mb-4 text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--color-text)]">
               Explore More About Himalayan Salt
             </h2>
           </div>

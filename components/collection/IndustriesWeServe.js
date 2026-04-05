@@ -51,7 +51,7 @@ const industries = [
 const IndustriesWeServe = () => {
     const [hoveredItem, setHoveredItem] = useState(null);
     return (
-        <section className="mt-14 bg-[var(--primary)] mb-16 py-16 relative overflow-hidden">
+        <section className="mt-14 bg-[var(--color-primary)] mb-16 py-16 relative overflow-hidden">
             <div className="max-w-5xl mx-auto px-4">
                 <h2 className="text-3xl sm:text-4xl lg:text-4xl font-bold text-center text-white mb-12">
                     Industries We Serve
@@ -70,8 +70,8 @@ const IndustriesWeServe = () => {
           `}
                             style={{
                                 boxShadow:
-                                    hoveredItem === idx ? "0 8px 32px #010814ff" : undefined,
-                                borderColor: hoveredItem === idx ? "#102446ff" : undefined,
+                                    hoveredItem === idx ? "0 8px 32px var(--color-primary-darker)" : undefined,
+                                borderColor: hoveredItem === idx ? "var(--color-primary)" : undefined,
                             }}
                         >
                             <div className="mb-6">{item.icon}</div>

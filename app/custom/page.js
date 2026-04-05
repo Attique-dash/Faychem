@@ -214,7 +214,7 @@ const CustomProducts = () => {
             <div className="border border-gray-200 bg-white rounded-2xl shadow-lg p-10 max-w-3xl mx-auto my-12">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 text-center tracking-tight">
                 Discover Excellence in{" "}
-                <span className="block text-[var(--primary)]">Every Grain</span>
+                <span className="block text-[var(--color-primary)]">Every Grain</span>
               </h2>
               <p className="text-gray-600 text-base md:text-lg mb-8 text-center max-w-2xl mx-auto">
                 Contact us for any custom item you need, backed by a reliable
@@ -223,7 +223,7 @@ const CustomProducts = () => {
               <div className="flex justify-center">
                 <Link
                   href="/contact"
-                  className="button flex items-center gap-2 text-lg px-8 py-4 rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--light)]"
+                  className="button flex items-center gap-2 text-lg px-8 py-4 rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-light)]"
                 >
                   <svg
                     className="w-5 h-5"

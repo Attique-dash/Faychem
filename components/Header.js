@@ -141,7 +141,7 @@ const Header = () => {
         >
           <div className="flex items-center justify-between h-full px-4 sm:px-6 mx-auto max-w-7xl w-full">
             {/* Logo */}
-            <Link href="/" className="text-[var(--primary)] group ml-2">
+            <Link href="/" className="text-[var(--color-primary)] group ml-2">
               <div className="transform transition-transform duration-500 group-hover:scale-105">
                 <Image
                   width={"auto"}
@@ -165,8 +165,8 @@ const Header = () => {
                     <div
                       ref={hasSubMenu ? dropdownRef : null}
                       className={`flex items-center rounded-lg transition-all duration-300 ${activeLink === name
-                        ? "bg-[var(--primary)] text-white shadow-md"
-                        : "text-[var(--black)] hover:bg-[var(--lightestx2)] hover:text-[var(--primary)]"
+                        ? "bg-[var(--color-primary)] text-white shadow-md"
+                        : "text-[var(--color-text)] hover:bg-[var(--color-surface)] hover:text-[var(--color-primary)]"
                         } px-3 py-2 mx-1 group cursor-pointer`}
                     >
                       <div className="flex items-center flex-1 min-w-0">
@@ -179,14 +179,14 @@ const Header = () => {
                             <span>{name}</span>
                             <FaChevronDown
                               className={`ml-1.5 text-xs transition-all duration-300 ${isProductsOpen ? "rotate-180" : "rotate-0"
-                                } ${activeLink === name ? "text-white" : "text-[var(--black)] group-hover:text-[var(--primary)]"}`}
+                                } ${activeLink === name ? "text-white" : "text-[var(--color-text)] group-hover:text-[var(--color-primary)]"}`}
                             />
                           </button>
                         ) : (
                           <Link
                             href={href}
                             className={
-                              "w-full font-medium transition-colors duration-200 group-hover:text-[var(--primary)] text-[var(--black)]"
+                              "w-full font-medium transition-colors duration-200 group-hover:text-[var(--color-primary)] text-[var(--color-text)]"
                             }
                           >
                             {name}
@@ -208,7 +208,7 @@ const Header = () => {
                               <Link
                                 href={href}
                                 onClick={() => setIsProductsOpen(false)}
-                                className="block w-full text-left py-2 px-4 text-sm text-[var(--black)] hover:text-[var(--primary)] hover:bg-[var(--lightestx2)] transition-all duration-200 hover:pl-6"
+                                className="block w-full text-left py-2 px-4 text-sm text-[var(--color-text)] hover:text-[var(--color-primary)] hover:bg-[var(--color-surface)] transition-all duration-200 hover:pl-6"
                               >
                                 {name.trim()}
                               </Link>
@@ -246,7 +246,7 @@ const Header = () => {
         </Link>
         <button
           onClick={handleToggle}
-          className="rounded-lg bg-gray-50 p-2.5 text-[var(--black)] transition-all duration-200 hover:bg-[#eef3e8] hover:text-[var(--primary)] hover:shadow-md active:scale-95"
+          className="rounded-lg bg-gray-50 p-2.5 text-[var(--color-text)] transition-all duration-200 hover:bg-[var(--color-surface)] hover:text-[var(--color-primary)] hover:shadow-md active:scale-95"
           aria-label="Toggle mobile menu"
           aria-expanded={isOpen}
           aria-controls="mobile-menu"
@@ -333,8 +333,8 @@ const Header = () => {
                             setMobileProductsOpen(!mobileProductsOpen)
                           }
                           className={`flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-left transition-all duration-300 ${activeLink === name
-                            ? "bg-[var(--primary)] text-white shadow-md"
-                            : "text-[var(--black)] hover:bg-[#eef3e8] hover:text-[var(--primary)]"
+                            ? "bg-[var(--color-primary)] text-white shadow-md"
+                            : "text-[var(--color-text)] hover:bg-[var(--color-surface)] hover:text-[var(--color-primary)]"
                             }`}
                         >
                           <span className="font-medium">
@@ -351,7 +351,7 @@ const Header = () => {
                             : "max-h-0 opacity-0"
                             }`}
                         >
-                          <ul className="ml-4 space-y-1 border-l-2 border-[var(--light)] pl-4">
+                          <ul className="ml-4 space-y-1 border-l-2 border-[var(--color-primary-light)] pl-4">
                             {subSections.map(({ name, href }, subIndex) => (
                               <li
                                 key={name}
@@ -367,7 +367,7 @@ const Header = () => {
                               >
                                 <button
                                   onClick={() => handleLinkClick(href)}
-                                  className="block w-full px-3 py-1.5 text-left text-sm text-gray-600 hover:text-[var(--primary)] hover:bg-[#eef3e8] rounded-md transition-all duration-200 hover:translate-x-1"
+                                  className="block w-full px-3 py-1.5 text-left text-sm text-gray-600 hover:text-[var(--color-primary)] hover:bg-[var(--color-surface)] rounded-md transition-all duration-200 hover:translate-x-1"
                                 >
                                   {name.trim()}
                                 </button>
@@ -380,8 +380,8 @@ const Header = () => {
                       <button
                         onClick={() => handleLinkClick(href)}
                         className={`block w-full p-3 rounded-lg text-left transition-all duration-300 font-medium ${activeLink === name
-                          ? "bg-[var(--primary)] text-white shadow-md"
-                          : "text-[var(--black)] hover:bg-[#eef3e8] hover:text-[var(--primary)]"
+                          ? "bg-[var(--color-primary)] text-white shadow-md"
+                          : "text-[var(--color-text)] hover:bg-[var(--color-surface)] hover:text-[var(--color-primary)]"
                           }`}
                       >
                         {name.charAt(0).toUpperCase() + name.slice(1)}
@@ -401,7 +401,7 @@ const Header = () => {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`text-gray-500 hover:text-[var(--primary)] cursor-pointer text-xl transition-all duration-200 hover:scale-125`}
+                    className={`text-gray-500 hover:text-[var(--color-primary)] cursor-pointer text-xl transition-all duration-200 hover:scale-125`}
                   >
                     <Icon />
                   </Link>

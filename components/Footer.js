@@ -36,18 +36,18 @@ const Footer = () => (
             <li>
               <Link
                 href="/"
-                className="hover:text-bold hover:text-[var(--primary)]"
+                className="hover:text-bold hover:text-[var(--color-primary)]"
               >
                 Home
               </Link>
             </li>
             <li>
-              <Link href="/#about" className="hover:text-[var(--primary)]">
+              <Link href="/#about" className="hover:text-[var(--color-primary)]">
                 About Us
               </Link>
             </li>
             <li>
-              <Link href="/contact" className="hover:text-[var(--primary)]">
+              <Link href="/contact" className="hover:text-[var(--color-primary)]">
                 Let's Talk Business
               </Link>
             </li>
@@ -61,37 +61,37 @@ const Footer = () => (
           </h3>
           <ul className="space-y-2 list-disc list-inside">
             <li>
-              <Link href="/pink-salt" className="hover:text-[var(--primary)]">
+              <Link href="/pink-salt" className="hover:text-[var(--color-primary)]">
                 Pink Salt
               </Link>
             </li>
             <li>
-              <Link href="/white-salt" className="hover:text-[var(--primary)]">
+              <Link href="/white-salt" className="hover:text-[var(--color-primary)]">
                 White Salt
               </Link>
             </li>
             <li>
-              <Link href="/black-salt" className="hover:text-[var(--primary)]">
+              <Link href="/black-salt" className="hover:text-[var(--color-primary)]">
                 Black Salt
               </Link>
             </li>
             <li>
-              <Link href="/custom" className="hover:text-[var(--primary)]">
+              <Link href="/custom" className="hover:text-[var(--color-primary)]">
                 Salt Lamps
               </Link>
             </li>
             <li>
-              <Link href="/custom" className="hover:text-[var(--primary)]">
+              <Link href="/custom" className="hover:text-[var(--color-primary)]">
                 Animal Lick Salt
               </Link>
             </li>
             <li>
-              <Link href="/custom" className="hover:text-[var(--primary)]">
+              <Link href="/custom" className="hover:text-[var(--color-primary)]">
                 Salt Bricks
               </Link>
             </li>
             <li>
-              <Link href="/custom" className="hover:text-[var(--primary)]">
+              <Link href="/custom" className="hover:text-[var(--color-primary)]">
                 Custom Crafted Items
               </Link>
             </li>
@@ -107,7 +107,7 @@ const Footer = () => (
             <FaEnvelope className="w-5 h-5 shrink-0" aria-hidden="true" />
             <Link
               href="mailto:info@silverlinetradingcompany.com"
-              className="font-semibold text-[var(--primary)] hover:text-[var(--dark)] transition-colors"
+              className="font-semibold text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] transition-colors"
             >
               info@silverlinetradingcompany.com
             </Link>
@@ -118,7 +118,7 @@ const Footer = () => (
               href="https://wa.me/923205509624?text=Hi%2C%20I%27m%20interested%20in%20your%20Himalayan%20salt%20products.%20Can%20you%20provide%20more%20information%3F"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-[var(--primary)] hover:text-[var(--dark)] transition-colors"
+              className="font-semibold text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] transition-colors"
             >
               +92 320 5509624
             </Link>

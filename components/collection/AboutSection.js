@@ -13,12 +13,12 @@ const AboutSection = () => {
             <div className="flex flex-col sm:flex-row items-center">
                 <div className="max-w-2xl flex flex-col sm:flex-col items-center mt-[1rem] sm:mt-[2rem] lg:mt-[3rem] ">
                     <div className="relative">
-                        <h2 className="mb-8 text-2xl sm:text-3xl lg:text-3xl font-bold text-[var(--black)]">
+                        <h2 className="mb-8 text-2xl sm:text-3xl lg:text-3xl font-bold text-[var(--color-text)]">
                             WHO ARE WE?
                         </h2>
                     </div>
                     <p>
-                        <span className="font-bold text-[var(--primary)]">
+                        <span className="font-bold text-[var(--color-primary)]">
                             Silverline Trading Company
                         </span>
                         &nbsp; specializes in general trading services, with a primary
@@ -31,7 +31,7 @@ const AboutSection = () => {
                     </p>
                     <p className="mt-4">
                         Our
-                        <span className="font-bold text-[var(--primary)]">
+                        <span className="font-bold text-[var(--color-primary)]">
                             {" "}
                             Mission{" "}
                         </span>
