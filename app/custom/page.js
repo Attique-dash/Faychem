@@ -18,26 +18,13 @@ const CustomProducts = () => {
   const [isVisible, setIsVisible] = useState(false);
   const componentRef = useRef(null);
 
-  // Create delay mapping for proper Tailwind classes
-  const delayClasses = [
-    "delay-0",
-    "delay-100",
-    "delay-200",
-    "delay-300",
-    "delay-400",
-    "delay-500",
-    "delay-[600ms]",
-    "delay-[700ms]",
-    "delay-[800ms]",
-    "delay-[900ms]",
-  ];
-
   // Intersection observer for animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          observer.disconnect();
         }
       },
       {
@@ -133,7 +120,7 @@ const CustomProducts = () => {
   ];
 
   return (
-    <div className="">
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -159,28 +146,29 @@ const CustomProducts = () => {
       />
       <div
         ref={componentRef}
-        className={`transition-all duration-1000 transform ${
+        className={`transition-all duration-1000 ${
           isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
         }`}
       >
         <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto pt-10 pb-12">
           {/* Professional Header */}
           <div className="text-center mb-16 max-w-4xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
               Crafted Products
             </h1>
           </div>
 
           {/* Professional Product Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-4 lg:gap-6 max-w-sm sm:max-w-7xl mx-auto mb-12 sm:mb-16 items-stretch">
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-4 lg:gap-6 max-w-sm sm:max-w-7xl mx-auto mb-12 sm:mb-16">
             {saltVariants.map((salt, index) => (
               <div
                 key={salt.id}
-                className={`transition-all duration-700 transform ${delayClasses[index] || "delay-0"} ${
+                className={`w-full sm:w-[calc(50%-8px)] lg:w-[calc(25%-18px)] transition-all duration-700 ${
                   isVisible
                     ? "translate-y-0 opacity-100"
                     : "translate-y-8 opacity-0"
-                } h-full`}
+                }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 group h-full flex flex-col">
                   {/* Professional Image Section */}
@@ -210,7 +198,7 @@ const CustomProducts = () => {
           </div>
 
           {/* Professional CTA Section */}
-          <div className="mt-20 text-center transition-all duration-1000 delay-700 transform ">
+          <div className="mt-20 text-center transition-all duration-1000 delay-700">
             <div className="border border-gray-200 bg-white rounded-2xl shadow-lg p-10 max-w-3xl mx-auto my-12">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 text-center tracking-tight">
                 Discover Excellence in{" "}
