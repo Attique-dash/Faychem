@@ -19,18 +19,28 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const sidebarRef = useRef(null);
   const mobileMenuRef = useRef(null);
   const dropdownRef = useRef(null);
   const router = useRouter();
 
+  // Scroll-aware header
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const socialLinks = [
-    { icon: FaFacebook, label: "Facebook", href: "https://facebook.com" },
-    { icon: FaTwitter, label: "Twitter", href: "https://twitter.com" },
-    { icon: FaInstagram, label: "Instagram", href: "https://instagram.com" },
-    { icon: FaYoutube, label: "YouTube", href: "https://youtube.com" },
-    { icon: FaLinkedin, label: "LinkedIn", href: "https://linkedin.com" },
+    { icon: FaFacebook, label: "Facebook", href: "#" },
+    { icon: FaTwitter, label: "Twitter", href: "#" },
+    { icon: FaInstagram, label: "Instagram", href: "#" },
+    { icon: FaYoutube, label: "YouTube", href: "#" },
+    { icon: FaLinkedin, label: "LinkedIn", href: "#" },
   ];
 
   const sections = [
@@ -81,7 +91,6 @@ const Header = () => {
     setIsOpen((prev) => !prev);
   };
 
-  // To:
   const handleLinkClick = (href) => {
     setIsOpen(false);
     setMobileProductsOpen(false);
@@ -132,19 +141,23 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-[white] z-50 fixed top-0 left-0 w-full overflow-hidden shadow-md">
-      {/* Desktop Top Navigation bg-gradient-to-r from-gray-50 to-white border-b border-blue-100 */}
+    <header className="z-50 fixed top-0 left-0 w-full overflow-hidden">
+      {/* Desktop Navigation */}
       <div className="hidden md:block">
         <div
           ref={sidebarRef}
-          className="bg-white fixed top-0 left-0 w-full h-16 z-50"
+          className={`fixed z-50 transition-all duration-500 ease-in-out ${
+            scrolled
+              ? "top-3 left-4 right-4 h-14 bg-white/70 backdrop-blur-xl rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)]"
+              : "top-0 left-0 right-0 h-16 bg-white shadow-md rounded-none"
+          }`}
         >
           <div className="flex items-center justify-between h-full px-4 sm:px-6 mx-auto max-w-7xl w-full">
             {/* Logo */}
             <Link href="/" className="text-[var(--color-primary)] group ml-2">
               <div className="transform transition-transform duration-500 group-hover:scale-105">
                 <Image
-                  width={"auto"}
+                  width={160}
                   height={40}
                   src={CompanyLogo}
                   alt="Silverline Trading Company logo"
@@ -164,13 +177,13 @@ const Header = () => {
                   <li key={name} className="relative">
                     <div
                       ref={hasSubMenu ? dropdownRef : null}
-                      className={`flex items-center rounded-lg transition-all duration-300 ${activeLink === name
-                        ? "bg-[var(--color-primary)] text-white shadow-md"
-                        : "text-[var(--color-text)] hover:bg-[var(--color-surface)] hover:text-[var(--color-primary)]"
-                        } px-3 py-2 mx-1 group cursor-pointer`}
+                      className={`flex items-center rounded-lg transition-all duration-300 shadow-sm hover:shadow-md ${
+                        activeLink === name
+                          ? "text-[var(--color-primary)] shadow-md"
+                          : "text-[var(--color-text)] hover:text-[var(--color-primary)]"
+                      } px-3 py-2 mx-1 group cursor-pointer relative`}
                     >
                       <div className="flex items-center flex-1 min-w-0">
-                        <div className="flex-shrink-0 mr-2"></div>
                         {hasSubMenu ? (
                           <button
                             onClick={() => setIsProductsOpen(!isProductsOpen)}
@@ -178,29 +191,37 @@ const Header = () => {
                           >
                             <span>{name}</span>
                             <FaChevronDown
-                              className={`ml-1.5 text-xs transition-all duration-300 ${isProductsOpen ? "rotate-180" : "rotate-0"
-                                } ${activeLink === name ? "text-white" : "text-[var(--color-text)] group-hover:text-[var(--color-primary)]"}`}
+                              className={`ml-1.5 text-xs transition-all duration-300 ${
+                                isProductsOpen ? "rotate-180" : "rotate-0"
+                              }`}
                             />
                           </button>
                         ) : (
                           <Link
                             href={href}
-                            className={
-                              "w-full font-medium transition-colors duration-200 group-hover:text-[var(--color-primary)] text-[var(--color-text)]"
-                            }
+                            className="w-full font-medium transition-colors duration-200"
                           >
                             {name}
                           </Link>
                         )}
                       </div>
+                      {/* Active underline indicator */}
+                      <span
+                        className={`absolute bottom-0 left-3 right-3 h-0.5 bg-[var(--color-primary)] rounded-full transition-all duration-300 ${
+                          activeLink === name
+                            ? "opacity-100 scale-x-100"
+                            : "opacity-0 scale-x-0"
+                        }`}
+                      />
                     </div>
 
                     {hasSubMenu && (
                       <div
-                        className={`absolute top-full left-0 bg-white shadow-xl rounded-lg min-w-[200px] transition-all duration-300 ${isProductsOpen
-                          ? "opacity-100 visible translate-y-1"
-                          : "opacity-0 invisible translate-y-4 pointer-events-none"
-                          }`}
+                        className={`absolute top-full left-0 bg-white shadow-xl rounded-lg min-w-[200px] transition-all duration-300 origin-top ${
+                          isProductsOpen
+                            ? "opacity-100 visible translate-y-1 scale-y-100"
+                            : "opacity-0 invisible translate-y-2 scale-y-95 pointer-events-none"
+                        }`}
                       >
                         <ul className="py-1">
                           {subSections.map(({ name, href }) => (
@@ -223,16 +244,19 @@ const Header = () => {
             </nav>
 
             {/* CTA Button */}
-            <Link href="/contact" className="button">
-              Let's Talk Business
+            <Link href="/contact" className="button whitespace-nowrap">
+              Get a Quote
             </Link>
           </div>
         </div>
       </div>
 
       {/* Mobile menu button */}
-      <div className="flex md:hidden items-center justify-between px-3 sm:px-4 py-3 bg-white shadow-none fixed top-0 left-0 w-full z-50">
-        {" "}
+      <div className={`flex md:hidden items-center justify-between px-3 sm:px-4 py-3 fixed z-50 transition-all duration-500 ease-in-out ${
+        scrolled
+          ? "top-2 left-3 right-3 bg-white/70 backdrop-blur-xl rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)]"
+          : "top-0 left-0 right-0 bg-white rounded-none"
+      }`}>
         <Link href="/" className="group">
           <div className="transform transition-transform duration-200 group-hover:scale-105">
             <Image
@@ -292,7 +316,7 @@ const Header = () => {
             : "-translate-x-full opacity-0 pointer-events-none"
             }`}
         >
-          <div className="flex flex-col h-full pb-6 pb-[env(safe-area-inset-bottom)]">
+          <div className="flex flex-col h-full pb-[max(1.5rem,env(safe-area-inset-bottom))]">
             {/* Mobile Header */}
             <div className="flex items-center justify-between p-4 border-b border-gray-200">
               <Image
@@ -302,7 +326,7 @@ const Header = () => {
               />
               <button
                 onClick={handleToggle}
-                className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-all duration-200 active:scale-95"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-all duration-200 active:scale-95"
               >
                 <span className="sr-only">Close menu</span>
                 <svg
@@ -332,10 +356,11 @@ const Header = () => {
                           onClick={() =>
                             setMobileProductsOpen(!mobileProductsOpen)
                           }
-                          className={`flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-left transition-all duration-300 ${activeLink === name
-                            ? "bg-[var(--color-primary)] text-white shadow-md"
-                            : "text-[var(--color-text)] hover:bg-[var(--color-surface)] hover:text-[var(--color-primary)]"
-                            }`}
+                          className={`flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-left transition-all duration-300 ${
+                            activeLink === name
+                              ? "text-[var(--color-primary)] bg-[var(--color-surface)]"
+                              : "text-[var(--color-text)] hover:bg-[var(--color-surface)] hover:text-[var(--color-primary)]"
+                          }`}
                         >
                           <span className="font-medium">
                             {name.charAt(0).toUpperCase() + name.slice(1)}
@@ -374,15 +399,16 @@ const Header = () => {
                               </li>
                             ))}
                           </ul>
-                        </div>{" "}
+                        </div>
                       </div>
                     ) : (
                       <button
                         onClick={() => handleLinkClick(href)}
-                        className={`block w-full p-3 rounded-lg text-left transition-all duration-300 font-medium ${activeLink === name
-                          ? "bg-[var(--color-primary)] text-white shadow-md"
-                          : "text-[var(--color-text)] hover:bg-[var(--color-surface)] hover:text-[var(--color-primary)]"
-                          }`}
+                        className={`block w-full p-3 rounded-lg text-left transition-all duration-300 font-medium ${
+                          activeLink === name
+                            ? "text-[var(--color-primary)] bg-[var(--color-surface)] border-l-2 border-[var(--color-primary)]"
+                            : "text-[var(--color-text)] hover:bg-[var(--color-surface)] hover:text-[var(--color-primary)]"
+                        }`}
                       >
                         {name.charAt(0).toUpperCase() + name.slice(1)}
                       </button>
@@ -392,7 +418,7 @@ const Header = () => {
               </ul>
             </nav>
 
-            <div className="flex flex-col gap-4 mb-6">
+            <div className="flex flex-col gap-4 mb-6 px-4">
               <div className="flex justify-center gap-4 mb-4">
                 {socialLinks.map(({ icon: Icon, label, href }) => (
                   <Link
@@ -411,7 +437,7 @@ const Header = () => {
                 onClick={() => handleLinkClick("/contact")}
                 className="button self-center w-fit min-w-[160px] text-sm"
               >
-                Let's Talk Business
+                Get a Quote
               </button>
             </div>
           </div>
