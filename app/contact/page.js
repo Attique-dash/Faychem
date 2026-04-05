@@ -50,60 +50,6 @@ const ContactForm = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  /** Reusable function to style SweetAlert buttons */
-  const styleSweetAlertButton = useCallback((backgroundColor, hoverColor) => {
-    const confirmBtn = document.querySelector('.swal2-confirm');
-    if (!confirmBtn) return;
-
-    // Set initial styles
-    const styles = {
-      backgroundColor,
-      color: '#ffffff',
-      border: 'none',
-      outline: 'none',
-      boxShadow: 'none',
-      padding: '10px 24px',
-      borderRadius: '6px',
-      fontSize: '16px',
-      fontWeight: '500',
-      cursor: 'pointer',
-      opacity: '1',
-      display: 'inline-block',
-      transition: 'background-color 0.2s ease'
-    };
-
-    Object.assign(confirmBtn.style, styles);
-
-    // Event handlers
-    const handleMouseEnter = (e) => {
-      e.target.style.backgroundColor = hoverColor;
-      e.target.style.transform = 'none';
-      e.target.style.boxShadow = 'none';
-      e.target.style.outline = 'none';
-    };
-
-    const handleMouseLeave = (e) => {
-      e.target.style.backgroundColor = backgroundColor;
-    };
-
-    const handleFocus = (e) => {
-      e.target.style.outline = 'none';
-      e.target.style.boxShadow = 'none';
-    };
-
-    // Add event listeners
-    confirmBtn.addEventListener('mouseenter', handleMouseEnter);
-    confirmBtn.addEventListener('mouseleave', handleMouseLeave);
-    confirmBtn.addEventListener('focus', handleFocus);
-
-    // Cleanup function to prevent memory leaks
-    return () => {
-      confirmBtn.removeEventListener('mouseenter', handleMouseEnter);
-      confirmBtn.removeEventListener('mouseleave', handleMouseLeave);
-      confirmBtn.removeEventListener('focus', handleFocus);
-    };
-  }, []);
-
   /** Helper for showing error alerts */
   const showError = useCallback((msg) => {
     Swal.fire({
@@ -215,7 +161,7 @@ const ContactForm = () => {
         title: "Message Sent Successfully!",
         html: `<p style="color: #6b7280; font-size: 0.95rem; margin-top: 0.5rem;">Thank you for reaching out! <br/> We've received your message and will get back to you soon.</p>`,
         confirmButtonText: "Close",
-        confirmButtonColor: "#c5c5c5ff",
+        confirmButtonColor: "#c5c5c5",
         background: "linear-gradient(135deg, #ffffff 0%, #f9fafb 100%)",
         backdrop: `rgba(0,0,0,0.4)`,
         showClass: {
@@ -228,7 +174,6 @@ const ContactForm = () => {
           title: "text-2xl font-bold text-gray-800",
           htmlContainer: "text-gray-600",
         },
-        didOpen: () => styleSweetAlertButton('#c5c5c5ff', '#999f9dff'),
       });
 
       // Reset form
@@ -253,16 +198,12 @@ const ContactForm = () => {
         confirmButtonColor: "#dc2626",
         background: "#ffffff",
         backdrop: `rgba(0,0,0,0.4)`,
-        customClass: {
-          confirmButton: "swal2-confirm-no-hover",
-        },
         showClass: {
           popup: "animate__animated animate__shakeX animate__faster",
         },
         hideClass: {
           popup: "animate__animated animate__fadeOutUp animate__faster",
         },
-        didOpen: () => styleSweetAlertButton('#dc2626', '#c21c1cff'),
       });
     } finally {
       setIsSubmitting(false);
@@ -270,7 +211,7 @@ const ContactForm = () => {
   };
 
   const inputClasses =
-    "bg-white block w-full px-5 py-3 mt-2 placeholder-gray-400 bg-gray-50 border border-gray-400 rounded-2xl transition-all duration-300 focus:border-[var(--color-primary)] focus:ring-1 focus:ring-[var(--color-primary-light)] focus:outline-none hover:border-[var(--color-primary-light)] shadow-sm focus:shadow-lg transform hover:scale-[1.02]";
+    "block w-full px-5 py-3 mt-2 placeholder-gray-400 bg-white border border-gray-400 rounded-2xl transition-all duration-300 focus:border-[var(--color-primary)] focus:ring-1 focus:ring-[var(--color-primary-light)] focus:outline-none hover:border-[var(--color-primary-light)] shadow-sm focus:shadow-lg";
 
   return (
     <section
@@ -278,20 +219,20 @@ const ContactForm = () => {
       className="bg-gradient-to-br from-[var(--color-accent)] to-white relative overflow-hidden"
     >
       <div
-        className={`transition-all duration-1000 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+        className={`transition-all duration-1000 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
           }`}
       >
         <div className="min-h-screen flex justify-center px-4">
-          <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-12 bg-white/0">
+          <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-12">
             {/* Left Info */}
             <div
-              className={`flex flex-col justify-start mt-16 sm:mt-20 md:mt-24 transition-all duration-700 transform delay-100 ${isVisible
+              className={`flex flex-col justify-start mt-16 sm:mt-20 md:mt-24 transition-all duration-700 delay-100 ${isVisible
                 ? "translate-y-0 opacity-100"
                 : "translate-y-8 opacity-0"
                 }`}
             >
               <span className="uppercase text-gray-500 text-sm mb-2">
-                We're here to help you
+                We&#39;re here to help you
               </span>
               <h1 className="font-bold text-4xl md:text-5xl mb-4">
                 <span className="text-[var(--color-primary)]">Discuss</span> Your Salt
@@ -327,7 +268,7 @@ const ContactForm = () => {
 
             {/* Form */}
             <div
-              className={`relative mt-2 sm:mt-8 md:mt-8 mb-10 p-6 py-8 rounded-3xl transition-all duration-1000 transform ${isVisible
+              className={`relative mt-2 sm:mt-8 md:mt-8 mb-10 px-6 py-8 rounded-3xl transition-all duration-1000 ${isVisible
                 ? "translate-x-0 opacity-100 delay-300"
                 : "translate-x-8 opacity-0"
                 }`}
@@ -335,7 +276,7 @@ const ContactForm = () => {
               <form onSubmit={SendMail}>
                 {/* Name Fields */}
                 <div
-                  className={`grid grid-cols-1 md:grid-cols-2 gap-2 transition-all duration-700 transform ${isVisible
+                  className={`grid grid-cols-1 md:grid-cols-2 gap-2 transition-all duration-700 ${isVisible
                     ? "translate-y-0 opacity-100 delay-200"
                     : "translate-y-6 opacity-0"
                     }`}
@@ -343,6 +284,7 @@ const ContactForm = () => {
                   <input
                     type="text"
                     placeholder="First Name *"
+                    aria-label="First Name"
                     className={inputClasses}
                     value={formData.name}
                     onChange={handleChange("name")}
@@ -351,6 +293,7 @@ const ContactForm = () => {
                   <input
                     type="text"
                     placeholder="Last Name *"
+                    aria-label="Last Name"
                     className={inputClasses}
                     value={formData.lastName}
                     onChange={handleChange("lastName")}
@@ -360,7 +303,7 @@ const ContactForm = () => {
 
                 {/* Company and Email */}
                 <div
-                  className={`grid grid-cols-1 md:grid-cols-2 gap-2 mt-4 transition-all duration-700 transform ${isVisible
+                  className={`grid grid-cols-1 md:grid-cols-2 gap-2 mt-4 transition-all duration-700 ${isVisible
                     ? "translate-y-0 opacity-100 delay-300"
                     : "translate-y-6 opacity-0"
                     }`}
@@ -368,6 +311,7 @@ const ContactForm = () => {
                   <input
                     type="text"
                     placeholder="Company Name *"
+                    aria-label="Company Name"
                     className={inputClasses}
                     value={formData.companyName}
                     onChange={handleChange("companyName")}
@@ -376,6 +320,7 @@ const ContactForm = () => {
                   <input
                     type="email"
                     placeholder="Email Address *"
+                    aria-label="Email Address"
                     className={inputClasses}
                     value={formData.email}
                     onChange={handleChange("email")}
@@ -385,7 +330,7 @@ const ContactForm = () => {
 
                 {/* Address */}
                 <div
-                  className={`mt-4 transition-all duration-700 transform ${isVisible
+                  className={`mt-4 transition-all duration-700 ${isVisible
                     ? "translate-y-0 opacity-100 delay-400"
                     : "translate-y-6 opacity-0"
                     }`}
@@ -393,6 +338,7 @@ const ContactForm = () => {
                   <input
                     type="text"
                     placeholder="Company Address *"
+                    aria-label="Company Address"
                     className={inputClasses}
                     value={formData.companyAddress}
                     onChange={handleChange("companyAddress")}
@@ -401,7 +347,7 @@ const ContactForm = () => {
                 </div>
 
                 {/* Country */}
-                <div className="mt-4">
+                <div className="mt-4" role="group" aria-label="Country Selection">
                   <ReactFlagsSelect
                     selected={selected}
                     onSelect={(code) => {
@@ -414,15 +360,15 @@ const ContactForm = () => {
                     placeholder="Select Country *"
                     searchable
                     className="w-full"
-                    selectButtonClassName="!w-full !bg-white !rounded-2xl !border !border-gray-300 !bg-gray-50 !px-5 !py-2 !mt-2 !text-gray-400 !shadow-sm !focus:outline-none !focus:ring-2 !focus:ring-[var(--color-primary-light)] !focus:border-[var(--color-primary)] !hover:border-[var(--color-primary-light)] !hover:scale-[1.02] !transform !transition-all !duration-300"
-                    optionsListClassName="!bg-white !z-[9999] !rounded-lg !border !border-gray-200 !shadow-xl !max-h-[800px] !overflow-y-auto"
+                    selectButtonClassName="!w-full !bg-white !rounded-2xl !border !border-gray-400 !px-5 !py-2 !mt-2 !text-gray-400 !shadow-sm !focus:outline-none !focus:ring-2 !focus:ring-[var(--color-primary-light)] !focus:border-[var(--color-primary)] !hover:border-[var(--color-primary-light)] !transition-all !duration-300"
+                    optionsListClassName="!bg-white !z-50 !rounded-lg !border !border-gray-200 !shadow-xl !max-h-[300px] !overflow-y-auto"
                     required
                   />
                 </div>
 
                 {/* Message */}
                 <div
-                  className={`mt-4 transition-all duration-700 transform ${isVisible
+                  className={`mt-4 transition-all duration-700 ${isVisible
                     ? "translate-y-0 opacity-100 delay-500"
                     : "translate-y-6 opacity-0"
                     }`}
@@ -430,10 +376,11 @@ const ContactForm = () => {
                   <textarea
                     className={`${inputClasses} resize-none min-h-[100px] max-h-[150px]`}
                     placeholder="Tell us about your requirements *"
+                    aria-label="Message"
                     value={formData.message}
                     onChange={handleMessageChange}
                     required
-                    style={{ overflow: "hidden" }}
+                    style={{ overflowY: "auto" }}
                   />
                   <div className="flex justify-between items-center mt-2">
                     <p
@@ -451,7 +398,7 @@ const ContactForm = () => {
 
                 {/* Submit */}
                 <div
-                  className={`mt-6 transition-all duration-700 transform ${isVisible
+                  className={`mt-6 transition-all duration-700 ${isVisible
                     ? "translate-y-0 opacity-100 delay-[650ms]"
                     : "translate-y-6 opacity-0"
                     }`}

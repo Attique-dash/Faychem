@@ -1,23 +1,31 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import dynamic from "next/dynamic";
 import { YouTubeEmbed } from "@next/third-parties/google";
 import AboutSection from "./collection/AboutSection";
 
 const IndustriesWeServe = dynamic(
   () => import("./collection/IndustriesWeServe"),
+  { loading: () => <div className="min-h-[300px]" /> }
 );
-const ProductsSection = dynamic(() => import("./collection/ProductsSection"));
-const WhyChooseUs = dynamic(() => import("./collection/WhyChooseUs"));
-const ContactSection = dynamic(() => import("./collection/ContactSection"));
+const ProductsSection = dynamic(
+  () => import("./collection/ProductsSection"),
+  { loading: () => <div className="min-h-[400px]" /> }
+);
+const WhyChooseUs = dynamic(
+  () => import("./collection/WhyChooseUs"),
+  { loading: () => <div className="min-h-[300px]" /> }
+);
+const ContactSection = dynamic(
+  () => import("./collection/ContactSection"),
+  { loading: () => <div className="min-h-[200px]" /> }
+);
 
 const Collection = () => {
-  const [hoveredItem, setHoveredItem] = useState(null);
-
   return (
     <div className="w-full">
-      <section className=" w-auto pt-8 relative overflow-hidden">
+      <section className="w-auto pt-8 relative overflow-hidden">
         {/* About Us Section */}
         <AboutSection />
 

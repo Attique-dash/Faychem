@@ -1,10 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 
 const useActiveLink = (sections) => {
   const [activeLink, setActiveLink] = useState('');
+  const ticking = useRef(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
+  const handleScroll = useCallback(() => {
+    if (ticking.current) return;
+    ticking.current = true;
+
+    requestAnimationFrame(() => {
       const scrollPosition = window.scrollY + window.innerHeight / 2;
 
       for (const section of sections) {
@@ -15,19 +19,23 @@ const useActiveLink = (sections) => {
 
           if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
             setActiveLink(section);
+            ticking.current = false;
             return;
           }
         }
       }
 
       setActiveLink('');
-    };
+      ticking.current = false;
+    });
+  }, [sections]);
 
+  useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Call on mount to set the initial active link
+    handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [sections]);
+  }, [handleScroll]);
 
   return activeLink;
 };

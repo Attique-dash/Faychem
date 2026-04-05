@@ -37,20 +37,6 @@ module.exports = {
       // => @media (min-width: 1280px) { ... }
 
       '2xl': '1536px',
-      // => @media (min-width: 1536px) { ... }
-      
-      // Add Custom Screen
-      'custom_lg': '1180px',
-      'custom_v-md': '500px',
-      'custom_Img_Siz': '900px',
-      'customSize0' : '670px',
-       'customSize1' : '700px',
-       'customSize2' : '1050px',
-       'customSize3' : '1130px',
-       'customSize4' : '1200px',
-       'customSize5' : '1290px',
-       'customSize5.5' : '1390px',
-       'customSize6' : '1430px'
 
 
 
