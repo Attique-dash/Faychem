@@ -435,7 +435,7 @@ const Header = () => {
               </div>
               <button
                 onClick={() => handleLinkClick("/contact")}
-                className="button self-center w-fit min-w-[160px] text-sm"
+                className="button self-center w-fit min-w-[160px] text-sm justify-center"
               >
                 Get a Quote
               </button>
