@@ -138,7 +138,7 @@ const HeroBanner = () => {
                     <Image
                       src={image.src}
                       alt={image.alt}
-                      className="rounded-lg w-full h-auto object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="rounded-lg w-full h-full sm:h-auto object-cover transition-transform duration-500 group-hover:scale-110"
                       sizes="(max-width: 640px) 45vw, (max-width: 1024px) 50vw, 200px"
                     />
 
