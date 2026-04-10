@@ -95,10 +95,10 @@ export const metadata = {
     description: defaultDescription,
     images: [
       {
-        url: `${siteUrl}/android-chrome-512x512.webp`,
-        width: 512,
-        height: 512,
-        alt: `${siteName} Logo`,
+        url: `${siteUrl}/og-banner.jpg`,
+        width: 1200,
+        height: 630,
+        alt: `${siteName} — Premium Himalayan Salt Exporter from Pakistan`,
       },
     ],
   },
@@ -106,7 +106,7 @@ export const metadata = {
     card: "summary_large_image",
     title: `${siteName} | Premium Salt Exporter`,
     description: defaultDescription,
-    images: [`${siteUrl}/android-chrome-512x512.webp`],
+    images: [`${siteUrl}/og-banner.jpg`],
   },
   robots: {
     index: true,
