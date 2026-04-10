@@ -176,6 +176,15 @@ const ContactForm = () => {
         },
       });
 
+      // Track successful submission in GA4
+      if (typeof window.gtag === "function") {
+        window.gtag("event", "generate_lead", {
+          event_category: "Contact",
+          event_label: country,
+          value: 1,
+        });
+      }
+
       // Reset form
       setFormData({
         name: "",
