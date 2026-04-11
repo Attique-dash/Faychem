@@ -7,7 +7,6 @@ import {
   useCallback,
 } from "react";
 import Link from "next/link";
-import axios from "axios";
 import Swal from "sweetalert2";
 import { emailConfig } from "@/utils/emailConfig";
 import ReactFlagsSelect from "react-flags-select";
@@ -146,14 +145,20 @@ const ContactForm = () => {
     });
 
     try {
-      await axios.post(emailConfig.apiEndpoint, {
-        name: fullName,
-        email,
-        message,
-        companyName,
-        companyAddress,
-        country,
+      const res = await fetch(emailConfig.apiEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fullName,
+          email,
+          message,
+          companyName,
+          companyAddress,
+          country,
+        }),
       });
+
+      if (!res.ok) throw new Error("Failed to send");
 
       // Show success message
       await Swal.fire({
