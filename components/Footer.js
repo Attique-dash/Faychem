@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import CompanyLogo from "../images/CompanyLogo.webp";
 import { FaEnvelope, FaPhone } from "react-icons/fa";
+import WhatsAppLink from "./WhatsAppLink";
 
 const Footer = () => (
   <footer className="bg-[#f5f5f4] text-gray-800 pt-12 pb-8">
@@ -115,14 +116,7 @@ const Footer = () => (
           </div>
           <div className="flex items-center gap-3">
             <FaPhone className="w-5 h-5 rotate-90 shrink-0" />
-            <Link
-              href="https://wa.me/923205509624?text=Hi%2C%20I%27m%20interested%20in%20your%20Himalayan%20salt%20products.%20Can%20you%20provide%20more%20information%3F"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold text-[var(--color-primary-dark)] hover:text-[var(--color-primary-darker)] transition-colors"
-            >
-              +92 320 5509624
-            </Link>
+            <WhatsAppLink />
           </div>
         </div>
       </div>

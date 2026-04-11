@@ -95,12 +95,55 @@ const productSchema = {
   ],
 };
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What is Himalayan White Salt?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Himalayan White Salt is the purest form of salt extracted from the deepest layers of the Khewra Salt Mines in Pakistan. It has minimal mineral coloring, resulting in a clean white appearance, and is prized for its purity in food processing and culinary use.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How is white salt different from pink salt?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "White salt comes from deeper deposits in the Khewra mines where fewer trace minerals are present, giving it a pure white color. Pink salt contains higher concentrations of iron and other minerals that create its distinctive pink hue. Both are natural and unrefined.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What are the main uses of Himalayan White Salt?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Himalayan White Salt is commonly used as a premium table salt, in food manufacturing and processing, for industrial applications, and in cosmetic products. Its clean appearance makes it ideal for applications where color neutrality is important.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can I order Himalayan White Salt in bulk?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, Silverline Trading Company exports Himalayan White Salt in bulk worldwide. We offer multiple granule sizes (2-5mm, 1-2mm, fine, powder), custom packaging, and competitive pricing for large orders.",
+      },
+    },
+  ],
+};
+
 export default function WhiteSaltLayout({ children }) {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       {children}
     </>

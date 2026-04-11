@@ -269,6 +269,14 @@ const ContactForm = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-base text-gray-800"
+                  onClick={() => {
+                    if (typeof window.gtag === "function") {
+                      window.gtag("event", "contact", {
+                        event_category: "WhatsApp",
+                        event_label: "Contact Page",
+                      });
+                    }
+                  }}
                 >
                   +92 320 5509624
                 </Link>

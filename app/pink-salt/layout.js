@@ -95,12 +95,55 @@ const productSchema = {
   ],
 };
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What is Himalayan Pink Salt?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Himalayan Pink Salt is a natural rock salt mined from the Khewra Salt Mines in Pakistan. It gets its distinctive pink color from trace minerals including iron, potassium, magnesium, and calcium — over 84 trace minerals in total.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What grain sizes of pink salt do you offer?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "We offer Himalayan Pink Salt in four granule sizes: coarse (2-5mm), medium (1-2mm), fine, and powder. Each size is suited for different applications — from seasoning and cooking to food processing and wellness products.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Do you offer bulk pricing for pink salt exports?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, Silverline Trading Company offers competitive bulk pricing for Himalayan Pink Salt exports worldwide. We handle custom packaging, private labeling, and international shipping to meet your business requirements.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What are the uses of Himalayan Pink Salt?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Himalayan Pink Salt is used for culinary seasoning, gourmet cooking, food processing, spa and wellness treatments, salt lamps, bath salts, and industrial applications. Its rich mineral content makes it a popular alternative to regular table salt.",
+      },
+    },
+  ],
+};
+
 export default function PinkSaltLayout({ children }) {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       {children}
     </>

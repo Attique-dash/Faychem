@@ -100,12 +100,55 @@ const productSchema = {
   ],
 };
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What is Himalayan Black Salt (Kala Namak)?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Himalayan Black Salt, also known as Kala Namak, is a volcanic rock salt mined from the Khewra Salt Mines in Pakistan. It has a distinctive sulfurous aroma and earthy flavor due to its high iron and sulfur content, making it a staple in South Asian cuisine.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What does black salt taste like?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Black salt has a distinctive sulfurous, umami-rich flavor often described as egg-like. This makes it popular in vegan cooking as an egg flavor substitute, and it is widely used in Indian chaats, chutneys, raitas, and Ayurvedic preparations.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is Himalayan Black Salt good for health?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Himalayan Black Salt is rich in iron, sodium chloride, and trace minerals. It has been used in Ayurvedic medicine for centuries and is believed to aid digestion and reduce bloating. It is also lower in sodium compared to regular table salt.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can I buy black salt in bulk for export?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, Silverline Trading Company exports Himalayan Black Salt in bulk worldwide. We offer coarse (2-5mm), medium (1-2mm), fine, and powder grades with custom packaging.",
+      },
+    },
+  ],
+};
+
 export default function BlackSaltLayout({ children }) {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       {children}
     </>
